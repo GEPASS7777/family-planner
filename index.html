@@ -95,6 +95,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif;back
 <script>
 const FAM={kid:{name:'小寶',bday:new Date(2025,0,10)},dad:{name:'爸爸',bday:new Date(1993,6,8)},mom:{name:'媽媽',bday:new Date(1991,10,12)}};
 let apiKey=localStorage.getItem('gemini_key')||'';
+let geminiModel=localStorage.getItem('gemini_model')||'gemini-2.0-flash';
 let prefs={area:'桃園/大台北',type:'綜合',dinner:'outside'};
 const app=document.getElementById('app');
 
@@ -114,15 +115,29 @@ async function fetchWeather(){
   }catch{return{icon:'🌡️',desc:'無法取得',temp:'--',hi:'--',lo:'--',hum:'--',rain:'--',good:true}}
 }
 
-async function callGemini(prompt){
-  const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,{
-    method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{responseMimeType:'application/json'}})
-  });
-  const d=await r.json();
-  if(d.error)throw new Error(d.error.message);
-  const txt=d.candidates[0].content.parts[0].text;
-  return JSON.parse(txt.replace(/```json|```/g,'').trim());
+async function callGemini(prompt, retry=0){
+  try{
+    const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${geminiModel}:generateContent?key=${apiKey}`,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{responseMimeType:'application/json'}})
+    });
+    const d=await r.json();
+    if(d.error){
+      if((d.error.code===429||d.error.status==='RESOURCE_EXHAUSTED')&&retry<3){
+        await new Promise(res=>setTimeout(res,(retry+1)*4000));
+        return callGemini(prompt,retry+1);
+      }
+      throw new Error(d.error.message);
+    }
+    const txt=d.candidates[0].content.parts[0].text;
+    return JSON.parse(txt.replace(/```json|```/g,'').trim());
+  }catch(e){
+    if(retry<2&&e.message&&e.message.includes('quota')){
+      await new Promise(res=>setTimeout(res,(retry+1)*4000));
+      return callGemini(prompt,retry+1);
+    }
+    throw e;
+  }
 }
 
 async function genPlan(wx){
@@ -175,10 +190,31 @@ function renderResult(wx,plan,bdays){
 }
 
 function showSetup(){
-  app.innerHTML=`<div class="card"><div class="card-body"><div class="setup-wrap"><p>🔑 請輸入你的 <strong>Gemini API Key</strong><br>金鑰只存在本機瀏覽器，不會上傳</p><input type="password" id="keyInput" placeholder="AIza..." autocomplete="off"><button class="btn btn-p btn-full" onclick="saveKey()">確認，開始使用</button><div class="hint">前往 <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a> 取得金鑰</div></div></div></div>`;
+  app.innerHTML=`<div class="card"><div class="card-body"><div class="setup-wrap">
+    <p>🔑 請輸入你的 <strong>Gemini API Key</strong><br>金鑰只存在本機瀏覽器，不會上傳</p>
+    <input type="password" id="keyInput" placeholder="AIza..." autocomplete="off">
+    <div class="form-row" style="margin-bottom:10px">
+      <label>模型選擇</label>
+      <select id="modelSelect">
+        <option value="gemini-2.0-flash" ${geminiModel==='gemini-2.0-flash'?'selected':''}>gemini-2.0-flash（推薦，免費額度高）</option>
+        <option value="gemini-2.5-flash" ${geminiModel==='gemini-2.5-flash'?'selected':''}>gemini-2.5-flash（較新）</option>
+        <option value="gemini-1.5-pro" ${geminiModel==='gemini-1.5-pro'?'selected':''}>gemini-1.5-pro（較強）</option>
+      </select>
+    </div>
+    <button class="btn btn-p btn-full" onclick="saveKey()">確認，開始使用</button>
+    <div class="hint">前往 <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a> 取得金鑰</div>
+  </div></div></div>`;
 }
 
-function saveKey(){const v=document.getElementById('keyInput').value.trim();if(!v){alert('請輸入 API Key');return}apiKey=v;localStorage.setItem('gemini_key',v);doAuto()}
+function saveKey(){
+  const v=document.getElementById('keyInput').value.trim();
+  if(!v){alert('請輸入 API Key');return}
+  const m=document.getElementById('modelSelect').value;
+  apiKey=v;geminiModel=m;
+  localStorage.setItem('gemini_key',v);
+  localStorage.setItem('gemini_model',m);
+  doAuto();
+}
 
 async function doAuto(){
   app.innerHTML=`<div class="loading"><div class="spinner"></div><br>取得天氣與 AI 行程建議中...</div>`;
