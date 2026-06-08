@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2d5a3d">
+<title>親子行程規劃</title>
+<link rel="manifest" href="manifest.json">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif;background:#f5f4ef;color:#1a1a1a;min-height:100vh}
+.header{background:#fff;border-bottom:0.5px solid #e0dfd8;padding:13px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.header h1{font-size:16px;font-weight:500}
+.date-chip{font-size:12px;color:#666;background:#f0efe8;padding:3px 9px;border-radius:20px}
+.main{padding:12px 14px;max-width:460px;margin:0 auto}
+.card{background:#fff;border-radius:12px;border:0.5px solid #e8e7e0;margin-bottom:10px;overflow:hidden}
+.card-head{padding:11px 14px;border-bottom:0.5px solid #f0efe8;display:flex;align-items:center;gap:8px}
+.card-head h2{font-size:13px;font-weight:500}
+.card-body{padding:12px 14px}
+.loading{text-align:center;padding:36px 0;color:#999;font-size:13px}
+.spinner{display:inline-block;width:18px;height:18px;border:2px solid #e8e7e0;border-top-color:#4a8c6f;border-radius:50%;animation:spin .8s linear infinite;margin-bottom:8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.setup-wrap{padding:20px 0;text-align:center}
+.setup-wrap p{font-size:13px;color:#666;margin-bottom:14px;line-height:1.6}
+.setup-wrap input{width:100%;font-size:13px;padding:9px 12px;border:0.5px solid #d8d7d0;border-radius:8px;font-family:inherit;margin-bottom:10px;letter-spacing:.5px}
+.setup-wrap .hint{font-size:11px;color:#aaa;margin-top:6px}
+.wx-row{display:flex;align-items:center;gap:14px;padding:6px 0 10px}
+.wx-temp{font-size:38px;font-weight:300;line-height:1}
+.wx-info{font-size:13px;color:#555}
+.wx-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.wx-stat{background:#f5f4ef;border-radius:8px;padding:8px 10px}
+.wx-stat-lbl{font-size:11px;color:#aaa;margin-bottom:2px}
+.wx-stat-val{font-size:13px;font-weight:500}
+.bday-bar{background:#f8f0fc;border:0.5px solid #d8b8f0;border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.bday-bar .icon{font-size:20px}
+.bday-bar p{font-size:12px;color:#5a2d80;line-height:1.5}
+.tl{display:flex;flex-direction:column}
+.tl-item{display:flex;gap:10px;align-items:flex-start}
+.tl-time{font-size:11px;color:#aaa;min-width:40px;padding-top:3px}
+.tl-col{display:flex;flex-direction:column;align-items:center}
+.tl-dot{width:8px;height:8px;border-radius:50%;background:#c8c7bf;margin-top:4px;flex-shrink:0}
+.tl-dot.hi{background:#3d7a5e}
+.tl-dot.food{background:#d4860a}
+.tl-dot.rest{background:#888ab0}
+.tl-line{width:1px;background:#eeeee8;flex:1;min-height:18px;margin:2px 0}
+.tl-txt{font-size:13px;padding-bottom:10px;line-height:1.5;flex:1}
+.tl-txt strong{font-weight:500;font-size:13px}
+.tl-txt .sub{font-size:11px;color:#999;margin-top:1px}
+.route-wrap{padding:10px 0 4px}
+.route-svg{width:100%;border-radius:8px;background:#f0efe8;overflow:hidden}
+.act{border:0.5px solid #e8e7e0;border-radius:10px;padding:11px 12px;margin-bottom:8px}
+.act:last-child{margin-bottom:0}
+.act-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:5px}
+.act-name{font-size:13px;font-weight:500;flex:1;line-height:1.4}
+.badge{font-size:11px;padding:2px 8px;border-radius:20px;flex-shrink:0;margin-left:7px}
+.badge-green{background:#e4f4ec;color:#2d7a52}
+.badge-amber{background:#fdf0e0;color:#a06010}
+.badge-purple{background:#f0e8f8;color:#6a30a8}
+.act-meta{font-size:11px;color:#999;margin-bottom:5px}
+.act-desc{font-size:12px;color:#555;line-height:1.5}
+.park-row{margin-top:7px;padding-top:7px;border-top:0.5px solid #f0efe8}
+.park-lbl{font-size:11px;color:#bbb;margin-bottom:4px}
+.park-item{display:flex;align-items:center;gap:7px;padding:3px 0}
+.park-item span{font-size:12px;flex:1}
+.park-item em{font-size:11px;color:#aaa;font-style:normal}
+.act-foot{display:flex;gap:7px;margin-top:8px}
+.btn-xs{font-size:12px;padding:4px 9px;border-radius:6px;border:0.5px solid #d8d7d0;background:#fff;cursor:pointer;color:#444;display:flex;align-items:center;gap:3px}
+.btn-xs:active{background:#f5f4ef}
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
+.btn{padding:9px;border-radius:8px;border:0.5px solid #d0d0c8;background:#fff;font-size:13px;cursor:pointer;font-family:inherit;color:#333;display:flex;align-items:center;justify-content:center;gap:5px;width:100%}
+.btn:active{background:#f5f4ef}
+.btn-p{background:#2d5a3d;color:#fff;border-color:#2d5a3d}
+.btn-p:active{background:#234830}
+.btn-full{grid-column:1/-1}
+.form-row{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}
+.form-row label{font-size:12px;color:#999}
+.form-row select,.form-row input[type=text]{font-size:13px;padding:8px 10px;border:0.5px solid #d8d7d0;border-radius:8px;background:#fff;font-family:inherit;color:#1a1a1a;width:100%}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:12px;padding:4px 10px;border-radius:20px;border:0.5px solid #d0d0c8;background:#fff;cursor:pointer;color:#555}
+.tag.on{background:#2d5a3d;color:#fff;border-color:#2d5a3d}
+.err{font-size:12px;color:#c0392b;padding:8px;background:#fff8f8;border-radius:8px;border:0.5px solid #f5c0c0}
+.dinner-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
+.dinner-opt{border:0.5px solid #d8d7d0;border-radius:10px;padding:10px;text-align:center;cursor:pointer;background:#fff}
+.dinner-opt.on{border-color:#2d5a3d;background:#f0f8f4}
+.dinner-opt .di{font-size:22px;margin-bottom:4px}
+.dinner-opt p{font-size:12px;color:#555}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>🌿 親子行程</h1>
+  <div class="date-chip" id="dateChip">載入中...</div>
+</div>
+<div class="main" id="app"></div>
+<script>
+const FAM={kid:{name:'小寶',bday:new Date(2025,0,10)},dad:{name:'爸爸',bday:new Date(1993,6,8)},mom:{name:'媽媽',bday:new Date(1991,10,12)}};
+let apiKey=localStorage.getItem('gemini_key')||'';
+let prefs={area:'桃園/大台北',type:'綜合',dinner:'outside'};
+const app=document.getElementById('app');
+
+function kidMonths(){const n=new Date(),b=FAM.kid.bday;return(n.getFullYear()-b.getFullYear())*12+(n.getMonth()-b.getMonth())}
+function todayStr(){const d=new Date(),days=['日','一','二','三','四','五','六'];return`${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')} (週${days[d.getDay()]})`}
+function isWeekend(){const d=new Date().getDay();return d===0||d===6}
+function checkBdays(){const t=new Date(),m=t.getMonth(),d=t.getDate(),res=[];for(const[,v]of Object.entries(FAM)){const diff=(new Date(t.getFullYear(),v.bday.getMonth(),v.bday.getDate())-new Date(t.getFullYear(),m,d))/86400000;if(diff>=0&&diff<=7)res.push({name:v.name,days:diff})}return res}
+
+async function fetchWeather(){
+  try{
+    const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=24.993&longitude=121.301&current=temperature_2m,weather_code,relative_humidity_2m,precipitation_probability&daily=temperature_2m_max,temperature_2m_min&timezone=Asia/Taipei&forecast_days=1');
+    const d=await r.json();
+    const wc=d.current.weather_code;
+    const icons={0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',51:'🌦️',61:'🌧️',63:'🌧️',80:'🌦️',95:'⛈️'};
+    const descs={0:'晴天',1:'大致晴朗',2:'部分多雲',3:'陰天',45:'有霧',61:'小雨',63:'中雨',80:'陣雨',95:'雷陣雨'};
+    return{icon:icons[wc]||'🌡️',desc:descs[wc]||'多雲',temp:Math.round(d.current.temperature_2m),hi:Math.round(d.daily.temperature_2m_max[0]),lo:Math.round(d.daily.temperature_2m_min[0]),hum:Math.round(d.current.relative_humidity_2m),rain:Math.round(d.current.precipitation_probability),good:wc<60};
+  }catch{return{icon:'🌡️',desc:'無法取得',temp:'--',hi:'--',lo:'--',hum:'--',rain:'--',good:true}}
+}
+
+async function callGemini(prompt){
+  const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{responseMimeType:'application/json'}})
+  });
+  const d=await r.json();
+  if(d.error)throw new Error(d.error.message);
+  const txt=d.candidates[0].content.parts[0].text;
+  return JSON.parse(txt.replace(/```json|```/g,'').trim());
+}
+
+async function genPlan(wx){
+  const dinnerNote=prefs.dinner==='home'?'晚餐回家吃，行程需在17:30前返程':'可以安排在外用晚餐，推薦一間親子友善餐廳';
+  const prompt=`今天${todayStr()}，${isWeekend()?'假日':'平日'}。天氣：${wx.desc}，${wx.temp}°C，降雨${wx.rain}%。${wx.good?'適合戶外':'優先室內'}。
+家庭：爸爸+媽媽+小寶(${kidMonths()}個月嬰幼兒)，住桃園市桃園區，有汽車。
+推薦地區：${prefs.area}，偏好：${prefs.type}。
+作息：09:00起床，12:00午餐，13:30午休1小時，${dinnerNote}，19:00家長洗澡，20:00小孩洗澡。
+
+請推薦3個適合嬰幼兒的景點/活動（可含展覽、互動、文創如華山松菸三創、百貨、公園、市集），並規劃完整行程。
+${prefs.dinner==='outside'?'第三個景點後安排親子友善晚餐地點（有停車、適合嬰幼兒）。':''}
+
+回傳純JSON（不加任何說明）：
+{"summary":"一句話描述今日行程主題","route":[{"label":"出發地","name":"桃園家","type":"home"},{"label":"景點1","name":"景點名稱","type":"spot"},{"label":"午餐","name":"餐廳名稱","type":"food"},{"label":"景點2","name":"景點名稱","type":"spot"},{"label":"景點3","name":"景點名稱","type":"spot"}${prefs.dinner==='outside'?',{"label":"晚餐","name":"餐廳名稱","type":"food"}':''},{"label":"返家","name":"桃園家","type":"home"}],"timeline":[{"time":"09:00","label":"起床準備","type":"rest"},{"time":"10:00","label":"出發","sub":"預計車程約X分鐘","type":"go"},{"time":"10:30","label":"景點一名稱","sub":"建議停留X小時，XXX特色","type":"spot"},{"time":"12:00","label":"午餐 — 餐廳名","sub":"地址","type":"food"},{"time":"13:00","label":"景點二名稱","sub":"建議停留X小時","type":"spot"},{"time":"13:30","label":"午休","sub":"車上或附近咖啡廳約1小時","type":"rest"},{"time":"14:30","label":"景點三名稱","sub":"建議停留X小時","type":"spot"},{"time":"17:30","label":"${prefs.dinner==='outside'?'晚餐 — 親子餐廳':'返程出發'}","sub":"${prefs.dinner==='outside'?'地址':'預計19:00前到家'}","type":"${prefs.dinner==='outside'?'food':'go'}"},{"time":"19:30","label":"${prefs.dinner==='outside'?'返程出發':'家長洗澡'}","type":"${prefs.dinner==='outside'?'go':'rest'}"},{"time":"20:00","label":"小孩洗澡","type":"rest"}],"activities":[{"name":"景點名稱","badge":"推薦","badgeType":"green","meta":"地址 ｜ 開放時間 ｜ 費用","desc":"說明+為何適合嬰幼兒+有無特惠活動","mapQ":"Google Maps搜尋字串","parking":[{"name":"停車場名稱","dist":"步行約X分鐘"},{"name":"停車場名","dist":"步行約X分鐘"}]}]${prefs.dinner==='outside'?',"dinner":{"name":"餐廳名稱","meta":"地址 ｜ 營業時間 ｜ 人均消費","desc":"為何推薦，親子設施，是否需訂位","mapQ":"餐廳Google Maps搜尋字串","parking":[{"name":"停車場","dist":"步行約X分鐘"}]}':''}}`;
+  return await callGemini(prompt);
+}
+
+function wxHTML(w){return`<div class="card"><div class="card-head"><span>🌤️</span><h2>今日天氣 — 桃園市</h2></div><div class="card-body"><div class="wx-row"><div style="font-size:38px">${w.icon}</div><div><div class="wx-temp">${w.temp}°C</div><div class="wx-info">${w.desc}</div></div></div><div class="wx-grid"><div class="wx-stat"><div class="wx-stat-lbl">最高/最低</div><div class="wx-stat-val">${w.hi}° / ${w.lo}°</div></div><div class="wx-stat"><div class="wx-stat-lbl">濕度</div><div class="wx-stat-val">${w.hum}%</div></div><div class="wx-stat"><div class="wx-stat-lbl">降雨機率</div><div class="wx-stat-val">${w.rain}%</div></div><div class="wx-stat"><div class="wx-stat-lbl">建議</div><div class="wx-stat-val" style="font-size:12px">${w.good?'✅ 戶外OK':'⚠️ 優先室內'}</div></div></div></div></div>`}
+
+function routeSVG(route){
+  if(!route||!route.length)return'';
+  const tc={home:'#4a8c6f',spot:'#3a78b8',food:'#d4860a',go:'#aaa'};
+  const ti={home:'🏠',spot:'📍',food:'🍽️',go:'🚗'};
+  const n=route.length,W=340,pad=24,step=Math.floor((W-pad*2)/(n-1)),cy=58;
+  let circles='',labels='',lines='';
+  route.forEach((r,i)=>{
+    const x=pad+i*step,col=tc[r.type]||'#888';
+    if(i<n-1)lines+=`<line x1="${x}" y1="${cy}" x2="${pad+(i+1)*step}" y2="${cy}" stroke="#ddd" stroke-width="2" stroke-dasharray="4,3"/>`;
+    circles+=`<circle cx="${x}" cy="${cy}" r="13" fill="${col}" opacity=".15"/><circle cx="${x}" cy="${cy}" r="8" fill="${col}"/>`;
+    const lbl=r.name.length>5?r.name.slice(0,5)+'…':r.name;
+    labels+=`<text x="${x}" y="${cy+5}" text-anchor="middle" font-size="10">${ti[r.type]||'📌'}</text><text x="${x}" y="${cy+24}" text-anchor="middle" font-size="9" fill="#555">${lbl}</text><text x="${x}" y="${cy+34}" text-anchor="middle" font-size="8" fill="#aaa">${r.label}</text>`;
+  });
+  return`<div class="route-wrap"><svg class="route-svg" viewBox="0 0 ${W} 95" xmlns="http://www.w3.org/2000/svg">${lines}${circles}${labels}</svg></div>`;
+}
+
+function tlHTML(items){const dc={spot:'hi',food:'food',rest:'rest',go:''};return items.map((it,i)=>`<div class="tl-item"><div class="tl-time">${it.time}</div><div class="tl-col"><div class="tl-dot ${dc[it.type]||''}"></div>${i<items.length-1?'<div class="tl-line"></div>':''}</div><div class="tl-txt"><strong>${it.label}</strong>${it.sub?`<div class="sub">${it.sub}</div>`:''}</div></div>`).join('')}
+
+function actHTML(acts){return acts.map(a=>{const mu=`https://maps.google.com/?q=${encodeURIComponent(a.mapQ||a.name)}`;const pk=a.parking?a.parking.map(p=>`<div class="park-item"><span>🅿️ ${p.name}</span><em>${p.dist}</em></div>`).join(''):'';return`<div class="act"><div class="act-top"><div class="act-name">${a.name}</div><div class="badge badge-${a.badgeType||'green'}">${a.badge}</div></div><div class="act-meta">${a.meta}</div><div class="act-desc">${a.desc}</div>${pk?`<div class="park-row"><div class="park-lbl">附近停車</div>${pk}</div>`:''}<div class="act-foot"><button class="btn-xs" onclick="openMap('${mu}')">🗺️ 地圖</button></div></div>`}).join('')}
+
+function dinnerHTML(d){if(!d)return'';const mu=`https://maps.google.com/?q=${encodeURIComponent(d.mapQ||d.name)}`;const pk=d.parking?d.parking.map(p=>`<div class="park-item"><span>🅿️ ${p.name}</span><em>${p.dist}</em></div>`).join(''):'';return`<div class="card"><div class="card-head"><span>🍽️</span><h2>晚餐推薦</h2></div><div class="card-body"><div class="act-name" style="margin-bottom:5px;font-size:14px">${d.name}</div><div class="act-meta">${d.meta}</div><div class="act-desc">${d.desc}</div>${pk?`<div class="park-row"><div class="park-lbl">附近停車</div>${pk}</div>`:''}<div class="act-foot" style="margin-top:8px"><button class="btn-xs" onclick="openMap('${mu}')">🗺️ 地圖</button></div></div></div>`}
+
+function bdayHTML(bdays){return bdays.map(b=>`<div class="bday-bar"><div class="icon">🎂</div><p><strong>${b.name}</strong>${b.days===0?'今天生日！🎉':`生日還有 ${b.days} 天`}<br>行程中可留意生日優惠</p></div>`).join('')}
+
+function renderResult(wx,plan,bdays){
+  const sumCard=`<div class="card"><div class="card-head"><span>✨</span><h2>${plan.summary||'今日親子行程'}</h2></div><div class="card-body">${routeSVG(plan.route)}</div></div>`;
+  const tlCard=`<div class="card"><div class="card-head"><span>🗓️</span><h2>行程時間表</h2></div><div class="card-body"><div class="tl">${tlHTML(plan.timeline)}</div></div></div>`;
+  const actCard=`<div class="card"><div class="card-head"><span>📍</span><h2>推薦景點 / 活動</h2></div><div class="card-body">${actHTML(plan.activities)}</div></div>`;
+  const ctrlCard=`<div class="card"><div class="card-head"><span>⚙️</span><h2>操作</h2></div><div class="card-body"><div class="btn-row"><button class="btn" onclick="doRegen()">🎲 重新建議</button><button class="btn" onclick="showManual()">✏️ 手動條件</button></div><div class="btn-row"><button class="btn btn-full" onclick="doAuto()">🔄 重新載入今日</button></div></div></div>`;
+  app.innerHTML=bdayHTML(bdays)+wxHTML(wx)+sumCard+tlCard+actCard+(plan.dinner?dinnerHTML(plan.dinner):'')+ctrlCard;
+}
+
+function showSetup(){
+  app.innerHTML=`<div class="card"><div class="card-body"><div class="setup-wrap"><p>🔑 請輸入你的 <strong>Gemini API Key</strong><br>金鑰只存在本機瀏覽器，不會上傳</p><input type="password" id="keyInput" placeholder="AIza..." autocomplete="off"><button class="btn btn-p btn-full" onclick="saveKey()">確認，開始使用</button><div class="hint">前往 <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a> 取得金鑰</div></div></div></div>`;
+}
+
+function saveKey(){const v=document.getElementById('keyInput').value.trim();if(!v){alert('請輸入 API Key');return}apiKey=v;localStorage.setItem('gemini_key',v);doAuto()}
+
+async function doAuto(){
+  app.innerHTML=`<div class="loading"><div class="spinner"></div><br>取得天氣與 AI 行程建議中...</div>`;
+  const bdays=checkBdays(),wx=await fetchWeather();
+  try{const plan=await genPlan(wx);renderResult(wx,plan,bdays)}
+  catch(e){app.innerHTML=`${wxHTML(wx)}<div class="card"><div class="card-body"><div class="err">❌ 行程產生失敗：${e.message}<br><br><button class="btn btn-full" onclick="doAuto()">重試</button><br><br><button class="btn btn-full" onclick="showSetup()">重新設定 API Key</button></div></div></div>`}
+}
+
+async function doRegen(){
+  app.innerHTML=`<div class="loading"><div class="spinner"></div><br>換一組行程中...</div>`;
+  const bdays=checkBdays(),wx=await fetchWeather();
+  try{const plan=await genPlan(wx);renderResult(wx,plan,bdays)}
+  catch(e){app.innerHTML=`<div class="card"><div class="card-body"><div class="err">❌ ${e.message}<br><br><button class="btn btn-full" onclick="doRegen()">重試</button></div></div></div>`}
+}
+
+function showManual(){
+  app.innerHTML=`<div class="card"><div class="card-head"><span>✏️</span><h2>手動指定條件</h2></div><div class="card-body"><div class="form-row"><label>地區</label><select id="selArea" onchange="onAreaChange(this.value)"><option value="桃園/大台北">桃園 / 大台北</option><option value="新竹">新竹</option><option value="宜蘭">宜蘭（避尖峰）</option><option value="台中">台中（二日遊）</option><option value="台南">台南（二日遊）</option><option value="other">其他（自行輸入）</option></select><div id="customAreaWrap" style="display:none;margin-top:6px"><input type="text" id="customArea" placeholder="輸入縣市，例如：嘉義市" oninput="prefs.area=this.value"></div></div><div class="form-row"><label>偏好類型</label><div class="tags" id="typeTags">${['綜合','展覽','互動體驗','戶外公園','百貨商場','文創市集','親子餐廳'].map(t=>`<div class="tag${t==='綜合'?' on':''}" onclick="selType(this,'${t}')">${t}</div>`).join('')}</div></div><div class="form-row"><label>晚餐安排</label><div class="dinner-opts"><div class="dinner-opt${prefs.dinner==='outside'?' on':''}" onclick="selDinner('outside',this)"><div class="di">🍜</div><p>在外用餐</p></div><div class="dinner-opt${prefs.dinner==='home'?' on':''}" onclick="selDinner('home',this)"><div class="di">🏠</div><p>回家吃</p></div></div></div><div class="btn-row"><button class="btn btn-p" onclick="runManual()">🔍 產生行程</button><button class="btn" onclick="doAuto()">← 取消</button></div></div></div>`;
+}
+
+function onAreaChange(v){prefs.area=v==='other'?'':v;document.getElementById('customAreaWrap').style.display=v==='other'?'block':'none'}
+function selType(el,v){document.querySelectorAll('#typeTags .tag').forEach(t=>t.classList.remove('on'));el.classList.add('on');prefs.type=v}
+function selDinner(v,el){prefs.dinner=v;document.querySelectorAll('.dinner-opt').forEach(e=>e.classList.remove('on'));el.classList.add('on')}
+async function runManual(){if(!prefs.area){alert('請輸入地區');return}app.innerHTML=`<div class="loading"><div class="spinner"></div><br>AI 規劃行程中...</div>`;const bdays=checkBdays(),wx=await fetchWeather();try{const plan=await genPlan(wx);renderResult(wx,plan,bdays)}catch(e){app.innerHTML=`<div class="card"><div class="card-body"><div class="err">❌ ${e.message}</div></div></div>`}}
+function openMap(url){window.open(url,'_blank')}
+
+document.getElementById('dateChip').textContent=todayStr();
+if(!apiKey)showSetup();else doAuto();
+</script>
+</body>
+</html>
