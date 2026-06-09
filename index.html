@@ -95,7 +95,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif;back
 <script>
 const FAM={kid:{name:'小寶',bday:new Date(2025,0,10)},dad:{name:'爸爸',bday:new Date(1993,6,8)},mom:{name:'媽媽',bday:new Date(1991,10,12)}};
 let apiKey=localStorage.getItem('gemini_key')||'';
-let geminiModel=localStorage.getItem('gemini_model')||'gemini-2.0-flash';
+let geminiModel=localStorage.getItem('gemini_model')||'gemini-1.5-flash';
 let prefs={area:'桃園/大台北',type:'綜合',dinner:'outside'};
 const app=document.getElementById('app');
 
@@ -196,9 +196,9 @@ function showSetup(){
     <div class="form-row" style="margin-bottom:10px">
       <label>模型選擇</label>
       <select id="modelSelect">
-        <option value="gemini-2.0-flash" ${geminiModel==='gemini-2.0-flash'?'selected':''}>gemini-2.0-flash（推薦，免費額度高）</option>
-        <option value="gemini-2.5-flash" ${geminiModel==='gemini-2.5-flash'?'selected':''}>gemini-2.5-flash（較新）</option>
-        <option value="gemini-1.5-pro" ${geminiModel==='gemini-1.5-pro'?'selected':''}>gemini-1.5-pro（較強）</option>
+        <option value="gemini-1.5-flash" ${geminiModel==='gemini-1.5-flash'?'selected':''}>gemini-1.5-flash（推薦，每天1500次免費）</option>
+        <option value="gemini-2.0-flash" ${geminiModel==='gemini-2.0-flash'?'selected':''}>gemini-2.0-flash（較新）</option>
+        <option value="gemini-1.5-pro" ${geminiModel==='gemini-1.5-pro'?'selected':''}>gemini-1.5-pro（每天50次免費）</option>
       </select>
     </div>
     <button class="btn btn-p btn-full" onclick="saveKey()">確認，開始使用</button>
