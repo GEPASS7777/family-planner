@@ -154,7 +154,7 @@ async function genPlan(wx){
 請推薦3個適合嬰幼兒的景點/活動（可含展覽、互動、文創如華山松菸三創、百貨、公園、市集），並規劃完整行程。
 ${prefs.dinner==='outside'?'第三個景點後安排親子友善晚餐地點（有停車、適合嬰幼兒）。':''}
 
-回傳純JSON（不加任何說明）：
+重要：只回傳純JSON字串，第一個字元必須是{，最後一個字元必須是}，絕對不要加任何說明文字、markdown符號或程式碼區塊標記：
 {"summary":"一句話描述今日行程主題","route":[{"label":"出發地","name":"桃園家","type":"home"},{"label":"景點1","name":"景點名稱","type":"spot"},{"label":"午餐","name":"餐廳名稱","type":"food"},{"label":"景點2","name":"景點名稱","type":"spot"},{"label":"景點3","name":"景點名稱","type":"spot"}${prefs.dinner==='outside'?',{"label":"晚餐","name":"餐廳名稱","type":"food"}':''},{"label":"返家","name":"桃園家","type":"home"}],"timeline":[{"time":"09:00","label":"起床準備","type":"rest"},{"time":"10:00","label":"出發","sub":"預計車程約X分鐘","type":"go"},{"time":"10:30","label":"景點一名稱","sub":"建議停留X小時，XXX特色","type":"spot"},{"time":"12:00","label":"午餐 — 餐廳名","sub":"地址","type":"food"},{"time":"13:00","label":"景點二名稱","sub":"建議停留X小時","type":"spot"},{"time":"13:30","label":"午休","sub":"車上或附近咖啡廳約1小時","type":"rest"},{"time":"14:30","label":"景點三名稱","sub":"建議停留X小時","type":"spot"},{"time":"17:30","label":"${prefs.dinner==='outside'?'晚餐 — 親子餐廳':'返程出發'}","sub":"${prefs.dinner==='outside'?'地址':'預計19:00前到家'}","type":"${prefs.dinner==='outside'?'food':'go'}"},{"time":"19:30","label":"${prefs.dinner==='outside'?'返程出發':'家長洗澡'}","type":"${prefs.dinner==='outside'?'go':'rest'}"},{"time":"20:00","label":"小孩洗澡","type":"rest"}],"activities":[{"name":"景點名稱","badge":"推薦","badgeType":"green","meta":"地址 ｜ 開放時間 ｜ 費用","desc":"說明+為何適合嬰幼兒+有無特惠活動","mapQ":"Google Maps搜尋字串","parking":[{"name":"停車場名稱","dist":"步行約X分鐘"},{"name":"停車場名","dist":"步行約X分鐘"}]}]${prefs.dinner==='outside'?',"dinner":{"name":"餐廳名稱","meta":"地址 ｜ 營業時間 ｜ 人均消費","desc":"為何推薦，親子設施，是否需訂位","mapQ":"餐廳Google Maps搜尋字串","parking":[{"name":"停車場","dist":"步行約X分鐘"}]}':''}}`;
   return await callGemini(prompt);
 }
@@ -200,9 +200,8 @@ function showSetup(){
     <div class="form-row" style="margin-bottom:10px">
       <label>模型選擇</label>
       <select id="modelSelect">
-        <option value="gemini-1.5-flash" ${geminiModel==='gemini-1.5-flash'?'selected':''}>gemini-1.5-flash（推薦，每天1500次免費）</option>
-        <option value="gemini-2.0-flash" ${geminiModel==='gemini-2.0-flash'?'selected':''}>gemini-2.0-flash（較新）</option>
-        <option value="gemini-1.5-pro" ${geminiModel==='gemini-1.5-pro'?'selected':''}>gemini-1.5-pro（每天50次免費）</option>
+        <option value="gemini-2.5-flash" ${geminiModel==='gemini-2.5-flash'?'selected':''}>gemini-2.5-flash（推薦，每天250次免費）</option>
+        <option value="gemini-2.5-flash-lite" ${geminiModel==='gemini-2.5-flash-lite'?'selected':''}>gemini-2.5-flash-lite（每天1000次，速度更快）</option>
       </select>
     </div>
     <button class="btn btn-p btn-full" onclick="saveKey()">確認，開始使用</button>
