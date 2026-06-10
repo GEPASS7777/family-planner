@@ -525,8 +525,6 @@ async function doNearby(){
     const newA=filterItems(d.activities||[]);
     const newS=filterItems(d.spots||[]);
     const newR=filterItems(d.restaurants||[]);
-    disc.activities=disc.activities.map((item,i)=>disc.selA.has(i)?item:(newA[ai]??item));
-    ai=0;
     disc.activities=disc.activities.map((item,i)=>{if(disc.selA.has(i))return item;return newA[ai]?newA[ai++]:item});
     disc.spots=disc.spots.map((item,i)=>{if(disc.selS.has(i))return item;return newS[si]?newS[si++]:item});
     disc.restaurants=disc.restaurants.map((item,i)=>{if(disc.selR.has(i))return item;return newR[ri]?newR[ri++]:item});
