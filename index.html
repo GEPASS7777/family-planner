@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="theme-color" content="#2d5a3d">
 <title>親子行程規劃</title>
 <link rel="manifest" href="manifest.json">
@@ -13,8 +13,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif;back
 .hdr h1{font-size:16px;font-weight:500}
 .chip{font-size:11px;color:#666;background:#f0efe8;padding:3px 8px;border-radius:20px}
 .main{padding:12px 14px;max-width:480px;margin:0 auto}
-
-/* Cards */
 .card{background:#fff;border-radius:12px;border:.5px solid #e8e7e0;margin-bottom:10px;overflow:hidden}
 .card-head{padding:10px 14px;border-bottom:.5px solid #f0efe8;display:flex;align-items:center;gap:8px}
 .card-head h2{font-size:13px;font-weight:500}
@@ -24,9 +22,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif;back
 .ld-wrap{padding:52px 24px;text-align:center}
 .ld-title{font-size:14px;color:#444;margin-bottom:16px;font-weight:500}
 .ld-track{background:#e8e7e0;border-radius:20px;height:10px;position:relative;overflow:visible;margin:0 8px 6px}
-.ld-fill{height:100%;background:linear-gradient(90deg,#4a8c6f,#7ab89a);border-radius:20px;animation:ldFill 10s ease-in-out forwards}
+.ld-fill{height:100%;background:linear-gradient(90deg,#4a8c6f,#7ab89a);border-radius:20px;animation:ldFill 12s ease-in-out forwards}
 @keyframes ldFill{0%{width:3%}20%{width:25%}50%{width:55%}80%{width:80%}100%{width:92%}}
-.ld-baby{position:absolute;top:-10px;font-size:22px;animation:ldRoll 10s ease-in-out forwards;left:0}
+.ld-baby{position:absolute;top:-10px;font-size:22px;animation:ldRoll 12s ease-in-out forwards;left:0}
 @keyframes ldRoll{0%{left:0%}20%{left:20%}50%{left:50%}80%{left:75%}100%{left:87%}}
 .ld-sub{font-size:12px;color:#aaa;margin-top:8px}
 
@@ -38,27 +36,36 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif;back
 .wx-stat{background:#f5f4ef;border-radius:8px;padding:7px 10px}
 .wx-lbl{font-size:10px;color:#aaa;margin-bottom:2px}
 .wx-val{font-size:13px;font-weight:500}
-
-/* Birthday */
 .bday{background:#f8f0fc;border:.5px solid #d8b8f0;border-radius:10px;padding:9px 12px;display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .bday p{font-size:12px;color:#5a2d80;line-height:1.5}
 
+/* Section header */
+.sec{margin-bottom:12px}
+.sec-hdr{display:flex;align-items:center;gap:7px;padding:8px 2px 8px;border-bottom:.5px solid #e8e7e0;margin-bottom:8px}
+.sec-hdr .sec-icon{font-size:16px}
+.sec-hdr .sec-title{font-size:13px;font-weight:500;flex:1}
+.sec-hdr .sec-hint{font-size:11px;color:#aaa}
+
 /* Spot grid */
 .sg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.sc{border:1.5px solid #e8e7e0;border-radius:10px;padding:10px;background:#fff;transition:all .2s;display:flex;flex-direction:column}
+.sc{border:1.5px solid #e8e7e0;border-radius:10px;padding:10px;background:#fff;display:flex;flex-direction:column;transition:all .2s}
 .sc.yes{border-color:#3d7a5e;background:#f0f9f5}
-.sc.no{opacity:.38}
-.sc-icon{font-size:26px;text-align:center;margin-bottom:6px}
-.sc-badge{font-size:10px;padding:2px 7px;border-radius:20px;display:inline-block;margin-bottom:5px}
-.sc-badge.景點{background:#e8f4f0;color:#2d7a5e}
+.sc.rest-card{background:#fffbf5}
+.sc.rest-card.yes{border-color:#c07820;background:#fdf8f0}
+.sc-icon{font-size:26px;text-align:center;margin-bottom:5px}
+.sc-badge{font-size:10px;padding:2px 7px;border-radius:20px;display:inline-block;margin-bottom:4px}
 .sc-badge.展覽{background:#f0e8f8;color:#6a30a8}
-.sc-badge.特惠{background:#fdf0e0;color:#a06010}
 .sc-badge.活動{background:#e8f0f8;color:#1a5a9a}
+.sc-badge.市集{background:#fff0e8;color:#a04010}
+.sc-badge.特惠{background:#fdf0e0;color:#a06010}
+.sc-badge.景點{background:#e8f4f0;color:#2d7a5e}
+.sc-badge.餐廳{background:#fdf5e0;color:#8a6000}
 .sc-name{font-size:12px;font-weight:500;margin-bottom:3px;line-height:1.3}
+.sc-period{font-size:10px;color:#e07820;margin-bottom:3px;font-weight:500}
 .sc-area{font-size:10px;color:#aaa;margin-bottom:4px}
 .sc-desc{font-size:11px;color:#666;line-height:1.5;margin-bottom:6px;flex:1}
-.sc-links{display:flex;gap:4px;margin-bottom:7px}
-.lbtn{font-size:10px;padding:3px 7px;border-radius:5px;border:.5px solid #d8d7d0;background:#fff;color:#555;text-decoration:none;display:inline-flex;align-items:center;gap:2px;cursor:pointer}
+.sc-links{display:flex;gap:4px;margin-bottom:7px;flex-wrap:wrap}
+.lbtn{font-size:10px;padding:3px 7px;border-radius:5px;border:.5px solid #d8d7d0;background:#fff;color:#555;text-decoration:none;display:inline-flex;align-items:center;gap:2px}
 .lbtn:active{background:#f5f4ef}
 .sc-btns{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:auto}
 .sbtn{font-size:11px;padding:5px 4px;border-radius:6px;border:.5px solid #d8d7d0;background:#fff;cursor:pointer;font-family:inherit;text-align:center}
@@ -66,13 +73,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif;back
 .sbtn.y.on{background:#3d7a5e;color:#fff}
 .sbtn.n.on{background:#eee;color:#999}
 
-/* Buttons */
+/* Summary & actions */
+.summary-box{background:#f5f4ef;border-radius:8px;padding:8px 12px;margin:10px 0;font-size:12px;color:#555;line-height:1.8}
 .brow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
 .btn{padding:9px;border-radius:8px;border:.5px solid #d0d0c8;background:#fff;font-size:13px;cursor:pointer;font-family:inherit;color:#333;text-align:center;width:100%}
 .btn:active{opacity:.8}
 .btn-p{background:#2d5a3d;color:#fff;border-color:#2d5a3d}
+.btn-a{background:#1a5a9a;color:#fff;border-color:#1a5a9a}
 .btn-full{grid-column:1/-1}
-.sel-count{font-size:12px;color:#888;text-align:center;margin-top:8px;padding:6px;background:#f5f4ef;border-radius:8px}
 
 /* Timeline */
 .tl{display:flex;flex-direction:column}
@@ -116,27 +124,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif;back
 .tags{display:flex;flex-wrap:wrap;gap:6px}
 .tag{font-size:12px;padding:4px 10px;border-radius:20px;border:.5px solid #d0d0c8;background:#fff;cursor:pointer;color:#555}
 .tag.on{background:#2d5a3d;color:#fff;border-color:#2d5a3d}
-.d-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
-.d-opt{border:.5px solid #d8d7d0;border-radius:10px;padding:10px;text-align:center;cursor:pointer;background:#fff}
-.d-opt.on{border-color:#2d5a3d;background:#f0f8f4}
-.d-opt .di{font-size:22px;margin-bottom:4px}
-.d-opt p{font-size:12px;color:#555}
 .err{font-size:12px;color:#c0392b;padding:10px;background:#fff8f8;border-radius:8px;border:.5px solid #f5c0c0;line-height:1.6}
 </style>
 </head>
 <body>
-<div class="hdr">
-  <h1>🌿 親子行程</h1>
-  <div class="chip" id="dateChip"></div>
-</div>
+<div class="hdr"><h1>🌿 親子行程</h1><div class="chip" id="dateChip"></div></div>
 <div class="main" id="app"></div>
-
 <script>
 const FAM={kid:{name:'小寶',bday:new Date(2025,0,10)},dad:{name:'爸爸',bday:new Date(1993,6,8)},mom:{name:'媽媽',bday:new Date(1991,10,12)}};
 let apiKey=localStorage.getItem('gk')||'';
 let mdl=localStorage.getItem('gm')||'gemini-2.5-flash-lite';
-let prefs={area:'桃園/大台北',type:'綜合',dinner:'outside'};
-let selSet=new Set(), spots=[], wx=null;
+let prefs={area:'桃園/大台北',type:'綜合'};
+const disc={wx:null,activities:[],spots:[],restaurants:[],selA:new Set(),selS:new Set(),selR:new Set()};
 const app=document.getElementById('app');
 
 function kidM(){const n=new Date(),b=FAM.kid.bday;return(n.getFullYear()-b.getFullYear())*12+(n.getMonth()-b.getMonth())}
@@ -167,7 +166,7 @@ function parseJ(txt){
   if(m1)try{return JSON.parse(m1[1].trim())}catch{}
   const m2=txt.match(/\{[\s\S]*\}/);
   if(m2)try{return JSON.parse(m2[0])}catch{}
-  throw new Error('AI 回應格式錯誤，請重試')
+  throw new Error('AI 回應格式錯誤，請重試');
 }
 
 async function callG(prompt,search=false,retry=0){
@@ -199,10 +198,7 @@ async function callG(prompt,search=false,retry=0){
 function showLd(title,sub){
   app.innerHTML=`<div class="ld-wrap">
     <div class="ld-title">${title}</div>
-    <div class="ld-track">
-      <span class="ld-baby">🍼</span>
-      <div class="ld-fill"></div>
-    </div>
+    <div class="ld-track"><span class="ld-baby">🍼</span><div class="ld-fill"></div></div>
     <div class="ld-sub">${sub||''}</div>
   </div>`;
 }
@@ -230,7 +226,7 @@ function saveKey(){
   doAuto();
 }
 
-// ── Weather HTML ─────────────────────────────
+// ── Weather ──────────────────────────────────
 function wxH(w){
   return`<div class="card"><div class="card-head"><span>🌤️</span><h2>今日天氣 — 桃園市</h2></div><div class="card-body">
     <div class="wx-row"><div style="font-size:36px">${w.icon}</div><div><div class="wx-temp">${w.temp}°C</div><div class="wx-desc">${w.desc}</div></div></div>
@@ -246,61 +242,102 @@ function bdayH(bd){
   return bd.map(b=>`<div class="bday"><div style="font-size:20px">🎂</div><p><strong>${b.name}</strong>${b.days===0?'今天生日！🎉':`生日還有 ${b.days} 天`}<br>留意生日優惠活動</p></div>`).join('');
 }
 
-// ── Spot Cards ───────────────────────────────
-function spotCard(s,i){
-  const sel=selSet.has(i);
-  const mapUrl=`https://maps.google.com/?q=${encodeURIComponent(s.name+' '+s.area+' 台灣')}`;
-  const srchUrl=`https://www.google.com/search?q=${encodeURIComponent(s.name+' '+s.area)}`;
-  return`<div class="sc ${sel?'yes':''}" id="sc${i}">
-    <div class="sc-icon">${s.icon||'📍'}</div>
-    <span class="sc-badge ${s.category}">${s.category}</span>
-    <div class="sc-name">${s.name}</div>
-    <div class="sc-area">📌 ${s.area}</div>
-    <div class="sc-desc">${s.desc}</div>
+// ── Cards ─────────────────────────────────────
+function mkCard(item, sec, i){
+  const selSet = sec==='a'?disc.selA : sec==='s'?disc.selS : disc.selR;
+  const sel = selSet.has(i);
+  const isRest = sec==='r';
+  const mapUrl=`https://maps.google.com/?q=${encodeURIComponent(item.name+' '+item.area+' 台灣')}`;
+  const srchUrl=`https://www.google.com/search?q=${encodeURIComponent(item.name+' '+item.area)}`;
+  return`<div class="sc ${sel?'yes':''} ${isRest?'rest-card':''}" id="sc-${sec}-${i}">
+    <div class="sc-icon">${item.icon||'📍'}</div>
+    <span class="sc-badge ${item.category}">${item.category}</span>
+    ${item.period?`<div class="sc-period">📅 ${item.period}</div>`:''}
+    <div class="sc-name">${item.name}</div>
+    <div class="sc-area">📌 ${item.area}</div>
+    <div class="sc-desc">${item.desc}</div>
+    ${item.priceRange?`<div class="sc-area">💰 ${item.priceRange}</div>`:''}
     <div class="sc-links">
       <a href="${mapUrl}" target="_blank" class="lbtn">🗺️ 地圖</a>
       <a href="${srchUrl}" target="_blank" class="lbtn">🔍 搜尋</a>
     </div>
     <div class="sc-btns">
-      <button class="sbtn y ${sel?'on':''}" onclick="tog(${i},true)">👍 有興趣</button>
-      <button class="sbtn n" onclick="tog(${i},false)">👎 沒興趣</button>
+      <button class="sbtn y ${sel?'on':''}" onclick="tog('${sec}',${i})">👍 有興趣</button>
+      <button class="sbtn n" onclick="togNo('${sec}',${i})">👎 沒興趣</button>
     </div>
   </div>`;
 }
 
-function tog(i,yes){
-  if(yes){
-    if(selSet.has(i)){selSet.delete(i)}
-    else{if(selSet.size>=3){alert('最多選3個');return}selSet.add(i)}
-  }else{selSet.delete(i)}
-  document.getElementById('sg').innerHTML=spots.map((s,i)=>spotCard(s,i)).join('');
-  updCount();
+function tog(sec,i){
+  const selSet=sec==='a'?disc.selA:sec==='s'?disc.selS:disc.selR;
+  if(selSet.has(i)){selSet.delete(i)}
+  else{
+    if(sec==='r'){if(selSet.size>=2){alert('餐廳最多選2間');return}}
+    else{if(disc.selA.size+disc.selS.size>=3){alert('景點+活動最多選3個');return}}
+    selSet.add(i);
+  }
+  rerender();
 }
-function updCount(){
-  const el=document.getElementById('sc-cnt');
-  if(el)el.textContent=selSet.size===0?'請選擇1～3個有興趣的景點':`已選 ${selSet.size} 個景點`;
+function togNo(sec,i){
+  const selSet=sec==='a'?disc.selA:sec==='s'?disc.selS:disc.selR;
+  selSet.delete(i);
+  rerender();
 }
 
-function showDisc(w,sp,bd){
-  spots=sp;selSet=new Set();
-  app.innerHTML=bdayH(bd)+wxH(w)+`<div class="card">
-    <div class="card-head"><span>✨</span><h2>今日推薦 — 選1～3個有興趣的</h2></div>
+function rerender(){
+  const sgA=document.getElementById('sg-a');
+  const sgS=document.getElementById('sg-s');
+  const sgR=document.getElementById('sg-r');
+  if(sgA)sgA.innerHTML=disc.activities.map((s,i)=>mkCard(s,'a',i)).join('');
+  if(sgS)sgS.innerHTML=disc.spots.map((s,i)=>mkCard(s,'s',i)).join('');
+  if(sgR)sgR.innerHTML=disc.restaurants.map((s,i)=>mkCard(s,'r',i)).join('');
+  updSummary();
+}
+
+function updSummary(){
+  const el=document.getElementById('sel-summary');
+  if(!el)return;
+  const ns=disc.selA.size+disc.selS.size, nr=disc.selR.size;
+  const rNote=nr===0?'未選餐廳（全程回家吃）':nr===1?'已選1間（午餐外食，晚餐6點到家）':'已選2間（午晚餐外食）';
+  el.innerHTML=`景點/活動：已選 <strong>${ns}</strong>/3 個 ｜ 餐廳：${rNote}`;
+}
+
+function sectionH(title,icon,id,items,sec,hint){
+  return`<div class="sec">
+    <div class="sec-hdr"><span class="sec-icon">${icon}</span><span class="sec-title">${title}</span><span class="sec-hint">${hint}</span></div>
+    <div class="sg" id="${id}">${items.map((s,i)=>mkCard(s,sec,i)).join('')}</div>
+  </div>`;
+}
+
+// ── Discovery Screen ─────────────────────────
+function showDisc(bd){
+  app.innerHTML=bdayH(bd)+wxH(disc.wx)+`<div class="card">
+    <div class="card-head"><span>✨</span><h2>今日推薦 — 選有興趣的後送出</h2></div>
     <div class="card-body">
-      <div class="sg" id="sg">${spots.map((s,i)=>spotCard(s,i)).join('')}</div>
-      <div class="sel-count" id="sc-cnt">請選擇1～3個有興趣的景點</div>
+      ${sectionH('🗓️ 期間限定活動 / 展覽','🗓️','sg-a',disc.activities,'a','本週/月限定')}
+      ${sectionH('📍 親子景點','📍','sg-s',disc.spots,'s','精選景點')}
+      ${sectionH('🍽️ 餐廳推薦','🍽️','sg-r',disc.restaurants,'r','午餐或晚餐')}
+      <div class="summary-box" id="sel-summary">景點/活動：已選 <strong>0</strong>/3 個 ｜ 餐廳：未選餐廳（全程回家吃）</div>
       <div class="brow">
-        <button class="btn" onclick="doRegen()">🔄 換一批</button>
+        <button class="btn btn-a" onclick="doNearby()">🔄 換周邊</button>
         <button class="btn btn-p" onclick="doSubmit()">✅ 送出規劃</button>
       </div>
-      <div class="brow"><button class="btn btn-full" onclick="showManual()">✏️ 手動指定條件</button></div>
+      <div class="brow">
+        <button class="btn btn-full" onclick="doAuto()">🔃 全部重新推薦</button>
+      </div>
+      <div class="brow">
+        <button class="btn btn-full" onclick="showManual()">✏️ 手動指定條件</button>
+      </div>
     </div>
   </div>`;
 }
 
 function doSubmit(){
-  if(selSet.size===0){alert('請至少選1個景點');return}
-  const chosen=[...selSet].map(i=>spots[i]);
-  genPlan(wx,chosen);
+  const ns=disc.selA.size+disc.selS.size;
+  if(ns===0){alert('請至少選1個景點或活動');return}
+  const chosenSpots=[...[...disc.selA].map(i=>disc.activities[i]),...[...disc.selS].map(i=>disc.spots[i])];
+  const chosenRests=[...[...disc.selR].map(i=>disc.restaurants[i])];
+  genPlan(disc.wx,chosenSpots,chosenRests);
 }
 
 // ── Itinerary ────────────────────────────────
@@ -336,7 +373,7 @@ function actH(acts){
     const mu=`https://maps.google.com/?q=${encodeURIComponent((a.mapQ||a.name)+' 台灣')}`;
     const su=`https://www.google.com/search?q=${encodeURIComponent(a.name+' 台灣')}`;
     const pk=a.parking?a.parking.map(p=>{
-      const pu=`https://maps.google.com/?q=${encodeURIComponent(p.name+' 停車場 '+a.name)}`;
+      const pu=`https://maps.google.com/?q=${encodeURIComponent(p.name+' '+a.name)}`;
       return`<div class="pk-item"><span>🅿️ ${p.name}</span><em>${p.dist}</em><a href="${pu}" target="_blank" class="lbtn">地圖</a></div>`;
     }).join(''):'';
     return`<div class="act">
@@ -352,20 +389,7 @@ function actH(acts){
   }).join('');
 }
 
-function dinH(d){
-  if(!d)return'';
-  const mu=`https://maps.google.com/?q=${encodeURIComponent((d.mapQ||d.name)+' 台灣')}`;
-  const su=`https://www.google.com/search?q=${encodeURIComponent(d.name+' 台灣 親子餐廳')}`;
-  const pk=d.parking?d.parking.map(p=>`<div class="pk-item"><span>🅿️ ${p.name}</span><em>${p.dist}</em><a href="https://maps.google.com/?q=${encodeURIComponent(p.name)}" target="_blank" class="lbtn">地圖</a></div>`).join(''):'';
-  return`<div class="card"><div class="card-head"><span>🍽️</span><h2>晚餐推薦</h2></div><div class="card-body">
-    <div class="act-name" style="font-size:14px;margin-bottom:5px">${d.name}</div>
-    <div class="act-meta">${d.meta}</div><div class="act-desc">${d.desc}</div>
-    ${pk?`<div class="pk-row"><div class="pk-lbl">附近停車</div>${pk}</div>`:''}
-    <div class="act-links"><a href="${mu}" target="_blank" class="lbtn">🗺️ Google 地圖</a><a href="${su}" target="_blank" class="lbtn">🔍 Google 搜尋</a></div>
-  </div></div>`;
-}
-
-function showPlan(w,plan){
+function showPlan(wx,plan){
   const bd=bdays();
   const sumC=`<div class="card"><div class="card-head"><span>✨</span><h2>${plan.summary||'今日親子行程'}</h2></div><div class="card-body">${rtSVG(plan.route)}</div></div>`;
   const tlC=`<div class="card"><div class="card-head"><span>🗓️</span><h2>行程時間表</h2></div><div class="card-body"><div class="tl">${tlH(plan.timeline)}</div></div></div>`;
@@ -373,97 +397,170 @@ function showPlan(w,plan){
   const ctC=`<div class="card"><div class="card-head"><span>⚙️</span><h2>操作</h2></div><div class="card-body">
     <div class="brow"><button class="btn" onclick="doAuto()">🔄 重新推薦</button><button class="btn" onclick="showManual()">✏️ 手動條件</button></div>
   </div></div>`;
-  app.innerHTML=bdayH(bd)+wxH(w)+sumC+tlC+acC+(plan.dinner?dinH(plan.dinner):'')+ctC;
+  app.innerHTML=bdayH(bd)+wxH(wx)+sumC+tlC+acC+ctC;
 }
 
-// ── API ──────────────────────────────────────
-async function fetchSpots(w){
-  const p=`今天${todayS()}，${isWkd()?'假日':'平日'}。天氣${w.desc}，${w.temp}°C，降雨${w.rain}%。${w.good?'適合戶外':'優先室內'}。
-地點：桃園市桃園區，有汽車可到大台北/桃園/新竹。家庭：爸爸+媽媽+${kidM()}個月嬰幼兒。
-偏好地區：${prefs.area}，偏好類型：${prefs.type}。
+// ── API Prompts ───────────────────────────────
+async function fetchAll(wx){
+  const p=`今天${todayS()}，${isWkd()?'假日':'平日'}。天氣${wx.desc}，${wx.temp}°C，降雨${wx.rain}%。${wx.good?'適合戶外':'優先室內'}。
+家庭：爸爸+媽媽+${kidM()}個月嬰幼兒，住桃園市桃園區，有汽車。偏好地區：${prefs.area}，偏好類型：${prefs.type}。
 
-請搜尋今日或近期在台灣大台北/桃園/新竹地區適合親子出遊的景點、活動和展覽，需包含：
-1.近期特展或展覽（美術館、博物館、文創空間如華山松菸三創）
-2.近期限定活動或市集
-3.熱門親子景點（百貨、互動體驗、公園）
-4.今日特惠或優惠活動
+請使用Google搜尋，查找台灣北部（台北/新北/桃園/新竹）地區：
+A) 本週或本月「期間限定」的活動、展覽、市集：需有明確舉辦日期，需為真實可查到的活動，共6個
+B) 適合帶嬰幼兒的固定親子景點：需為真實存在且目前正常營業，共3個
+C) 在A、B景點附近、適合帶嬰幼兒的親子餐廳或一般餐廳：共3間
 
-重要：只回傳純JSON，第一個字元必須是{，不要加任何說明或markdown。
-格式：{"spots":[
-{"name":"景點名稱","category":"展覽","icon":"🎨","desc":"為何推薦（20字內，含即時資訊如特展名稱/優惠/熱門原因）","area":"所在區域如台北市大安區"},
-{"name":"","category":"活動","icon":"🎪","desc":"","area":""},
-{"name":"","category":"景點","icon":"🌳","desc":"","area":""},
-{"name":"","category":"特惠","icon":"🛍️","desc":"","area":""},
-{"name":"","category":"展覽","icon":"🏛️","desc":"","area":""},
-{"name":"","category":"景點","icon":"🎡","desc":"","area":""}
-]}
-category只能用：展覽、活動、景點、特惠`;
+【重要規則】
+1. 所有推薦必須是你在網路上查到確切存在且目前仍在進行/營業的地點，不可捏造或推測
+2. A類活動必須提供明確日期範圍
+3. 推薦多元化，不要重複類型，優先推薦較少人知道的特色地點
+4. 禁止推薦不確定是否存在的地點
+
+只回傳純JSON，第一個字元必須是{：
+{"activities":[
+{"name":"活動名","category":"展覽","icon":"🎨","desc":"說明含特色（20字內）","area":"區域如台北市中正區","period":"06/10~06/20"},
+{"name":"","category":"活動","icon":"🎪","desc":"","area":"","period":""},
+{"name":"","category":"市集","icon":"🏪","desc":"","area":"","period":""},
+{"name":"","category":"特惠","icon":"🎡","desc":"","area":"","period":""},
+{"name":"","category":"展覽","icon":"🎭","desc":"","area":"","period":""},
+{"name":"","category":"活動","icon":"🎠","desc":"","area":"","period":""}
+],
+"spots":[
+{"name":"景點名","category":"景點","icon":"🌳","desc":"說明+適合嬰幼兒原因（20字內）","area":"區域"},
+{"name":"","category":"景點","icon":"🏛️","desc":"","area":""},
+{"name":"","category":"景點","icon":"🎨","desc":"","area":""}
+],
+"restaurants":[
+{"name":"餐廳名","category":"餐廳","icon":"🍽️","desc":"特色+親子設施（20字內）","area":"區域","priceRange":"$$"},
+{"name":"","category":"餐廳","icon":"🍜","desc":"","area":"","priceRange":"$"},
+{"name":"","category":"餐廳","icon":"🥗","desc":"","area":"","priceRange":"$$"}
+]}`;
   return await callG(p,true);
 }
 
-async function fetchPlan(w,chosen){
-  const names=chosen.map(s=>s.name).join('、');
-  const areas=chosen.map(s=>s.area).join('、');
-  const dn=prefs.dinner==='home'?'晚餐回家吃，需在17:30前返程':'安排在外用晚餐（親子友善餐廳）';
-  const p=`今天${todayS()}，${isWkd()?'假日':'平日'}。天氣${w.desc}，${w.temp}°C。
+async function fetchNearby(wx){
+  const selItems=[
+    ...[...disc.selA].map(i=>disc.activities[i]),
+    ...[...disc.selS].map(i=>disc.spots[i]),
+    ...[...disc.selR].map(i=>disc.restaurants[i])
+  ];
+  if(selItems.length===0){return fetchAll(wx)}
+  const selDesc=selItems.map(s=>`${s.name}（${s.area}）`).join('、');
+  const selAreas=[...new Set(selItems.map(s=>s.area))].join('、');
+  const needA=disc.activities.length-disc.selA.size;
+  const needS=disc.spots.length-disc.selS.size;
+  const needR=disc.restaurants.length-disc.selR.size;
+
+  const p=`使用者已選擇：${selDesc}
+請搜尋在這些地點附近（${selAreas}）的替換推薦，為未選擇的項目找周邊替代：
+- 期間限定活動/展覽（需有日期）：${needA}個
+- 親子景點：${needS}個
+- 親子/一般餐廳：${needR}間
+
+重要：只推薦真實可查到的地點，活動需有日期，地點需在已選地點的附近區域，多元化不重複。
+
+只回傳純JSON，第一個字元必須是{：
+{"activities":[${needA}個，格式：{"name":"","category":"活動","icon":"","desc":"","area":"","period":""}],
+"spots":[${needS}個，格式：{"name":"","category":"景點","icon":"","desc":"","area":""}],
+"restaurants":[${needR}間，格式：{"name":"","category":"餐廳","icon":"","desc":"","area":"","priceRange":""}]}`;
+  return await callG(p,true);
+}
+
+async function fetchPlan(wx,spots,rests){
+  const sNames=spots.map(s=>s.name).join('、');
+  const sAreas=spots.map(s=>s.area).join('、');
+  const rCount=rests.length;
+  let dinnerNote,arriveNote;
+  if(rCount===0){dinnerNote='所有餐點回家吃，需在17:30前返程，到家時間18:00';arriveNote='18:00到家'}
+  else if(rCount===1){dinnerNote=`午餐在${rests[0].name}（${rests[0].area}），晚餐回家，需在17:30前返程，到家時間18:00`;arriveNote='18:00到家'}
+  else{dinnerNote=`午餐在${rests[0].name}（${rests[0].area}），晚餐在${rests[1].name}（${rests[1].area}）`;arriveNote='20:00前到家'}
+  const rInfo=rests.length>0?`已選餐廳：${rests.map(r=>r.name+'('+r.area+')').join('、')}`:'無選擇餐廳';
+
+  const p=`今天${todayS()}，${isWkd()?'假日':'平日'}。天氣${wx.desc}，${wx.temp}°C。
 家庭：爸爸+媽媽+${kidM()}個月嬰幼兒，住桃園市桃園區，有汽車。
-已選景點：${names}（區域：${areas}）
-作息：09:00起床，12:00午餐，13:30午休1小時，${dn}，19:00家長洗澡，20:00小孩洗澡。
+已選景點/活動：${sNames}（區域：${sAreas}）
+${rInfo}
+餐飲安排：${dinnerNote}
+作息：09:00起床，12:00午餐，13:30午休1小時，19:00家長洗澡，20:00小孩洗澡，${arriveNote}。
 
-規劃要求：依地理位置由近到遠順序排列（同方向行進，避免來回折返），每個景點提供2個附近停車場。
+規劃要求：
+1. 依地理位置由近到遠排列（同方向行進，嚴禁來回折返）
+2. 每個景點提供2個附近停車場
+3. 行程需符合嬰幼兒作息
 
-重要：只回傳純JSON，第一個字元必須是{，不要加任何說明或markdown。
+只回傳純JSON，第一個字元必須是{：
 {"summary":"今日行程主題一句話",
-"route":[{"label":"出發","name":"桃園家","type":"home"},{"label":"景點1","name":"景點名","type":"spot"},{"label":"午餐","name":"餐廳名","type":"food"},{"label":"景點2","name":"景點名","type":"spot"},{"label":"返家","name":"桃園家","type":"home"}],
+"route":[{"label":"出發","name":"桃園家","type":"home"},{"label":"景點1","name":"名稱","type":"spot"},{"label":"午餐","name":"餐廳或略","type":"food"},{"label":"景點2","name":"名稱","type":"spot"},{"label":"返家","name":"桃園家","type":"home"}],
 "timeline":[
 {"time":"09:00","label":"起床準備","type":"rest"},
-{"time":"10:00","label":"出發","sub":"預計車程約X分鐘","type":"go"},
-{"time":"10:30","label":"景點一","sub":"建議停留X小時，特色說明","type":"spot"},
-{"time":"12:00","label":"午餐 — 餐廳名","sub":"地址","type":"food"},
-{"time":"13:00","label":"景點二","sub":"建議停留X小時","type":"spot"},
-{"time":"13:30","label":"午休","sub":"車上或附近咖啡廳約1小時","type":"rest"},
-{"time":"14:30","label":"景點三（若有）","sub":"建議停留X小時","type":"spot"},
-{"time":"17:30","label":"${prefs.dinner==='outside'?'晚餐 — 餐廳名':'返程出發'}","sub":"${prefs.dinner==='outside'?'地址':'預計19:00前到家'}","type":"${prefs.dinner==='outside'?'food':'go'}"},
+{"time":"10:00","label":"出發","sub":"車程約X分鐘","type":"go"},
+{"time":"10:30","label":"景點名","sub":"停留約X小時，特色說明","type":"spot"},
+{"time":"12:00","label":"午餐${rCount>0?' — '+rests[0].name:'（自備或附近覓食）'}","sub":"地址","type":"food"},
+{"time":"13:00","label":"景點名","sub":"停留約X小時","type":"spot"},
+{"time":"13:30","label":"午休","sub":"車上或咖啡廳約1小時","type":"rest"},
+{"time":"14:30","label":"景點名（若有）","sub":"停留約X小時","type":"spot"},
+{"time":"${rCount>=2?'17:30':'17:00'}","label":"${rCount>=2?'晚餐 — '+rests[1].name:'返程出發'}","sub":"${rCount>=2?rests[1].area:'預計18:00到家'}","type":"${rCount>=2?'food':'go'}"},
+{"time":"${rCount>=2?'19:00':'18:00'}","label":"${rCount>=2?'返程出發':'到家'}","type":"${rCount>=2?'go':'rest'}"},
 {"time":"20:00","label":"小孩洗澡","type":"rest"}
 ],
-"activities":[{"name":"景點名","badge":"推薦","meta":"地址 | 開放時間 | 費用","desc":"詳細說明+適合嬰幼兒原因","mapQ":"Google搜尋字串","parking":[{"name":"停車場名","dist":"步行X分鐘"},{"name":"停車場名2","dist":"步行X分鐘"}]}]${prefs.dinner==='outside'?',"dinner":{"name":"餐廳名","meta":"地址|時間|人均","desc":"推薦原因","mapQ":"搜尋字串","parking":[{"name":"停車場","dist":"步行X分鐘"}]}':''}}`;
+"activities":[{"name":"景點名","badge":"推薦","meta":"地址｜開放時間｜費用","desc":"詳細說明+適合嬰幼兒原因","mapQ":"搜尋字串","parking":[{"name":"停車場名","dist":"步行X分鐘"},{"name":"停車場名2","dist":"步行X分鐘"}]}]}`;
   return await callG(p,false);
 }
 
 // ── Flows ─────────────────────────────────────
 async function doAuto(){
-  showLd('🔍 搜尋今日推薦景點中...','查詢展覽・活動・特惠・熱門親子景點');
-  wx=await getWx();
+  showLd('🔍 搜尋今日推薦中...','查詢本週活動・展覽・特惠・親子景點・餐廳');
+  disc.wx=await getWx();
+  disc.selA=new Set();disc.selS=new Set();disc.selR=new Set();
   try{
-    const d=await fetchSpots(wx);
-    showDisc(wx,d.spots||[],bdays());
+    const d=await fetchAll(disc.wx);
+    disc.activities=d.activities||[];
+    disc.spots=d.spots||[];
+    disc.restaurants=d.restaurants||[];
+    showDisc(bdays());
   }catch(e){
-    app.innerHTML=wxH(wx)+`<div class="card"><div class="card-body"><div class="err">❌ 搜尋失敗：${e.message}<br>
+    app.innerHTML=wxH(disc.wx)+`<div class="card"><div class="card-body"><div class="err">❌ 搜尋失敗：${e.message}<br>
     <button class="btn btn-full" onclick="doAuto()" style="margin-top:8px">重試</button>
     <button class="btn btn-full" onclick="showSetup()" style="margin-top:8px">重新設定 API Key</button>
     </div></div></div>`;
   }
 }
 
-async function doRegen(){
-  showLd('🔄 換一批推薦中...','重新搜尋景點與活動');
+async function doNearby(){
+  const ns=disc.selA.size+disc.selS.size+disc.selR.size;
+  if(ns===0){alert('請先選至少一個有興趣的項目，再換周邊推薦');return}
+  showLd('🔄 搜尋周邊替換中...','依照已選地點查找附近推薦');
   try{
-    const d=await fetchSpots(wx);
-    showDisc(wx,d.spots||[],bdays());
+    const d=await fetchNearby(disc.wx);
+    // Replace only unselected items
+    let ai=0,si=0,ri=0;
+    disc.activities=disc.activities.map((item,i)=>{
+      if(disc.selA.has(i))return item;
+      return d.activities&&d.activities[ai]?d.activities[ai++]:item;
+    });
+    disc.spots=disc.spots.map((item,i)=>{
+      if(disc.selS.has(i))return item;
+      return d.spots&&d.spots[si]?d.spots[si++]:item;
+    });
+    disc.restaurants=disc.restaurants.map((item,i)=>{
+      if(disc.selR.has(i))return item;
+      return d.restaurants&&d.restaurants[ri]?d.restaurants[ri++]:item;
+    });
+    showDisc(bdays());
   }catch(e){
     app.innerHTML=`<div class="card"><div class="card-body"><div class="err">❌ ${e.message}<br>
-    <button class="btn btn-full" onclick="doAuto()" style="margin-top:8px">重新開始</button></div></div></div>`;
+    <button class="btn btn-full" onclick="showDisc(bdays())" style="margin-top:8px">返回選擇畫面</button></div></div></div>`;
   }
 }
 
-async function genPlan(w,chosen){
-  showLd('🗓️ 規劃行程中...','依你選的景點安排最佳路線');
+async function genPlan(wx,spots,rests){
+  showLd('🗓️ AI 規劃最佳路線中...','依地理位置排序，安排行程時間表');
   try{
-    const plan=await fetchPlan(w,chosen);
-    showPlan(w,plan);
+    const plan=await fetchPlan(wx,spots,rests);
+    showPlan(wx,plan);
   }catch(e){
     app.innerHTML=`<div class="card"><div class="card-body"><div class="err">❌ 行程規劃失敗：${e.message}<br>
-    <button class="btn btn-full" onclick="doAuto()" style="margin-top:8px">重新開始</button></div></div></div>`;
+    <button class="btn btn-full" onclick="showDisc(bdays())" style="margin-top:8px">返回選擇</button></div></div></div>`;
   }
 }
 
@@ -484,21 +581,14 @@ function showManual(){
     <div class="frow"><label>偏好類型</label>
       <div class="tags" id="tT">${['綜合','展覽','互動體驗','戶外公園','百貨商場','文創市集','親子餐廳'].map(t=>`<div class="tag${t==='綜合'?' on':''}" onclick="sT(this,'${t}')">${t}</div>`).join('')}</div>
     </div>
-    <div class="frow"><label>晚餐安排</label>
-      <div class="d-opts">
-        <div class="d-opt${prefs.dinner==='outside'?' on':''}" onclick="sD('outside',this)"><div class="di">🍜</div><p>在外用餐</p></div>
-        <div class="d-opt${prefs.dinner==='home'?' on':''}" onclick="sD('home',this)"><div class="di">🏠</div><p>回家吃</p></div>
-      </div>
-    </div>
     <div class="brow">
       <button class="btn btn-p" onclick="doAuto()">🔍 搜尋景點</button>
-      <button class="btn" onclick="doAuto()">← 取消</button>
+      <button class="btn" onclick="showDisc(bdays())">← 取消</button>
     </div>
   </div></div>`;
 }
 function onAC(v){prefs.area=v==='other'?'':v;document.getElementById('cAW').style.display=v==='other'?'block':'none'}
 function sT(el,v){document.querySelectorAll('#tT .tag').forEach(t=>t.classList.remove('on'));el.classList.add('on');prefs.type=v}
-function sD(v,el){prefs.dinner=v;document.querySelectorAll('.d-opt').forEach(e=>e.classList.remove('on'));el.classList.add('on')}
 
 // ── Init ──────────────────────────────────────
 document.getElementById('dateChip').textContent=todayS();
