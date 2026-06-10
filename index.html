@@ -17,8 +17,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif;back
 .card-head{padding:10px 14px;border-bottom:.5px solid #f0efe8;display:flex;align-items:center;gap:8px}
 .card-head h2{font-size:13px;font-weight:500}
 .card-body{padding:12px 14px}
-
-/* Loading */
 .ld-wrap{padding:52px 24px;text-align:center}
 .ld-title{font-size:14px;color:#444;margin-bottom:16px;font-weight:500}
 .ld-track{background:#e8e7e0;border-radius:20px;height:10px;position:relative;overflow:visible;margin:0 8px 6px}
@@ -27,8 +25,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif;back
 .ld-baby{position:absolute;top:-10px;font-size:22px;animation:ldRoll 12s ease-in-out forwards;left:0}
 @keyframes ldRoll{0%{left:0%}20%{left:20%}50%{left:50%}80%{left:75%}100%{left:87%}}
 .ld-sub{font-size:12px;color:#aaa;margin-top:8px}
-
-/* Weather */
 .wx-row{display:flex;align-items:center;gap:14px;padding:4px 0 10px}
 .wx-temp{font-size:36px;font-weight:300;line-height:1}
 .wx-desc{font-size:13px;color:#555}
@@ -38,15 +34,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif;back
 .wx-val{font-size:13px;font-weight:500}
 .bday{background:#f8f0fc;border:.5px solid #d8b8f0;border-radius:10px;padding:9px 12px;display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .bday p{font-size:12px;color:#5a2d80;line-height:1.5}
-
-/* Section header */
 .sec{margin-bottom:12px}
-.sec-hdr{display:flex;align-items:center;gap:7px;padding:8px 2px 8px;border-bottom:.5px solid #e8e7e0;margin-bottom:8px}
-.sec-hdr .sec-icon{font-size:16px}
+.sec-hdr{display:flex;align-items:center;gap:7px;padding:8px 2px;border-bottom:.5px solid #e8e7e0;margin-bottom:8px}
 .sec-hdr .sec-title{font-size:13px;font-weight:500;flex:1}
 .sec-hdr .sec-hint{font-size:11px;color:#aaa}
-
-/* Spot grid */
+.sec-empty{font-size:12px;color:#aaa;padding:12px 4px;text-align:center;background:#f9f9f7;border-radius:8px}
 .sg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .sc{border:1.5px solid #e8e7e0;border-radius:10px;padding:10px;background:#fff;display:flex;flex-direction:column;transition:all .2s}
 .sc.yes{border-color:#3d7a5e;background:#f0f9f5}
@@ -72,8 +64,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif;back
 .sbtn.y{border-color:#3d7a5e;color:#3d7a5e}
 .sbtn.y.on{background:#3d7a5e;color:#fff}
 .sbtn.n.on{background:#eee;color:#999}
-
-/* Summary & actions */
 .summary-box{background:#f5f4ef;border-radius:8px;padding:8px 12px;margin:10px 0;font-size:12px;color:#555;line-height:1.8}
 .brow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
 .btn{padding:9px;border-radius:8px;border:.5px solid #d0d0c8;background:#fff;font-size:13px;cursor:pointer;font-family:inherit;color:#333;text-align:center;width:100%}
@@ -81,8 +71,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif;back
 .btn-p{background:#2d5a3d;color:#fff;border-color:#2d5a3d}
 .btn-a{background:#1a5a9a;color:#fff;border-color:#1a5a9a}
 .btn-full{grid-column:1/-1}
-
-/* Timeline */
 .tl{display:flex;flex-direction:column}
 .tl-item{display:flex;gap:10px}
 .tl-t{font-size:11px;color:#aaa;min-width:40px;padding-top:3px}
@@ -93,12 +81,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif;back
 .tl-txt{font-size:13px;padding-bottom:10px;line-height:1.5;flex:1}
 .tl-txt strong{font-weight:500}
 .tl-txt .sub{font-size:11px;color:#999;margin-top:1px}
-
-/* Route SVG */
 .rt-wrap{padding:8px 0 4px}
 .rt-svg{width:100%;border-radius:8px;background:#f0efe8}
-
-/* Activity detail */
 .act{border:.5px solid #e8e7e0;border-radius:10px;padding:11px 12px;margin-bottom:8px}
 .act:last-child{margin-bottom:0}
 .act-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:5px}
@@ -112,8 +96,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif;back
 .pk-item span{font-size:12px;flex:1}
 .pk-item em{font-size:11px;color:#aaa;font-style:normal}
 .act-links{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
-
-/* Setup */
 .su-wrap{padding:20px 0;text-align:center}
 .su-wrap p{font-size:13px;color:#666;margin-bottom:14px;line-height:1.6}
 .su-wrap input{width:100%;font-size:13px;padding:9px 12px;border:.5px solid #d8d7d0;border-radius:8px;font-family:inherit;margin-bottom:10px}
@@ -125,6 +107,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif;back
 .tag{font-size:12px;padding:4px 10px;border-radius:20px;border:.5px solid #d0d0c8;background:#fff;cursor:pointer;color:#555}
 .tag.on{background:#2d5a3d;color:#fff;border-color:#2d5a3d}
 .err{font-size:12px;color:#c0392b;padding:10px;background:#fff8f8;border-radius:8px;border:.5px solid #f5c0c0;line-height:1.6}
+.warn{font-size:12px;color:#7a5c00;padding:8px 12px;background:#fffbe8;border-radius:8px;border:.5px solid #e8d888;margin-bottom:8px}
 </style>
 </head>
 <body>
@@ -133,14 +116,45 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif;back
 <script>
 const FAM={kid:{name:'小寶',bday:new Date(2025,0,10)},dad:{name:'爸爸',bday:new Date(1993,6,8)},mom:{name:'媽媽',bday:new Date(1991,10,12)}};
 let apiKey=localStorage.getItem('gk')||'';
-let mdl=localStorage.getItem('gm')||'gemini-2.5-flash-lite';
+let planMdl=localStorage.getItem('gm')||'gemini-2.5-flash-lite';
+const SEARCH_MDL='gemini-2.5-flash'; // 搜尋專用，品質較高
 let prefs={area:'桃園/大台北',type:'綜合'};
 const disc={wx:null,activities:[],spots:[],restaurants:[],selA:new Set(),selS:new Set(),selR:new Set()};
 const app=document.getElementById('app');
 
+// 地區關鍵字對應表
+const REGION_KW={
+  '桃園/大台北':['桃園','台北','臺北','新北','淡水','板橋','三重','中和','永和','新莊','土城','樹林','鶯歌','三峽','汐止','瑞芳','平溪','深坑','石碇','坪林','八里','林口','泰山','五股','蘆洲','三芝','石門','金山','萬里','貢寮','雙溪','平溪'],
+  '新竹':['新竹','竹北','竹東','關西','新埔','湖口','新豐','芎林','橫山','北埔','峨眉','寶山','五峰','尖石'],
+  '宜蘭':['宜蘭','羅東','蘇澳','礁溪','頭城','冬山','五結','三星','大同','南澳'],
+  '台中':['台中','臺中','豐原','大里','太平','清水','沙鹿','梧棲','后里','神岡','潭子','大雅','烏日','大肚','龍井','霧峰','和平','東勢','石岡','新社','外埔','大安','苑裡'],
+  '台南':['台南','臺南','永康','仁德','歸仁','關廟','龍崎','玉井','楠西','南化','左鎮','新化','善化','新市','安定','山上','麻豆','佳里','七股','將軍','學甲','北門','西港','下營','六甲','官田','大內','柳營','鹽水','白河','後壁','東山'],
+};
+
+function getRegionKws(){
+  const kws=REGION_KW[prefs.area];
+  if(kws)return kws;
+  // 自訂輸入：用輸入值本身做比對
+  return prefs.area?[prefs.area]:[];
+}
+function matchRegion(area){
+  if(!area)return false;
+  return getRegionKws().some(k=>area.includes(k));
+}
+function filterItems(items){
+  if(!items||!items.length)return[];
+  return items.filter(item=>matchRegion(item.area));
+}
+
 function kidM(){const n=new Date(),b=FAM.kid.bday;return(n.getFullYear()-b.getFullYear())*12+(n.getMonth()-b.getMonth())}
 function todayS(){const d=new Date(),w=['日','一','二','三','四','五','六'];return`${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')} (週${w[d.getDay()]})`}
 function isWkd(){const d=new Date().getDay();return d===0||d===6}
+function dateRange(){
+  const t=new Date(),f=new Date(t);
+  f.setDate(f.getDate()+30);
+  const fmt=d=>`${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')}`;
+  return{today:fmt(t),until:fmt(f)};
+}
 function bdays(){
   const t=new Date(),m=t.getMonth(),d=t.getDate(),r=[];
   for(const[,v]of Object.entries(FAM)){
@@ -169,17 +183,17 @@ function parseJ(txt){
   throw new Error('AI 回應格式錯誤，請重試');
 }
 
-async function callG(prompt,search=false,retry=0){
+async function callG(prompt,search=false,retry=0,model=planMdl){
   try{
     const body={contents:[{parts:[{text:prompt}]}]};
     if(search)body.tools=[{"google_search":{}}];
-    const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${mdl}:generateContent?key=${apiKey}`,{
+    const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,{
       method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)
     });
     const d=await r.json();
     if(d.error){
       const can=(d.error.code===429||d.error.code===503||d.error.status==='RESOURCE_EXHAUSTED'||d.error.status==='UNAVAILABLE');
-      if(can&&retry<4){await new Promise(r=>setTimeout(r,Math.pow(2,retry+1)*1000));return callG(prompt,search,retry+1)}
+      if(can&&retry<4){await new Promise(r=>setTimeout(r,Math.pow(2,retry+1)*1000));return callG(prompt,search,retry+1,model)}
       throw new Error(d.error.message);
     }
     const txt=d.candidates[0].content.parts.map(p=>p.text||'').join('');
@@ -188,7 +202,7 @@ async function callG(prompt,search=false,retry=0){
     const msg=e.message||'';
     if(retry<4&&(msg.includes('quota')||msg.includes('exhausted')||msg.includes('demand')||msg.includes('503'))){
       await new Promise(r=>setTimeout(r,Math.pow(2,retry+1)*1000));
-      return callG(prompt,search,retry+1);
+      return callG(prompt,search,retry+1,model);
     }
     throw e;
   }
@@ -208,10 +222,10 @@ function showSetup(){
   app.innerHTML=`<div class="card"><div class="card-body"><div class="su-wrap">
     <p>🔑 請輸入你的 <strong>Gemini API Key</strong><br>金鑰只存在本機，不會上傳</p>
     <input type="password" id="ki" placeholder="AIza..." autocomplete="off">
-    <div class="frow"><label>模型</label>
+    <div class="frow"><label>行程規劃模型（搜尋固定使用 gemini-2.5-flash）</label>
       <select id="ms">
-        <option value="gemini-2.5-flash-lite" ${mdl==='gemini-2.5-flash-lite'?'selected':''}>gemini-2.5-flash-lite（推薦，每天1000次免費）</option>
-        <option value="gemini-2.5-flash" ${mdl==='gemini-2.5-flash'?'selected':''}>gemini-2.5-flash（每天250次，品質較高）</option>
+        <option value="gemini-2.5-flash-lite" ${planMdl==='gemini-2.5-flash-lite'?'selected':''}>gemini-2.5-flash-lite（推薦，每天1000次免費）</option>
+        <option value="gemini-2.5-flash" ${planMdl==='gemini-2.5-flash'?'selected':''}>gemini-2.5-flash（每天250次，品質較高）</option>
       </select>
     </div>
     <button class="btn btn-p btn-full" onclick="saveKey()">確認，開始使用</button>
@@ -221,8 +235,8 @@ function showSetup(){
 function saveKey(){
   const v=document.getElementById('ki').value.trim();
   if(!v){alert('請輸入 API Key');return}
-  apiKey=v;mdl=document.getElementById('ms').value;
-  localStorage.setItem('gk',v);localStorage.setItem('gm',mdl);
+  apiKey=v;planMdl=document.getElementById('ms').value;
+  localStorage.setItem('gk',v);localStorage.setItem('gm',planMdl);
   doAuto();
 }
 
@@ -243,10 +257,10 @@ function bdayH(bd){
 }
 
 // ── Cards ─────────────────────────────────────
-function mkCard(item, sec, i){
-  const selSet = sec==='a'?disc.selA : sec==='s'?disc.selS : disc.selR;
-  const sel = selSet.has(i);
-  const isRest = sec==='r';
+function mkCard(item,sec,i){
+  const selSet=sec==='a'?disc.selA:sec==='s'?disc.selS:disc.selR;
+  const sel=selSet.has(i);
+  const isRest=sec==='r';
   const mapUrl=`https://maps.google.com/?q=${encodeURIComponent(item.name+' '+item.area+' 台灣')}`;
   const srchUrl=`https://www.google.com/search?q=${encodeURIComponent(item.name+' '+item.area)}`;
   return`<div class="sc ${sel?'yes':''} ${isRest?'rest-card':''}" id="sc-${sec}-${i}">
@@ -280,10 +294,8 @@ function tog(sec,i){
 }
 function togNo(sec,i){
   const selSet=sec==='a'?disc.selA:sec==='s'?disc.selS:disc.selR;
-  selSet.delete(i);
-  rerender();
+  selSet.delete(i);rerender();
 }
-
 function rerender(){
   const sgA=document.getElementById('sg-a');
   const sgS=document.getElementById('sg-s');
@@ -293,41 +305,40 @@ function rerender(){
   if(sgR)sgR.innerHTML=disc.restaurants.map((s,i)=>mkCard(s,'r',i)).join('');
   updSummary();
 }
-
 function updSummary(){
   const el=document.getElementById('sel-summary');
   if(!el)return;
-  const ns=disc.selA.size+disc.selS.size, nr=disc.selR.size;
+  const ns=disc.selA.size+disc.selS.size,nr=disc.selR.size;
   const rNote=nr===0?'未選餐廳（全程回家吃）':nr===1?'已選1間（午餐外食，晚餐6點到家）':'已選2間（午晚餐外食）';
   el.innerHTML=`景點/活動：已選 <strong>${ns}</strong>/3 個 ｜ 餐廳：${rNote}`;
 }
-
-function sectionH(title,icon,id,items,sec,hint){
+function secHTML(title,id,items,sec,hint){
+  const cards=items.length?`<div class="sg" id="${id}">${items.map((s,i)=>mkCard(s,sec,i)).join('')}</div>`
+    :`<div class="sec-empty" id="${id}">目前在「${prefs.area}」未找到符合的${title.replace(/[🗓️📍🍽️ ]/g,'')}，可換一批或調整地區</div>`;
   return`<div class="sec">
-    <div class="sec-hdr"><span class="sec-icon">${icon}</span><span class="sec-title">${title}</span><span class="sec-hint">${hint}</span></div>
-    <div class="sg" id="${id}">${items.map((s,i)=>mkCard(s,sec,i)).join('')}</div>
+    <div class="sec-hdr"><span class="sec-title">${title}</span><span class="sec-hint">${hint}</span></div>
+    ${cards}
   </div>`;
 }
 
 // ── Discovery Screen ─────────────────────────
 function showDisc(bd){
+  const totalFiltered=disc.activities.length+disc.spots.length+disc.restaurants.length;
+  const warnHTML=totalFiltered===0?`<div class="warn">⚠️ 此次搜尋結果全部被地區過濾移除，建議點「全部重新推薦」或調整地區條件。</div>`:'';
   app.innerHTML=bdayH(bd)+wxH(disc.wx)+`<div class="card">
-    <div class="card-head"><span>✨</span><h2>今日推薦 — 選有興趣的後送出</h2></div>
+    <div class="card-head"><span>✨</span><h2>今日推薦 — 地區：${prefs.area}</h2></div>
     <div class="card-body">
-      ${sectionH('🗓️ 期間限定活動 / 展覽','🗓️','sg-a',disc.activities,'a','本週/月限定')}
-      ${sectionH('📍 親子景點','📍','sg-s',disc.spots,'s','精選景點')}
-      ${sectionH('🍽️ 餐廳推薦','🍽️','sg-r',disc.restaurants,'r','午餐或晚餐')}
+      ${warnHTML}
+      ${secHTML('🗓️ 期間限定活動 / 展覽','sg-a',disc.activities,'a','本週/月限定')}
+      ${secHTML('📍 親子景點','sg-s',disc.spots,'s','精選景點')}
+      ${secHTML('🍽️ 餐廳推薦','sg-r',disc.restaurants,'r','午餐或晚餐')}
       <div class="summary-box" id="sel-summary">景點/活動：已選 <strong>0</strong>/3 個 ｜ 餐廳：未選餐廳（全程回家吃）</div>
       <div class="brow">
         <button class="btn btn-a" onclick="doNearby()">🔄 換周邊</button>
         <button class="btn btn-p" onclick="doSubmit()">✅ 送出規劃</button>
       </div>
-      <div class="brow">
-        <button class="btn btn-full" onclick="doAuto()">🔃 全部重新推薦</button>
-      </div>
-      <div class="brow">
-        <button class="btn btn-full" onclick="showManual()">✏️ 手動指定條件</button>
-      </div>
+      <div class="brow"><button class="btn btn-full" onclick="doAuto()">🔃 全部重新推薦</button></div>
+      <div class="brow"><button class="btn btn-full" onclick="showManual()">✏️ 手動指定條件</button></div>
     </div>
   </div>`;
 }
@@ -358,7 +369,6 @@ function rtSVG(route){
   });
   return`<div class="rt-wrap"><svg class="rt-svg" viewBox="0 0 ${W} 84" xmlns="http://www.w3.org/2000/svg">${ln}${ci}${lb}</svg></div>`;
 }
-
 function tlH(items){
   const dc={spot:'s',food:'f',rest:'r',go:''};
   return items.map((it,i)=>`<div class="tl-item">
@@ -367,7 +377,6 @@ function tlH(items){
     <div class="tl-txt"><strong>${it.label}</strong>${it.sub?`<div class="sub">${it.sub}</div>`:''}</div>
   </div>`).join('');
 }
-
 function actH(acts){
   return acts.map(a=>{
     const mu=`https://maps.google.com/?q=${encodeURIComponent((a.mapQ||a.name)+' 台灣')}`;
@@ -378,8 +387,7 @@ function actH(acts){
     }).join(''):'';
     return`<div class="act">
       <div class="act-top"><div class="act-name">${a.name}</div><div class="act-badge">${a.badge||'推薦'}</div></div>
-      <div class="act-meta">${a.meta}</div>
-      <div class="act-desc">${a.desc}</div>
+      <div class="act-meta">${a.meta}</div><div class="act-desc">${a.desc}</div>
       ${pk?`<div class="pk-row"><div class="pk-lbl">附近停車</div>${pk}</div>`:''}
       <div class="act-links">
         <a href="${mu}" target="_blank" class="lbtn">🗺️ Google 地圖</a>
@@ -388,7 +396,6 @@ function actH(acts){
     </div>`;
   }).join('');
 }
-
 function showPlan(wx,plan){
   const bd=bdays();
   const sumC=`<div class="card"><div class="card-head"><span>✨</span><h2>${plan.summary||'今日親子行程'}</h2></div><div class="card-body">${rtSVG(plan.route)}</div></div>`;
@@ -402,121 +409,103 @@ function showPlan(wx,plan){
 
 // ── API Prompts ───────────────────────────────
 async function fetchAll(wx){
-  const p=`今天${todayS()}，${isWkd()?'假日':'平日'}。天氣${wx.desc}，${wx.temp}°C，降雨${wx.rain}%。${wx.good?'適合戶外':'優先室內'}。
-家庭：爸爸+媽媽+${kidM()}個月嬰幼兒，住桃園市桃園區，有汽車。偏好地區：${prefs.area}，偏好類型：${prefs.type}。
+  const dr=dateRange();
+  const regionStr=prefs.area;
+  const p=`【最高優先規則 — 必須嚴格遵守】
+1. 地區限制：所有推薦的景點、活動、餐廳必須位於「${regionStr}」，其他縣市地區一律禁止推薦
+2. 日期限制：期間限定活動的舉辦日期必須在 ${dr.today} 至 ${dr.until} 之間，超出此範圍一律禁止推薦
+3. 真實性：所有推薦必須是你能透過Google搜尋找到確切資訊的真實地點/活動，無法確認者禁止推薦
+4. 寧缺勿濫：找不到足夠數量時，減少推薦數量，絕對禁止捏造
 
-請使用Google搜尋，查找台灣北部（台北/新北/桃園/新竹）地區：
-A) 本週或本月「期間限定」的活動、展覽、市集：需有明確舉辦日期，需為真實可查到的活動，共6個
-B) 適合帶嬰幼兒的固定親子景點：需為真實存在且目前正常營業，共3個
-C) 在A、B景點附近、適合帶嬰幼兒的親子餐廳或一般餐廳：共3間
+今天：${todayS()}，${isWkd()?'假日':'平日'}。天氣${wx.desc}，${wx.temp}°C，降雨${wx.rain}%。${wx.good?'適合戶外':'優先室內'}。
+家庭：爸爸+媽媽+${kidM()}個月嬰幼兒，住桃園市桃園區，有汽車。偏好類型：${prefs.type}。
 
-【重要規則】
-1. 所有推薦必須是你在網路上查到確切存在且目前仍在進行/營業的地點，不可捏造或推測
-2. A類活動必須提供明確日期範圍
-3. 推薦多元化，不要重複類型，優先推薦較少人知道的特色地點
-4. 禁止推薦不確定是否存在的地點
+請使用Google搜尋，查找「${regionStr}」地區：
+A) 期間限定活動/展覽/市集：最多6個，日期必須在${dr.today}~${dr.until}之間
+B) 適合帶嬰幼兒的親子景點：最多3個，必須目前正常營業
+C) 適合帶嬰幼兒的餐廳：最多3間，必須在${regionStr}地區，目前正常營業
 
 只回傳純JSON，第一個字元必須是{：
-{"activities":[
-{"name":"活動名","category":"展覽","icon":"🎨","desc":"說明含特色（20字內）","area":"區域如台北市中正區","period":"06/10~06/20"},
-{"name":"","category":"活動","icon":"🎪","desc":"","area":"","period":""},
-{"name":"","category":"市集","icon":"🏪","desc":"","area":"","period":""},
-{"name":"","category":"特惠","icon":"🎡","desc":"","area":"","period":""},
-{"name":"","category":"展覽","icon":"🎭","desc":"","area":"","period":""},
-{"name":"","category":"活動","icon":"🎠","desc":"","area":"","period":""}
-],
-"spots":[
-{"name":"景點名","category":"景點","icon":"🌳","desc":"說明+適合嬰幼兒原因（20字內）","area":"區域"},
-{"name":"","category":"景點","icon":"🏛️","desc":"","area":""},
-{"name":"","category":"景點","icon":"🎨","desc":"","area":""}
-],
-"restaurants":[
-{"name":"餐廳名","category":"餐廳","icon":"🍽️","desc":"特色+親子設施（20字內）","area":"區域","priceRange":"$$"},
-{"name":"","category":"餐廳","icon":"🍜","desc":"","area":"","priceRange":"$"},
-{"name":"","category":"餐廳","icon":"🥗","desc":"","area":"","priceRange":"$$"}
-]}`;
-  return await callG(p,true);
+{"activities":[{"name":"名稱","category":"展覽","icon":"🎨","desc":"說明（20字內）","area":"${regionStr}內的確切地址或區域","period":"MM/DD~MM/DD","source":"來源網站名稱"}],
+"spots":[{"name":"名稱","category":"景點","icon":"🌳","desc":"說明+嬰幼兒適合原因（20字內）","area":"確切區域","source":"來源"}],
+"restaurants":[{"name":"名稱","category":"餐廳","icon":"🍽️","desc":"特色（20字內）","area":"確切區域","priceRange":"$|$$|$$$","source":"來源"}]}`;
+  return await callG(p,true,0,SEARCH_MDL);
 }
 
 async function fetchNearby(wx){
-  const selItems=[
-    ...[...disc.selA].map(i=>disc.activities[i]),
-    ...[...disc.selS].map(i=>disc.spots[i]),
-    ...[...disc.selR].map(i=>disc.restaurants[i])
-  ];
-  if(selItems.length===0){return fetchAll(wx)}
+  const dr=dateRange();
+  const selItems=[...[...disc.selA].map(i=>disc.activities[i]),...[...disc.selS].map(i=>disc.spots[i]),...[...disc.selR].map(i=>disc.restaurants[i])];
+  if(selItems.length===0)return fetchAll(wx);
   const selDesc=selItems.map(s=>`${s.name}（${s.area}）`).join('、');
-  const selAreas=[...new Set(selItems.map(s=>s.area))].join('、');
-  const needA=disc.activities.length-disc.selA.size;
-  const needS=disc.spots.length-disc.selS.size;
-  const needR=disc.restaurants.length-disc.selR.size;
+  const needA=Math.max(0,6-disc.selA.size);
+  const needS=Math.max(0,3-disc.selS.size);
+  const needR=Math.max(0,3-disc.selR.size);
+  const p=`【最高優先規則 — 必須嚴格遵守】
+1. 地區限制：所有推薦必須位於「${prefs.area}」，且盡量在已選地點附近，其他縣市一律禁止
+2. 日期限制：活動日期必須在 ${dr.today} 至 ${dr.until} 之間
+3. 真實性：只推薦能查到確切資訊的真實地點，無法確認者禁止推薦
+4. 寧缺勿濫：找不到足夠數量時減少數量，禁止捏造
 
-  const p=`使用者已選擇：${selDesc}
-請搜尋在這些地點附近（${selAreas}）的替換推薦，為未選擇的項目找周邊替代：
-- 期間限定活動/展覽（需有日期）：${needA}個
-- 親子景點：${needS}個
-- 親子/一般餐廳：${needR}間
+使用者已選：${selDesc}
+請在這些地點附近搜尋替換推薦（${prefs.area}地區）：
+- 期間限定活動/展覽（需有日期）：最多${needA}個
+- 親子景點：最多${needS}個
+- 親子/一般餐廳：最多${needR}間
 
-重要：只推薦真實可查到的地點，活動需有日期，地點需在已選地點的附近區域，多元化不重複。
-
-只回傳純JSON，第一個字元必須是{：
-{"activities":[${needA}個，格式：{"name":"","category":"活動","icon":"","desc":"","area":"","period":""}],
-"spots":[${needS}個，格式：{"name":"","category":"景點","icon":"","desc":"","area":""}],
-"restaurants":[${needR}間，格式：{"name":"","category":"餐廳","icon":"","desc":"","area":"","priceRange":""}]}`;
-  return await callG(p,true);
+只回傳純JSON，格式與activities/spots/restaurants陣列，每筆包含name/category/icon/desc/area/source，活動加period，餐廳加priceRange。`;
+  return await callG(p,true,0,SEARCH_MDL);
 }
 
 async function fetchPlan(wx,spots,rests){
   const sNames=spots.map(s=>s.name).join('、');
   const sAreas=spots.map(s=>s.area).join('、');
   const rCount=rests.length;
-  let dinnerNote,arriveNote;
-  if(rCount===0){dinnerNote='所有餐點回家吃，需在17:30前返程，到家時間18:00';arriveNote='18:00到家'}
-  else if(rCount===1){dinnerNote=`午餐在${rests[0].name}（${rests[0].area}），晚餐回家，需在17:30前返程，到家時間18:00`;arriveNote='18:00到家'}
-  else{dinnerNote=`午餐在${rests[0].name}（${rests[0].area}），晚餐在${rests[1].name}（${rests[1].area}）`;arriveNote='20:00前到家'}
+  let dinnerNote;
+  if(rCount===0)dinnerNote='所有餐點回家吃，需在17:00前返程，到家時間18:00';
+  else if(rCount===1)dinnerNote=`午餐在${rests[0].name}（${rests[0].area}），晚餐回家，需在17:00前返程，到家18:00`;
+  else dinnerNote=`午餐在${rests[0].name}（${rests[0].area}），晚餐在${rests[1].name}（${rests[1].area}）`;
   const rInfo=rests.length>0?`已選餐廳：${rests.map(r=>r.name+'('+r.area+')').join('、')}`:'無選擇餐廳';
-
+  const arriveHome=rCount>=2?'20:00前到家':'18:00到家';
   const p=`今天${todayS()}，${isWkd()?'假日':'平日'}。天氣${wx.desc}，${wx.temp}°C。
 家庭：爸爸+媽媽+${kidM()}個月嬰幼兒，住桃園市桃園區，有汽車。
 已選景點/活動：${sNames}（區域：${sAreas}）
 ${rInfo}
 餐飲安排：${dinnerNote}
-作息：09:00起床，12:00午餐，13:30午休1小時，19:00家長洗澡，20:00小孩洗澡，${arriveNote}。
+作息：09:00起床，12:00午餐，13:30午休1小時，19:00家長洗澡，20:00小孩洗澡，${arriveHome}。
 
 規劃要求：
-1. 依地理位置由近到遠排列（同方向行進，嚴禁來回折返）
+1. 依地理位置由近到遠排列，嚴禁來回折返
 2. 每個景點提供2個附近停車場
-3. 行程需符合嬰幼兒作息
+3. 行程符合嬰幼兒作息
 
 只回傳純JSON，第一個字元必須是{：
 {"summary":"今日行程主題一句話",
-"route":[{"label":"出發","name":"桃園家","type":"home"},{"label":"景點1","name":"名稱","type":"spot"},{"label":"午餐","name":"餐廳或略","type":"food"},{"label":"景點2","name":"名稱","type":"spot"},{"label":"返家","name":"桃園家","type":"home"}],
+"route":[{"label":"出發","name":"桃園家","type":"home"},{"label":"景1","name":"名稱","type":"spot"},{"label":"午餐","name":"餐廳","type":"food"},{"label":"景2","name":"名稱","type":"spot"},{"label":"返家","name":"桃園家","type":"home"}],
 "timeline":[
 {"time":"09:00","label":"起床準備","type":"rest"},
 {"time":"10:00","label":"出發","sub":"車程約X分鐘","type":"go"},
 {"time":"10:30","label":"景點名","sub":"停留約X小時，特色說明","type":"spot"},
-{"time":"12:00","label":"午餐${rCount>0?' — '+rests[0].name:'（自備或附近覓食）'}","sub":"地址","type":"food"},
+{"time":"12:00","label":"午餐${rCount>0?' — '+rests[0].name:'（自備）'}","sub":"地址或說明","type":"food"},
 {"time":"13:00","label":"景點名","sub":"停留約X小時","type":"spot"},
 {"time":"13:30","label":"午休","sub":"車上或咖啡廳約1小時","type":"rest"},
 {"time":"14:30","label":"景點名（若有）","sub":"停留約X小時","type":"spot"},
 {"time":"${rCount>=2?'17:30':'17:00'}","label":"${rCount>=2?'晚餐 — '+rests[1].name:'返程出發'}","sub":"${rCount>=2?rests[1].area:'預計18:00到家'}","type":"${rCount>=2?'food':'go'}"},
-{"time":"${rCount>=2?'19:00':'18:00'}","label":"${rCount>=2?'返程出發':'到家'}","type":"${rCount>=2?'go':'rest'}"},
 {"time":"20:00","label":"小孩洗澡","type":"rest"}
 ],
 "activities":[{"name":"景點名","badge":"推薦","meta":"地址｜開放時間｜費用","desc":"詳細說明+適合嬰幼兒原因","mapQ":"搜尋字串","parking":[{"name":"停車場名","dist":"步行X分鐘"},{"name":"停車場名2","dist":"步行X分鐘"}]}]}`;
-  return await callG(p,false);
+  return await callG(p,false,0,planMdl);
 }
 
 // ── Flows ─────────────────────────────────────
 async function doAuto(){
-  showLd('🔍 搜尋今日推薦中...','查詢本週活動・展覽・特惠・親子景點・餐廳');
+  showLd('🔍 搜尋今日推薦中...','使用 gemini-2.5-flash 查詢活動・景點・餐廳');
   disc.wx=await getWx();
   disc.selA=new Set();disc.selS=new Set();disc.selR=new Set();
   try{
     const d=await fetchAll(disc.wx);
-    disc.activities=d.activities||[];
-    disc.spots=d.spots||[];
-    disc.restaurants=d.restaurants||[];
+    disc.activities=filterItems(d.activities||[]);
+    disc.spots=filterItems(d.spots||[]);
+    disc.restaurants=filterItems(d.restaurants||[]);
     showDisc(bdays());
   }catch(e){
     app.innerHTML=wxH(disc.wx)+`<div class="card"><div class="card-body"><div class="err">❌ 搜尋失敗：${e.message}<br>
@@ -529,27 +518,22 @@ async function doAuto(){
 async function doNearby(){
   const ns=disc.selA.size+disc.selS.size+disc.selR.size;
   if(ns===0){alert('請先選至少一個有興趣的項目，再換周邊推薦');return}
-  showLd('🔄 搜尋周邊替換中...','依照已選地點查找附近推薦');
+  showLd('🔄 搜尋周邊替換中...','查找已選地點附近的新推薦');
   try{
     const d=await fetchNearby(disc.wx);
-    // Replace only unselected items
     let ai=0,si=0,ri=0;
-    disc.activities=disc.activities.map((item,i)=>{
-      if(disc.selA.has(i))return item;
-      return d.activities&&d.activities[ai]?d.activities[ai++]:item;
-    });
-    disc.spots=disc.spots.map((item,i)=>{
-      if(disc.selS.has(i))return item;
-      return d.spots&&d.spots[si]?d.spots[si++]:item;
-    });
-    disc.restaurants=disc.restaurants.map((item,i)=>{
-      if(disc.selR.has(i))return item;
-      return d.restaurants&&d.restaurants[ri]?d.restaurants[ri++]:item;
-    });
+    const newA=filterItems(d.activities||[]);
+    const newS=filterItems(d.spots||[]);
+    const newR=filterItems(d.restaurants||[]);
+    disc.activities=disc.activities.map((item,i)=>disc.selA.has(i)?item:(newA[ai]??item));
+    ai=0;
+    disc.activities=disc.activities.map((item,i)=>{if(disc.selA.has(i))return item;return newA[ai]?newA[ai++]:item});
+    disc.spots=disc.spots.map((item,i)=>{if(disc.selS.has(i))return item;return newS[si]?newS[si++]:item});
+    disc.restaurants=disc.restaurants.map((item,i)=>{if(disc.selR.has(i))return item;return newR[ri]?newR[ri++]:item});
     showDisc(bdays());
   }catch(e){
     app.innerHTML=`<div class="card"><div class="card-body"><div class="err">❌ ${e.message}<br>
-    <button class="btn btn-full" onclick="showDisc(bdays())" style="margin-top:8px">返回選擇畫面</button></div></div></div>`;
+    <button class="btn btn-full" onclick="showDisc(bdays())" style="margin-top:8px">返回</button></div></div></div>`;
   }
 }
 
@@ -567,13 +551,13 @@ async function genPlan(wx,spots,rests){
 // ── Manual ────────────────────────────────────
 function showManual(){
   app.innerHTML=`<div class="card"><div class="card-head"><span>✏️</span><h2>手動指定條件</h2></div><div class="card-body">
-    <div class="frow"><label>地區</label>
+    <div class="frow"><label>地區（推薦結果將嚴格限制在此地區）</label>
       <select id="sA" onchange="onAC(this.value)">
         <option value="桃園/大台北">桃園 / 大台北</option>
         <option value="新竹">新竹</option>
-        <option value="宜蘭">宜蘭（避尖峰）</option>
-        <option value="台中">台中（二日遊）</option>
-        <option value="台南">台南（二日遊）</option>
+        <option value="宜蘭">宜蘭</option>
+        <option value="台中">台中</option>
+        <option value="台南">台南</option>
         <option value="other">其他（自行輸入）</option>
       </select>
       <div id="cAW" style="display:none;margin-top:6px"><input type="text" id="cA" placeholder="輸入縣市，例如：嘉義市" oninput="prefs.area=this.value"></div>
