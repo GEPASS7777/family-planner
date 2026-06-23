@@ -20,10 +20,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif;back
 .ld-wrap{padding:52px 24px;text-align:center}
 .ld-title{font-size:14px;color:#444;margin-bottom:16px;font-weight:500}
 .ld-track{background:#e8e7e0;border-radius:20px;height:10px;position:relative;overflow:visible;margin:0 8px 6px}
-.ld-fill{height:100%;background:linear-gradient(90deg,#4a8c6f,#7ab89a);border-radius:20px;animation:ldFill 12s ease-in-out forwards}
-@keyframes ldFill{0%{width:3%}20%{width:25%}50%{width:55%}80%{width:80%}100%{width:92%}}
-.ld-baby{position:absolute;top:-10px;font-size:22px;animation:ldRoll 12s ease-in-out forwards;left:0}
-@keyframes ldRoll{0%{left:0%}20%{left:20%}50%{left:50%}80%{left:75%}100%{left:87%}}
+.ld-fill{height:100%;background:linear-gradient(90deg,#4a8c6f,#7ab89a);border-radius:20px;animation:ldFill 18s ease-in-out forwards}
+@keyframes ldFill{0%{width:3%}20%{width:20%}50%{width:50%}80%{width:80%}100%{width:92%}}
+.ld-baby{position:absolute;top:-10px;font-size:22px;animation:ldRoll 18s ease-in-out forwards;left:0}
+@keyframes ldRoll{0%{left:0%}20%{left:17%}50%{left:46%}80%{left:76%}100%{left:88%}}
 .ld-sub{font-size:12px;color:#aaa;margin-top:8px}
 .wx-row{display:flex;align-items:center;gap:14px;padding:4px 0 10px}
 .wx-temp{font-size:36px;font-weight:300;line-height:1}
@@ -36,8 +36,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif;back
 .bday p{font-size:12px;color:#5a2d80;line-height:1.5}
 .sec{margin-bottom:12px}
 .sec-hdr{display:flex;align-items:center;gap:7px;padding:8px 2px;border-bottom:.5px solid #e8e7e0;margin-bottom:8px}
-.sec-hdr .sec-title{font-size:13px;font-weight:500;flex:1}
-.sec-hdr .sec-hint{font-size:11px;color:#aaa}
+.sec-title{font-size:13px;font-weight:500;flex:1}
+.sec-hint{font-size:11px;color:#aaa}
 .sec-empty{font-size:12px;color:#aaa;padding:12px 4px;text-align:center;background:#f9f9f7;border-radius:8px}
 .sg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .sc{border:1.5px solid #e8e7e0;border-radius:10px;padding:10px;background:#fff;display:flex;flex-direction:column;transition:all .2s}
@@ -96,65 +96,69 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif;back
 .pk-item span{font-size:12px;flex:1}
 .pk-item em{font-size:11px;color:#aaa;font-style:normal}
 .act-links{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
-.su-wrap{padding:20px 0;text-align:center}
+.su-wrap{padding:16px 0;text-align:center}
 .su-wrap p{font-size:13px;color:#666;margin-bottom:14px;line-height:1.6}
-.su-wrap input{width:100%;font-size:13px;padding:9px 12px;border:.5px solid #d8d7d0;border-radius:8px;font-family:inherit;margin-bottom:10px}
-.su-hint{font-size:11px;color:#aaa;margin-top:6px}
+.su-hint{font-size:11px;color:#aaa;margin-top:6px;text-align:center}
 .frow{display:flex;flex-direction:column;gap:5px;margin-bottom:10px;text-align:left}
 .frow label{font-size:12px;color:#999}
-.frow select,.frow input[type=text]{font-size:13px;padding:8px 10px;border:.5px solid #d8d7d0;border-radius:8px;background:#fff;font-family:inherit;color:#1a1a1a;width:100%}
+.frow input[type=password],.frow input[type=text],.frow select{font-size:13px;padding:8px 10px;border:.5px solid #d8d7d0;border-radius:8px;background:#fff;font-family:inherit;color:#1a1a1a;width:100%}
 .tags{display:flex;flex-wrap:wrap;gap:6px}
 .tag{font-size:12px;padding:4px 10px;border-radius:20px;border:.5px solid #d0d0c8;background:#fff;cursor:pointer;color:#555}
 .tag.on{background:#2d5a3d;color:#fff;border-color:#2d5a3d}
 .err{font-size:12px;color:#c0392b;padding:10px;background:#fff8f8;border-radius:8px;border:.5px solid #f5c0c0;line-height:1.6}
 .warn{font-size:12px;color:#7a5c00;padding:8px 12px;background:#fffbe8;border-radius:8px;border:.5px solid #e8d888;margin-bottom:8px}
+.divider{height:.5px;background:#f0efe8;margin:12px 0}
 </style>
 </head>
 <body>
 <div class="hdr"><h1>🌿 親子行程</h1><div class="chip" id="dateChip"></div></div>
 <div class="main" id="app"></div>
 <script>
-const FAM={kid:{name:'小寶',bday:new Date(2025,0,10)},dad:{name:'爸爸',bday:new Date(1993,6,8)},mom:{name:'媽媽',bday:new Date(1991,10,12)}};
-let apiKey=localStorage.getItem('gk')||'';
-let planMdl=localStorage.getItem('gm')||'gemini-2.5-flash-lite';
-const SEARCH_MDL='gemini-2.5-flash'; // 搜尋專用，品質較高
-let prefs={area:'桃園/大台北',type:'綜合'};
-const disc={wx:null,activities:[],spots:[],restaurants:[],selA:new Set(),selS:new Set(),selR:new Set()};
-const app=document.getElementById('app');
+// ── 家庭資料 ──────────────────────────────────
+const FAM={
+  kid:{name:'小寶',bday:new Date(2025,0,10)},
+  dad:{name:'爸爸',bday:new Date(1993,6,8)},
+  mom:{name:'媽媽',bday:new Date(1991,10,12)}
+};
 
-// 地區關鍵字對應表
-const REGION_KW={
-  '桃園':['桃園','中壢','平鎮','八德','楊梅','蘆竹','大園','龍潭','龜山','大溪','復興','新屋','觀音'],
-  '大台北':['台北','臺北','新北','淡水','板橋','三重','中和','永和','新莊','土城','樹林','鶯歌','三峽','汐止','瑞芳','平溪','深坑','石碇','坪林','八里','林口','泰山','五股','蘆洲','三芝','石門','金山','萬里','貢寮','雙溪'],
-  '新竹':['新竹','竹北','竹東','關西','新埔','湖口','新豐','芎林','橫山','北埔','峨眉','寶山','五峰','尖石'],
-  '宜蘭':['宜蘭','羅東','蘇澳','礁溪','頭城','冬山','五結','三星','大同','南澳'],
-  '台中':['台中','臺中','豐原','大里','太平','清水','沙鹿','梧棲','后里','神岡','潭子','大雅','烏日','大肚','龍井','霧峰','和平','東勢','石岡','新社','外埔','大安','苑裡'],
-  '台南':['台南','臺南','永康','仁德','歸仁','關廟','龍崎','玉井','楠西','南化','左鎮','新化','善化','新市','安定','山上','麻豆','佳里','七股','將軍','學甲','北門','西港','下營','六甲','官田','大內','柳營','鹽水','白河','後壁','東山'],
+// ── API Keys & 設定 ────────────────────────────
+let gemKey  = localStorage.getItem('gk')  || '';
+let gcseKey = localStorage.getItem('gsk') || '';
+let gcseCx  = localStorage.getItem('gcx') || '';
+let planMdl = localStorage.getItem('gm')  || 'gemini-2.5-flash-lite';
+const SEARCH_MDL = 'gemini-2.5-flash';
+let prefs = {area:'桃園', type:'綜合'};
+
+// ── 地區關鍵字對應 ─────────────────────────────
+const REGION_KW = {
+  '桃園':   ['桃園','中壢','平鎮','八德','楊梅','蘆竹','大園','龍潭','龜山','大溪','復興','新屋','觀音'],
+  '大台北': ['台北','臺北','新北','淡水','板橋','三重','中和','永和','新莊','土城','樹林','鶯歌','三峽','汐止','瑞芳','深坑','坪林','八里','林口','蘆洲','三芝','石門','金山','萬里'],
+  '新竹':   ['新竹','竹北','竹東','關西','新埔','湖口','新豐','芎林','橫山','北埔','峨眉','寶山','南寮'],
+  '宜蘭':   ['宜蘭','羅東','蘇澳','礁溪','頭城','冬山','五結','三星','大同','南澳'],
+  '台中':   ['台中','臺中','豐原','大里','太平','清水','沙鹿','梧棲','后里','神岡','潭子','大雅','烏日','霧峰'],
+  '台南':   ['台南','臺南','永康','仁德','歸仁','關廟','玉井','新化','善化','新市','麻豆','佳里','七股','將軍'],
 };
 
 function getRegionKws(){
-  const kws=REGION_KW[prefs.area];
-  if(kws)return kws;
-  // 自訂輸入：用輸入值本身做比對
-  return prefs.area?[prefs.area]:[];
+  const kws = REGION_KW[prefs.area];
+  return kws || (prefs.area ? [prefs.area] : []);
 }
 function matchRegion(area){
-  if(!area)return false;
-  return getRegionKws().some(k=>area.includes(k));
+  if(!area) return false;
+  return getRegionKws().some(k => area.includes(k));
 }
 function filterItems(items){
-  if(!items||!items.length)return[];
-  return items.filter(item=>matchRegion(item.area));
+  return (items||[]).filter(item => matchRegion(item.area));
 }
 
+// ── 工具函式 ──────────────────────────────────
 function kidM(){const n=new Date(),b=FAM.kid.bday;return(n.getFullYear()-b.getFullYear())*12+(n.getMonth()-b.getMonth())}
 function todayS(){const d=new Date(),w=['日','一','二','三','四','五','六'];return`${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')} (週${w[d.getDay()]})`}
 function isWkd(){const d=new Date().getDay();return d===0||d===6}
 function dateRange(){
-  const t=new Date(),f=new Date(t);
-  f.setDate(f.getDate()+30);
+  const t=new Date(),f=new Date(t);f.setDate(f.getDate()+30);
   const fmt=d=>`${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')}`;
-  return{today:fmt(t),until:fmt(f)};
+  return{today:fmt(t),until:fmt(f),year:t.getFullYear(),month:t.getMonth()+1};
 }
 function bdays(){
   const t=new Date(),m=t.getMonth(),d=t.getDate(),r=[];
@@ -165,6 +169,7 @@ function bdays(){
   return r;
 }
 
+// ── 天氣 ──────────────────────────────────────
 async function getWx(){
   try{
     const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=24.993&longitude=121.301&current=temperature_2m,weather_code,relative_humidity_2m,precipitation_probability&daily=temperature_2m_max,temperature_2m_min&timezone=Asia/Taipei&forecast_days=1');
@@ -175,6 +180,16 @@ async function getWx(){
   }catch{return{icon:'🌡️',desc:'無法取得',temp:'--',hi:'--',lo:'--',hum:'--',rain:'--',good:true}}
 }
 
+// ── Google Custom Search ───────────────────────
+async function searchGoogle(query, num=8){
+  const url=`https://www.googleapis.com/customsearch/v1?key=${gcseKey}&cx=${gcseCx}&q=${encodeURIComponent(query)}&lr=lang_zh-TW&num=${num}&gl=tw`;
+  const r=await fetch(url);
+  const d=await r.json();
+  if(d.error) throw new Error(`Google Search 錯誤：${d.error.message}`);
+  return (d.items||[]).map(i=>`【標題】${i.title}\n【摘要】${i.snippet}`).join('\n---\n');
+}
+
+// ── Gemini API ────────────────────────────────
 function parseJ(txt){
   try{return JSON.parse(txt.trim())}catch{}
   const m1=txt.match(/```json\s*([\s\S]*?)```/);
@@ -184,33 +199,20 @@ function parseJ(txt){
   throw new Error('AI 回應格式錯誤，請重試');
 }
 
-async function callG(prompt,search=false,retry=0,model=planMdl){
+async function callG(prompt, retry=0, model=planMdl){
   const FALLBACK='gemini-2.5-flash-lite';
-  const isRateErr=(code,status,msg)=>code===429||code===503||status==='RESOURCE_EXHAUSTED'||status==='UNAVAILABLE'||(msg&&(msg.includes('demand')||msg.includes('quota')||msg.includes('exhausted')||msg.includes('503')));
+  const isRate=(c,s,m)=>c===429||c===503||s==='RESOURCE_EXHAUSTED'||s==='UNAVAILABLE'||(m&&(m.includes('demand')||m.includes('quota')||m.includes('exhausted')||m.includes('503')));
   try{
-    const body={contents:[{parts:[{text:prompt}]}]};
-    if(search)body.tools=[{"google_search":{}}];
-    const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,{
-      method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)
+    const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${gemKey}`,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({contents:[{parts:[{text:prompt}]}]})
     });
     const d=await r.json();
     if(d.error){
-      if(isRateErr(d.error.code,d.error.status,d.error.message)){
-        // 第一次：等待後用同模型重試
-        if(retry<2){
-          await new Promise(r=>setTimeout(r,Math.pow(2,retry+1)*1000));
-          return callG(prompt,search,retry+1,model);
-        }
-        // 超過2次：自動降級到 flash-lite
-        if(model!==FALLBACK){
-          console.log(`[降級] ${model} → ${FALLBACK}`);
-          return callG(prompt,search,0,FALLBACK);
-        }
-        // 已是 fallback 仍失敗：再等一次
-        if(retry<4){
-          await new Promise(r=>setTimeout(r,8000));
-          return callG(prompt,search,retry+1,FALLBACK);
-        }
+      if(isRate(d.error.code,d.error.status,d.error.message)){
+        if(retry<2){await new Promise(r=>setTimeout(r,Math.pow(2,retry+1)*1000));return callG(prompt,retry+1,model)}
+        if(model!==FALLBACK) return callG(prompt,0,FALLBACK);
+        if(retry<4){await new Promise(r=>setTimeout(r,8000));return callG(prompt,retry+1,FALLBACK)}
       }
       throw new Error(d.error.message);
     }
@@ -218,57 +220,124 @@ async function callG(prompt,search=false,retry=0,model=planMdl){
     return parseJ(txt);
   }catch(e){
     const msg=e.message||'';
-    if(isRateErr(null,null,msg)){
-      if(retry<2){
-        await new Promise(r=>setTimeout(r,Math.pow(2,retry+1)*1000));
-        return callG(prompt,search,retry+1,model);
-      }
-      if(model!==FALLBACK){
-        console.log(`[降級catch] ${model} → ${FALLBACK}`);
-        return callG(prompt,search,0,FALLBACK);
-      }
-      if(retry<4){
-        await new Promise(r=>setTimeout(r,8000));
-        return callG(prompt,search,retry+1,FALLBACK);
-      }
+    if(isRate(null,null,msg)){
+      if(retry<2){await new Promise(r=>setTimeout(r,Math.pow(2,retry+1)*1000));return callG(prompt,retry+1,model)}
+      if(model!==FALLBACK) return callG(prompt,0,FALLBACK);
+      if(retry<4){await new Promise(r=>setTimeout(r,8000));return callG(prompt,retry+1,FALLBACK)}
     }
     throw e;
   }
 }
 
 // ── Loading ──────────────────────────────────
+const disc={wx:null,activities:[],spots:[],restaurants:[],selA:new Set(),selS:new Set(),selR:new Set()};
+const app=document.getElementById('app');
+
 function showLd(title,sub){
   app.innerHTML=`<div class="ld-wrap">
     <div class="ld-title">${title}</div>
     <div class="ld-track"><span class="ld-baby">🍼</span><div class="ld-fill"></div></div>
-    <div class="ld-sub">${sub||''}</div>
+    <div class="ld-sub" id="ldSub">${sub||''}</div>
   </div>`;
 }
+function updLd(sub){
+  const el=document.getElementById('ldSub');
+  if(el) el.textContent=sub;
+}
 
-// ── Setup ────────────────────────────────────
+// ── Setup ─────────────────────────────────────
 function showSetup(){
-  app.innerHTML=`<div class="card"><div class="card-body"><div class="su-wrap">
-    <p>🔑 請輸入你的 <strong>Gemini API Key</strong><br>金鑰只存在本機，不會上傳</p>
-    <input type="password" id="ki" placeholder="AIza..." autocomplete="off">
-    <div class="frow"><label>行程規劃模型（搜尋固定使用 gemini-2.5-flash）</label>
+  app.innerHTML=`<div class="card"><div class="card-head"><span>⚙️</span><h2>初始設定</h2></div><div class="card-body">
+    <div class="su-wrap">
+      <p>首次使用需要設定三組金鑰<br>所有金鑰只存在本機，不會上傳</p>
+    </div>
+    <div class="frow">
+      <label>① Gemini API Key（行程規劃用）</label>
+      <input type="password" id="kiGem" placeholder="AIza..." autocomplete="off" value="${gemKey}">
+      <div class="su-hint">前往 <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a> 取得</div>
+    </div>
+    <div class="divider"></div>
+    <div class="frow">
+      <label>② Google Custom Search API Key（活動搜尋用）</label>
+      <input type="password" id="kiGcse" placeholder="AIzaSy..." autocomplete="off" value="${gcseKey}">
+      <div class="su-hint">前往 <a href="https://console.cloud.google.com" target="_blank">Google Cloud Console</a> 建立</div>
+    </div>
+    <div class="frow">
+      <label>③ Search Engine ID（cx）</label>
+      <input type="text" id="kiCx" placeholder="a1b2c3d4e..." autocomplete="off" value="${gcseCx}">
+      <div class="su-hint">前往 <a href="https://programmablesearchengine.google.com" target="_blank">Programmable Search Engine</a> 取得</div>
+    </div>
+    <div class="divider"></div>
+    <div class="frow">
+      <label>行程規劃模型</label>
       <select id="ms">
         <option value="gemini-2.5-flash-lite" ${planMdl==='gemini-2.5-flash-lite'?'selected':''}>gemini-2.5-flash-lite（推薦，每天1000次免費）</option>
         <option value="gemini-2.5-flash" ${planMdl==='gemini-2.5-flash'?'selected':''}>gemini-2.5-flash（每天250次，品質較高）</option>
       </select>
     </div>
-    <button class="btn btn-p btn-full" onclick="saveKey()">確認，開始使用</button>
-    <div class="su-hint">前往 <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a> 取得</div>
-  </div></div></div>`;
+    <button class="btn btn-p btn-full" onclick="saveKey()" style="margin-top:4px">✅ 儲存設定，開始使用</button>
+  </div></div>`;
 }
+
 function saveKey(){
-  const v=document.getElementById('ki').value.trim();
-  if(!v){alert('請輸入 API Key');return}
-  apiKey=v;planMdl=document.getElementById('ms').value;
-  localStorage.setItem('gk',v);localStorage.setItem('gm',planMdl);
+  const g=document.getElementById('kiGem').value.trim();
+  const s=document.getElementById('kiGcse').value.trim();
+  const c=document.getElementById('kiCx').value.trim();
+  if(!g){alert('請輸入 Gemini API Key');return}
+  if(!s){alert('請輸入 Google Custom Search API Key');return}
+  if(!c){alert('請輸入 Search Engine ID');return}
+  gemKey=g; gcseKey=s; gcseCx=c;
+  planMdl=document.getElementById('ms').value;
+  localStorage.setItem('gk',g);
+  localStorage.setItem('gsk',s);
+  localStorage.setItem('gcx',c);
+  localStorage.setItem('gm',planMdl);
+  showRegionPicker();
+}
+
+// ── Region Picker ─────────────────────────────
+function showRegionPicker(){
+  const areas=['桃園','大台北','新竹','宜蘭','台中','台南'];
+  app.innerHTML=`<div class="card"><div class="card-head"><span>📍</span><h2>今天想去哪裡？</h2></div><div class="card-body">
+    <div class="frow" style="margin-bottom:14px">
+      <label>選擇地區</label>
+      <select id="rpArea" style="font-size:15px;padding:10px 12px">
+        ${areas.map(a=>`<option value="${a}" ${a===prefs.area?'selected':''}>${a==='大台北'?'大台北（台北＋新北）':a}</option>`).join('')}
+        <option value="other">其他（自行輸入）</option>
+      </select>
+      <div id="rpCustomWrap" style="display:none;margin-top:8px">
+        <input type="text" id="rpCustom" placeholder="輸入縣市，例如：嘉義市">
+      </div>
+    </div>
+    <div class="frow" style="margin-bottom:16px">
+      <label>偏好類型（可選）</label>
+      <div class="tags" id="rpTypeTags">${['綜合','展覽','互動體驗','戶外公園','百貨商場','文創市集'].map(t=>`<div class="tag${t===prefs.type?' on':''}" onclick="rpSelType(this,'${t}')">${t}</div>`).join('')}</div>
+    </div>
+    <button class="btn btn-p btn-full" style="padding:12px;font-size:14px" onclick="rpConfirm()">🔍 搜尋今日推薦</button>
+    <div style="text-align:center;margin-top:10px">
+      <button class="btn" style="font-size:12px;color:#aaa;border:none;background:none;width:auto" onclick="showSetup()">⚙️ 修改 API Key 設定</button>
+    </div>
+  </div></div>`;
+  document.getElementById('rpArea').addEventListener('change',function(){
+    const isOther=this.value==='other';
+    document.getElementById('rpCustomWrap').style.display=isOther?'block':'none';
+    if(!isOther) prefs.area=this.value;
+  });
+}
+function rpSelType(el,v){document.querySelectorAll('#rpTypeTags .tag').forEach(t=>t.classList.remove('on'));el.classList.add('on');prefs.type=v}
+function rpConfirm(){
+  const sel=document.getElementById('rpArea').value;
+  if(sel==='other'){
+    const c=document.getElementById('rpCustom').value.trim();
+    if(!c){alert('請輸入地區');return}
+    prefs.area=c;
+  }else{
+    prefs.area=sel;
+  }
   doAuto();
 }
 
-// ── Weather ──────────────────────────────────
+// ── Weather HTML ──────────────────────────────
 function wxH(w){
   return`<div class="card"><div class="card-head"><span>🌤️</span><h2>今日天氣 — 桃園市</h2></div><div class="card-body">
     <div class="wx-row"><div style="font-size:36px">${w.icon}</div><div><div class="wx-temp">${w.temp}°C</div><div class="wx-desc">${w.desc}</div></div></div>
@@ -321,40 +390,37 @@ function tog(sec,i){
   rerender();
 }
 function togNo(sec,i){
-  const selSet=sec==='a'?disc.selA:sec==='s'?disc.selS:disc.selR;
-  selSet.delete(i);rerender();
+  const s=sec==='a'?disc.selA:sec==='s'?disc.selS:disc.selR;
+  s.delete(i);rerender();
 }
 function rerender(){
-  const sgA=document.getElementById('sg-a');
-  const sgS=document.getElementById('sg-s');
-  const sgR=document.getElementById('sg-r');
-  if(sgA)sgA.innerHTML=disc.activities.map((s,i)=>mkCard(s,'a',i)).join('');
-  if(sgS)sgS.innerHTML=disc.spots.map((s,i)=>mkCard(s,'s',i)).join('');
-  if(sgR)sgR.innerHTML=disc.restaurants.map((s,i)=>mkCard(s,'r',i)).join('');
+  ['a','s','r'].forEach(sec=>{
+    const el=document.getElementById(`sg-${sec}`);
+    if(!el) return;
+    const arr=sec==='a'?disc.activities:sec==='s'?disc.spots:disc.restaurants;
+    el.innerHTML=arr.map((s,i)=>mkCard(s,sec,i)).join('');
+  });
   updSummary();
 }
 function updSummary(){
   const el=document.getElementById('sel-summary');
-  if(!el)return;
+  if(!el) return;
   const ns=disc.selA.size+disc.selS.size,nr=disc.selR.size;
   const rNote=nr===0?'未選餐廳（全程回家吃）':nr===1?'已選1間（午餐外食，晚餐6點到家）':'已選2間（午晚餐外食）';
   el.innerHTML=`景點/活動：已選 <strong>${ns}</strong>/3 個 ｜ 餐廳：${rNote}`;
 }
 function secHTML(title,id,items,sec,hint){
   const cards=items.length?`<div class="sg" id="${id}">${items.map((s,i)=>mkCard(s,sec,i)).join('')}</div>`
-    :`<div class="sec-empty" id="${id}">目前在「${prefs.area}」未找到符合的${title.replace(/[🗓️📍🍽️ ]/g,'')}，可換一批或調整地區</div>`;
-  return`<div class="sec">
-    <div class="sec-hdr"><span class="sec-title">${title}</span><span class="sec-hint">${hint}</span></div>
-    ${cards}
-  </div>`;
+    :`<div class="sec-empty" id="${id}">「${prefs.area}」目前未找到符合的${title.replace(/[🗓️📍🍽️ ]/g,'')}項目，可換一批試試</div>`;
+  return`<div class="sec"><div class="sec-hdr"><span class="sec-title">${title}</span><span class="sec-hint">${hint}</span></div>${cards}</div>`;
 }
 
-// ── Discovery Screen ─────────────────────────
+// ── Discovery Screen ──────────────────────────
 function showDisc(bd){
-  const totalFiltered=disc.activities.length+disc.spots.length+disc.restaurants.length;
-  const warnHTML=totalFiltered===0?`<div class="warn">⚠️ 此次搜尋結果全部被地區過濾移除，建議點「全部重新推薦」或調整地區條件。</div>`:'';
+  const total=disc.activities.length+disc.spots.length+disc.restaurants.length;
+  const warnHTML=total===0?`<div class="warn">⚠️ 搜尋結果全部被地區過濾，請點「全部重新推薦」或調整地區。</div>`:'';
   app.innerHTML=bdayH(bd)+wxH(disc.wx)+`<div class="card">
-    <div class="card-head"><span>✨</span><h2>今日推薦 — 地區：${prefs.area}</h2></div>
+    <div class="card-head"><span>✨</span><h2>今日推薦 — ${prefs.area}</h2></div>
     <div class="card-body">
       ${warnHTML}
       ${secHTML('🗓️ 期間限定活動 / 展覽','sg-a',disc.activities,'a','本週/月限定')}
@@ -366,22 +432,96 @@ function showDisc(bd){
         <button class="btn btn-p" onclick="doSubmit()">✅ 送出規劃</button>
       </div>
       <div class="brow"><button class="btn btn-full" onclick="doAuto()">🔃 全部重新推薦</button></div>
-      <div class="brow"><button class="btn btn-full" onclick="showManual()">✏️ 手動指定條件</button></div>
+      <div class="brow"><button class="btn btn-full" onclick="showRegionPicker()">📍 換地區</button></div>
     </div>
   </div>`;
 }
 
 function doSubmit(){
-  const ns=disc.selA.size+disc.selS.size;
-  if(ns===0){alert('請至少選1個景點或活動');return}
+  if(disc.selA.size+disc.selS.size===0){alert('請至少選1個景點或活動');return}
   const chosenSpots=[...[...disc.selA].map(i=>disc.activities[i]),...[...disc.selS].map(i=>disc.spots[i])];
   const chosenRests=[...[...disc.selR].map(i=>disc.restaurants[i])];
   genPlan(disc.wx,chosenSpots,chosenRests);
 }
 
-// ── Itinerary ────────────────────────────────
+// ── Fetch: 兩步驟（Google Search → Gemini 整理）
+async function fetchAll(wx){
+  const dr=dateRange();
+  const area=prefs.area;
+
+  updLd(`🔍 Google 搜尋中（1/4）活動...`);
+  const actR=await searchGoogle(`${area} 親子活動 展覽 市集 ${dr.year}年${dr.month}月`,8);
+
+  updLd(`🔍 Google 搜尋中（2/4）景點...`);
+  const spotR=await searchGoogle(`${area} 親子景點 嬰幼兒 推薦`,8);
+
+  updLd(`🔍 Google 搜尋中（3/4）餐廳...`);
+  const restR=await searchGoogle(`${area} 親子餐廳 嬰幼兒 推薦`,8);
+
+  updLd(`🤖 AI 整理資料中（4/4）...`);
+
+  const prompt=`你是資料整理助手。以下是 Google 搜尋結果，請從中萃取資訊並整理成 JSON 格式。
+
+【絕對規則，違反則整個項目跳過】
+1. 只能使用下方搜尋結果中出現的資訊，禁止自行補充或創造任何內容
+2. 地區必須在「${area}」，其他縣市一律跳過不推薦
+3. 活動日期必須在搜尋結果中有明確提及，且在 ${dr.today} 至 ${dr.until} 之間，超出範圍跳過
+4. 無法從搜尋結果確認真實存在的項目，整個跳過
+5. 寧可少，絕不捏造
+
+今天：${todayS()}，天氣：${wx.desc}，${wx.temp}°C。家庭：爸爸+媽媽+${kidM()}個月嬰幼兒。
+
+【活動/展覽搜尋結果】
+${actR||'（無結果）'}
+
+【景點搜尋結果】
+${spotR||'（無結果）'}
+
+【餐廳搜尋結果】
+${restR||'（無結果）'}
+
+只回傳純JSON，第一個字元必須是{：
+{"activities":[{"name":"名稱","category":"活動","icon":"🎪","desc":"說明（20字內，只用搜尋結果中的資訊）","area":"${area}內的具體地點","period":"MM/DD~MM/DD（從搜尋結果取得，無法確認則省略此項目）"}],
+"spots":[{"name":"名稱","category":"景點","icon":"🌳","desc":"說明+嬰幼兒適合原因（20字內）","area":"具體地點"}],
+"restaurants":[{"name":"名稱","category":"餐廳","icon":"🍽️","desc":"特色（20字內）","area":"具體地點","priceRange":"$|$$|$$$"}]}
+
+category限定：活動、展覽、市集、特惠、景點、餐廳`;
+
+  return await callG(prompt,0,SEARCH_MDL);
+}
+
+async function fetchNearby(wx){
+  const dr=dateRange();
+  const area=prefs.area;
+  const selItems=[...[...disc.selA].map(i=>disc.activities[i]),...[...disc.selS].map(i=>disc.spots[i]),...[...disc.selR].map(i=>disc.restaurants[i])];
+  if(selItems.length===0) return fetchAll(wx);
+  const selNames=selItems.map(s=>s.name).join('、');
+
+  updLd(`🔍 搜尋周邊活動...`);
+  const actR=await searchGoogle(`${area} ${selNames}附近 親子活動 展覽 ${dr.year}年${dr.month}月`,6);
+  updLd(`🔍 搜尋周邊景點...`);
+  const spotR=await searchGoogle(`${area} ${selNames}附近 親子景點`,6);
+  updLd(`🔍 搜尋周邊餐廳...`);
+  const restR=await searchGoogle(`${area} ${selNames}附近 親子餐廳`,6);
+  updLd(`🤖 AI 整理資料中...`);
+
+  const prompt=`【絕對規則】只能使用下方搜尋結果的資訊，地區必須在「${area}」，活動日期必須在 ${dr.today}~${dr.until}，無法確認的跳過，寧可少不捏造。
+
+已選景點：${selNames}
+今天：${todayS()}
+
+【活動搜尋結果】${actR||'（無結果）'}
+【景點搜尋結果】${spotR||'（無結果）'}
+【餐廳搜尋結果】${restR||'（無結果）'}
+
+只回傳純JSON，第一個字元必須是{，格式同上（activities/spots/restaurants陣列）。`;
+
+  return await callG(prompt,0,SEARCH_MDL);
+}
+
+// ── Itinerary ─────────────────────────────────
 function rtSVG(route){
-  if(!route||!route.length)return'';
+  if(!route||!route.length) return'';
   const tc={home:'#4a8c6f',spot:'#3a78b8',food:'#d4860a',go:'#aaa'};
   const ti={home:'🏠',spot:'📍',food:'🍽️',go:'🚗'};
   const n=route.length,W=340,pad=22,step=Math.floor((W-pad*2)/(n-1)),cy=52;
@@ -409,10 +549,7 @@ function actH(acts){
   return acts.map(a=>{
     const mu=`https://maps.google.com/?q=${encodeURIComponent((a.mapQ||a.name)+' 台灣')}`;
     const su=`https://www.google.com/search?q=${encodeURIComponent(a.name+' 台灣')}`;
-    const pk=a.parking?a.parking.map(p=>{
-      const pu=`https://maps.google.com/?q=${encodeURIComponent(p.name+' '+a.name)}`;
-      return`<div class="pk-item"><span>🅿️ ${p.name}</span><em>${p.dist}</em><a href="${pu}" target="_blank" class="lbtn">地圖</a></div>`;
-    }).join(''):'';
+    const pk=a.parking?a.parking.map(p=>`<div class="pk-item"><span>🅿️ ${p.name}</span><em>${p.dist}</em><a href="https://maps.google.com/?q=${encodeURIComponent(p.name+' '+a.name)}" target="_blank" class="lbtn">地圖</a></div>`).join(''):'';
     return`<div class="act">
       <div class="act-top"><div class="act-name">${a.name}</div><div class="act-badge">${a.badge||'推薦'}</div></div>
       <div class="act-meta">${a.meta}</div><div class="act-desc">${a.desc}</div>
@@ -426,62 +563,13 @@ function actH(acts){
 }
 function showPlan(wx,plan){
   const bd=bdays();
-  const sumC=`<div class="card"><div class="card-head"><span>✨</span><h2>${plan.summary||'今日親子行程'}</h2></div><div class="card-body">${rtSVG(plan.route)}</div></div>`;
-  const tlC=`<div class="card"><div class="card-head"><span>🗓️</span><h2>行程時間表</h2></div><div class="card-body"><div class="tl">${tlH(plan.timeline)}</div></div></div>`;
-  const acC=`<div class="card"><div class="card-head"><span>📍</span><h2>景點詳細資訊</h2></div><div class="card-body">${actH(plan.activities)}</div></div>`;
-  const ctC=`<div class="card"><div class="card-head"><span>⚙️</span><h2>操作</h2></div><div class="card-body">
-    <div class="brow"><button class="btn" onclick="doAuto()">🔄 重新推薦</button><button class="btn" onclick="showManual()">✏️ 手動條件</button></div>
-  </div></div>`;
-  app.innerHTML=bdayH(bd)+wxH(wx)+sumC+tlC+acC+ctC;
-}
-
-// ── API Prompts ───────────────────────────────
-async function fetchAll(wx){
-  const dr=dateRange();
-  const regionStr=prefs.area;
-  const p=`【最高優先規則 — 必須嚴格遵守】
-1. 地區限制：所有推薦的景點、活動、餐廳必須位於「${regionStr}」，其他縣市地區一律禁止推薦
-2. 日期限制：期間限定活動的舉辦日期必須在 ${dr.today} 至 ${dr.until} 之間，超出此範圍一律禁止推薦
-3. 真實性：所有推薦必須是你能透過Google搜尋找到確切資訊的真實地點/活動，無法確認者禁止推薦
-4. 寧缺勿濫：找不到足夠數量時，減少推薦數量，絕對禁止捏造
-
-今天：${todayS()}，${isWkd()?'假日':'平日'}。天氣${wx.desc}，${wx.temp}°C，降雨${wx.rain}%。${wx.good?'適合戶外':'優先室內'}。
-家庭：爸爸+媽媽+${kidM()}個月嬰幼兒，住桃園市桃園區，有汽車。偏好類型：${prefs.type}。
-
-請使用Google搜尋，查找「${regionStr}」地區：
-A) 期間限定活動/展覽/市集：最多6個，日期必須在${dr.today}~${dr.until}之間
-B) 適合帶嬰幼兒的親子景點：最多3個，必須目前正常營業
-C) 適合帶嬰幼兒的餐廳：最多3間，必須在${regionStr}地區，目前正常營業
-
-只回傳純JSON，第一個字元必須是{：
-{"activities":[{"name":"名稱","category":"展覽","icon":"🎨","desc":"說明（20字內）","area":"${regionStr}內的確切地址或區域","period":"MM/DD~MM/DD","source":"來源網站名稱"}],
-"spots":[{"name":"名稱","category":"景點","icon":"🌳","desc":"說明+嬰幼兒適合原因（20字內）","area":"確切區域","source":"來源"}],
-"restaurants":[{"name":"名稱","category":"餐廳","icon":"🍽️","desc":"特色（20字內）","area":"確切區域","priceRange":"$|$$|$$$","source":"來源"}]}`;
-  return await callG(p,true,0,SEARCH_MDL);
-}
-
-async function fetchNearby(wx){
-  const dr=dateRange();
-  const selItems=[...[...disc.selA].map(i=>disc.activities[i]),...[...disc.selS].map(i=>disc.spots[i]),...[...disc.selR].map(i=>disc.restaurants[i])];
-  if(selItems.length===0)return fetchAll(wx);
-  const selDesc=selItems.map(s=>`${s.name}（${s.area}）`).join('、');
-  const needA=Math.max(0,6-disc.selA.size);
-  const needS=Math.max(0,3-disc.selS.size);
-  const needR=Math.max(0,3-disc.selR.size);
-  const p=`【最高優先規則 — 必須嚴格遵守】
-1. 地區限制：所有推薦必須位於「${prefs.area}」，且盡量在已選地點附近，其他縣市一律禁止
-2. 日期限制：活動日期必須在 ${dr.today} 至 ${dr.until} 之間
-3. 真實性：只推薦能查到確切資訊的真實地點，無法確認者禁止推薦
-4. 寧缺勿濫：找不到足夠數量時減少數量，禁止捏造
-
-使用者已選：${selDesc}
-請在這些地點附近搜尋替換推薦（${prefs.area}地區）：
-- 期間限定活動/展覽（需有日期）：最多${needA}個
-- 親子景點：最多${needS}個
-- 親子/一般餐廳：最多${needR}間
-
-只回傳純JSON，格式與activities/spots/restaurants陣列，每筆包含name/category/icon/desc/area/source，活動加period，餐廳加priceRange。`;
-  return await callG(p,true,0,SEARCH_MDL);
+  app.innerHTML=bdayH(bd)+wxH(wx)
+    +`<div class="card"><div class="card-head"><span>✨</span><h2>${plan.summary||'今日親子行程'}</h2></div><div class="card-body">${rtSVG(plan.route)}</div></div>`
+    +`<div class="card"><div class="card-head"><span>🗓️</span><h2>行程時間表</h2></div><div class="card-body"><div class="tl">${tlH(plan.timeline)}</div></div></div>`
+    +`<div class="card"><div class="card-head"><span>📍</span><h2>景點詳細資訊</h2></div><div class="card-body">${actH(plan.activities)}</div></div>`
+    +`<div class="card"><div class="card-head"><span>⚙️</span><h2>操作</h2></div><div class="card-body">
+      <div class="brow"><button class="btn" onclick="showRegionPicker()">📍 換地區重搜</button><button class="btn" onclick="showSetup()">⚙️ 設定</button></div>
+    </div></div>`;
 }
 
 async function fetchPlan(wx,spots,rests){
@@ -489,22 +577,17 @@ async function fetchPlan(wx,spots,rests){
   const sAreas=spots.map(s=>s.area).join('、');
   const rCount=rests.length;
   let dinnerNote;
-  if(rCount===0)dinnerNote='所有餐點回家吃，需在17:00前返程，到家時間18:00';
-  else if(rCount===1)dinnerNote=`午餐在${rests[0].name}（${rests[0].area}），晚餐回家，需在17:00前返程，到家18:00`;
+  if(rCount===0) dinnerNote='所有餐點回家吃，17:00前返程，18:00到家';
+  else if(rCount===1) dinnerNote=`午餐在${rests[0].name}（${rests[0].area}），晚餐回家，17:00前返程，18:00到家`;
   else dinnerNote=`午餐在${rests[0].name}（${rests[0].area}），晚餐在${rests[1].name}（${rests[1].area}）`;
-  const rInfo=rests.length>0?`已選餐廳：${rests.map(r=>r.name+'('+r.area+')').join('、')}`:'無選擇餐廳';
-  const arriveHome=rCount>=2?'20:00前到家':'18:00到家';
   const p=`今天${todayS()}，${isWkd()?'假日':'平日'}。天氣${wx.desc}，${wx.temp}°C。
 家庭：爸爸+媽媽+${kidM()}個月嬰幼兒，住桃園市桃園區，有汽車。
 已選景點/活動：${sNames}（區域：${sAreas}）
-${rInfo}
+${rests.length?`已選餐廳：${rests.map(r=>r.name+'('+r.area+')').join('、')}`:'無選擇餐廳'}
 餐飲安排：${dinnerNote}
-作息：09:00起床，12:00午餐，13:30午休1小時，19:00家長洗澡，20:00小孩洗澡，${arriveHome}。
+作息：09:00起床，12:00午餐，13:30午休1小時，19:00家長洗澡，20:00小孩洗澡。
 
-規劃要求：
-1. 依地理位置由近到遠排列，嚴禁來回折返
-2. 每個景點提供2個附近停車場
-3. 行程符合嬰幼兒作息
+規劃要求：依地理位置由近到遠排列，嚴禁來回折返，每個景點提供2個附近停車場。
 
 只回傳純JSON，第一個字元必須是{：
 {"summary":"今日行程主題一句話",
@@ -512,21 +595,21 @@ ${rInfo}
 "timeline":[
 {"time":"09:00","label":"起床準備","type":"rest"},
 {"time":"10:00","label":"出發","sub":"車程約X分鐘","type":"go"},
-{"time":"10:30","label":"景點名","sub":"停留約X小時，特色說明","type":"spot"},
-{"time":"12:00","label":"午餐${rCount>0?' — '+rests[0].name:'（自備）'}","sub":"地址或說明","type":"food"},
+{"time":"10:30","label":"景點名","sub":"停留約X小時，特色","type":"spot"},
+{"time":"12:00","label":"午餐${rCount>0?' — '+rests[0].name:'（自備）'}","sub":"地址","type":"food"},
 {"time":"13:00","label":"景點名","sub":"停留約X小時","type":"spot"},
 {"time":"13:30","label":"午休","sub":"車上或咖啡廳約1小時","type":"rest"},
 {"time":"14:30","label":"景點名（若有）","sub":"停留約X小時","type":"spot"},
-{"time":"${rCount>=2?'17:30':'17:00'}","label":"${rCount>=2?'晚餐 — '+rests[1].name:'返程出發'}","sub":"${rCount>=2?rests[1].area:'預計18:00到家'}","type":"${rCount>=2?'food':'go'}"},
+{"time":"${rCount>=2?'17:30':'17:00'}","label":"${rCount>=2?'晚餐 — '+rests[1].name:'返程出發'}","sub":"說明","type":"${rCount>=2?'food':'go'}"},
 {"time":"20:00","label":"小孩洗澡","type":"rest"}
 ],
-"activities":[{"name":"景點名","badge":"推薦","meta":"地址｜開放時間｜費用","desc":"詳細說明+適合嬰幼兒原因","mapQ":"搜尋字串","parking":[{"name":"停車場名","dist":"步行X分鐘"},{"name":"停車場名2","dist":"步行X分鐘"}]}]}`;
-  return await callG(p,false,0,planMdl);
+"activities":[{"name":"景點名","badge":"推薦","meta":"地址｜開放時間｜費用","desc":"說明+適合嬰幼兒原因","mapQ":"搜尋字串","parking":[{"name":"停車場名","dist":"步行X分鐘"},{"name":"停車場名2","dist":"步行X分鐘"}]}]}`;
+  return await callG(p,0,planMdl);
 }
 
-// ── Flows ─────────────────────────────────────
+// ── 主流程 ─────────────────────────────────────
 async function doAuto(){
-  showLd('🔍 搜尋今日推薦中...','使用 gemini-2.5-flash 查詢活動・景點・餐廳');
+  showLd('🔍 搜尋今日推薦中...','查詢 Google 取得真實活動資訊');
   disc.wx=await getWx();
   disc.selA=new Set();disc.selS=new Set();disc.selR=new Set();
   try{
@@ -538,21 +621,20 @@ async function doAuto(){
   }catch(e){
     app.innerHTML=wxH(disc.wx)+`<div class="card"><div class="card-body"><div class="err">❌ 搜尋失敗：${e.message}<br>
     <button class="btn btn-full" onclick="doAuto()" style="margin-top:8px">重試</button>
-    <button class="btn btn-full" onclick="showSetup()" style="margin-top:8px">重新設定 API Key</button>
+    <button class="btn btn-full" onclick="showSetup()" style="margin-top:8px">重新設定</button>
     </div></div></div>`;
   }
 }
 
 async function doNearby(){
-  const ns=disc.selA.size+disc.selS.size+disc.selR.size;
-  if(ns===0){alert('請先選至少一個有興趣的項目，再換周邊推薦');return}
-  showLd('🔄 搜尋周邊替換中...','查找已選地點附近的新推薦');
+  if(disc.selA.size+disc.selS.size+disc.selR.size===0){alert('請先選至少一個有興趣的項目');return}
+  showLd('🔄 搜尋周邊推薦中...','查詢已選地點附近的景點與活動');
   try{
     const d=await fetchNearby(disc.wx);
-    let ai=0,si=0,ri=0;
     const newA=filterItems(d.activities||[]);
     const newS=filterItems(d.spots||[]);
     const newR=filterItems(d.restaurants||[]);
+    let ai=0,si=0,ri=0;
     disc.activities=disc.activities.map((item,i)=>{if(disc.selA.has(i))return item;return newA[ai]?newA[ai++]:item});
     disc.spots=disc.spots.map((item,i)=>{if(disc.selS.has(i))return item;return newS[si]?newS[si++]:item});
     disc.restaurants=disc.restaurants.map((item,i)=>{if(disc.selR.has(i))return item;return newR[ri]?newR[ri++]:item});
@@ -574,81 +656,11 @@ async function genPlan(wx,spots,rests){
   }
 }
 
-// ── Manual ────────────────────────────────────
-function showManual(){
-  app.innerHTML=`<div class="card"><div class="card-head"><span>✏️</span><h2>手動指定條件</h2></div><div class="card-body">
-    <div class="frow"><label>地區（推薦結果將嚴格限制在此地區）</label>
-      <select id="sA" onchange="onAC(this.value)">
-        <option value="桃園">桃園</option>
-        <option value="大台北">大台北（台北＋新北）</option>
-        <option value="新竹">新竹</option>
-        <option value="宜蘭">宜蘭</option>
-        <option value="台中">台中</option>
-        <option value="台南">台南</option>
-        <option value="other">其他（自行輸入）</option>
-      </select>
-      <div id="cAW" style="display:none;margin-top:6px"><input type="text" id="cA" placeholder="輸入縣市，例如：嘉義市" oninput="prefs.area=this.value"></div>
-    </div>
-    <div class="frow"><label>偏好類型</label>
-      <div class="tags" id="tT">${['綜合','展覽','互動體驗','戶外公園','百貨商場','文創市集','親子餐廳'].map(t=>`<div class="tag${t==='綜合'?' on':''}" onclick="sT(this,'${t}')">${t}</div>`).join('')}</div>
-    </div>
-    <div class="brow">
-      <button class="btn btn-p" onclick="doAuto()">🔍 搜尋景點</button>
-      <button class="btn" onclick="showDisc(bdays())">← 取消</button>
-    </div>
-  </div></div>`;
-}
-function onAC(v){prefs.area=v==='other'?'':v;document.getElementById('cAW').style.display=v==='other'?'block':'none'}
-function sT(el,v){document.querySelectorAll('#tT .tag').forEach(t=>t.classList.remove('on'));el.classList.add('on');prefs.type=v}
-
-// ── Region Picker ─────────────────────────────
-function showRegionPicker(){
-  const areas=['桃園','大台北','新竹','宜蘭','台中','台南'];
-  app.innerHTML=`<div class="card"><div class="card-head"><span>📍</span><h2>今天想去哪裡？</h2></div><div class="card-body">
-    <div class="frow" style="margin-bottom:14px">
-      <label>選擇地區</label>
-      <select id="rpArea" style="font-size:15px;padding:10px 12px">
-        ${areas.map(a=>`<option value="${a}" ${a===prefs.area?'selected':''}>${a}</option>`).join('')}
-        <option value="other">其他（自行輸入）</option>
-      </select>
-      <div id="rpCustomWrap" style="display:none;margin-top:8px">
-        <input type="text" id="rpCustom" placeholder="輸入縣市，例如：嘉義市" style="font-size:14px;padding:9px 12px;border:.5px solid #d8d7d0;border-radius:8px;width:100%;font-family:inherit">
-      </div>
-    </div>
-    <div class="frow" style="margin-bottom:14px">
-      <label>偏好類型（可選）</label>
-      <div class="tags" id="rpTypeTags">${['綜合','展覽','互動體驗','戶外公園','百貨商場','文創市集'].map(t=>`<div class="tag${t===prefs.type?' on':''}" onclick="rpSelType(this,'${t}')">${t}</div>`).join('')}</div>
-    </div>
-    <button class="btn btn-p btn-full" style="padding:12px;font-size:14px" onclick="rpConfirm()">🔍 搜尋今日推薦</button>
-    <div style="text-align:center;margin-top:10px">
-      <button class="btn" style="font-size:12px;color:#aaa;border:none;background:none" onclick="showSetup()">⚙️ 設定 API Key</button>
-    </div>
-  </div></div>`;
-  document.getElementById('rpArea').addEventListener('change',function(){
-    const isOther=this.value==='other';
-    document.getElementById('rpCustomWrap').style.display=isOther?'block':'none';
-    if(!isOther)prefs.area=this.value;
-  });
-}
-function rpSelType(el,v){
-  document.querySelectorAll('#rpTypeTags .tag').forEach(t=>t.classList.remove('on'));
-  el.classList.add('on');prefs.type=v;
-}
-function rpConfirm(){
-  const sel=document.getElementById('rpArea').value;
-  if(sel==='other'){
-    const custom=document.getElementById('rpCustom').value.trim();
-    if(!custom){alert('請輸入地區');return}
-    prefs.area=custom;
-  }else{
-    prefs.area=sel;
-  }
-  doAuto();
-}
-
 // ── Init ──────────────────────────────────────
 document.getElementById('dateChip').textContent=todayS();
-if(!apiKey)showSetup();else showRegionPicker();
+const allKeysReady = gemKey && gcseKey && gcseCx;
+if(!allKeysReady) showSetup();
+else showRegionPicker();
 </script>
 </body>
 </html>
