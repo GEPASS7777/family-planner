@@ -599,9 +599,54 @@ function showManual(){
 function onAC(v){prefs.area=v==='other'?'':v;document.getElementById('cAW').style.display=v==='other'?'block':'none'}
 function sT(el,v){document.querySelectorAll('#tT .tag').forEach(t=>t.classList.remove('on'));el.classList.add('on');prefs.type=v}
 
+// ── Region Picker ─────────────────────────────
+function showRegionPicker(){
+  const areas=['桃園/大台北','新竹','宜蘭','台中','台南'];
+  app.innerHTML=`<div class="card"><div class="card-head"><span>📍</span><h2>今天想去哪裡？</h2></div><div class="card-body">
+    <div class="frow" style="margin-bottom:14px">
+      <label>選擇地區</label>
+      <select id="rpArea" style="font-size:15px;padding:10px 12px">
+        ${areas.map(a=>`<option value="${a}" ${a===prefs.area?'selected':''}>${a}</option>`).join('')}
+        <option value="other">其他（自行輸入）</option>
+      </select>
+      <div id="rpCustomWrap" style="display:none;margin-top:8px">
+        <input type="text" id="rpCustom" placeholder="輸入縣市，例如：嘉義市" style="font-size:14px;padding:9px 12px;border:.5px solid #d8d7d0;border-radius:8px;width:100%;font-family:inherit">
+      </div>
+    </div>
+    <div class="frow" style="margin-bottom:14px">
+      <label>偏好類型（可選）</label>
+      <div class="tags" id="rpTypeTags">${['綜合','展覽','互動體驗','戶外公園','百貨商場','文創市集'].map(t=>`<div class="tag${t===prefs.type?' on':''}" onclick="rpSelType(this,'${t}')">${t}</div>`).join('')}</div>
+    </div>
+    <button class="btn btn-p btn-full" style="padding:12px;font-size:14px" onclick="rpConfirm()">🔍 搜尋今日推薦</button>
+    <div style="text-align:center;margin-top:10px">
+      <button class="btn" style="font-size:12px;color:#aaa;border:none;background:none" onclick="showSetup()">⚙️ 設定 API Key</button>
+    </div>
+  </div></div>`;
+  document.getElementById('rpArea').addEventListener('change',function(){
+    const isOther=this.value==='other';
+    document.getElementById('rpCustomWrap').style.display=isOther?'block':'none';
+    if(!isOther)prefs.area=this.value;
+  });
+}
+function rpSelType(el,v){
+  document.querySelectorAll('#rpTypeTags .tag').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');prefs.type=v;
+}
+function rpConfirm(){
+  const sel=document.getElementById('rpArea').value;
+  if(sel==='other'){
+    const custom=document.getElementById('rpCustom').value.trim();
+    if(!custom){alert('請輸入地區');return}
+    prefs.area=custom;
+  }else{
+    prefs.area=sel;
+  }
+  doAuto();
+}
+
 // ── Init ──────────────────────────────────────
 document.getElementById('dateChip').textContent=todayS();
-if(!apiKey)showSetup();else doAuto();
+if(!apiKey)showSetup();else showRegionPicker();
 </script>
 </body>
 </html>
