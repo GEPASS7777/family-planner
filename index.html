@@ -124,7 +124,8 @@ const app=document.getElementById('app');
 
 // 地區關鍵字對應表
 const REGION_KW={
-  '桃園/大台北':['桃園','台北','臺北','新北','淡水','板橋','三重','中和','永和','新莊','土城','樹林','鶯歌','三峽','汐止','瑞芳','平溪','深坑','石碇','坪林','八里','林口','泰山','五股','蘆洲','三芝','石門','金山','萬里','貢寮','雙溪','平溪'],
+  '桃園':['桃園','中壢','平鎮','八德','楊梅','蘆竹','大園','龍潭','龜山','大溪','復興','新屋','觀音'],
+  '大台北':['台北','臺北','新北','淡水','板橋','三重','中和','永和','新莊','土城','樹林','鶯歌','三峽','汐止','瑞芳','平溪','深坑','石碇','坪林','八里','林口','泰山','五股','蘆洲','三芝','石門','金山','萬里','貢寮','雙溪'],
   '新竹':['新竹','竹北','竹東','關西','新埔','湖口','新豐','芎林','橫山','北埔','峨眉','寶山','五峰','尖石'],
   '宜蘭':['宜蘭','羅東','蘇澳','礁溪','頭城','冬山','五結','三星','大同','南澳'],
   '台中':['台中','臺中','豐原','大里','太平','清水','沙鹿','梧棲','后里','神岡','潭子','大雅','烏日','大肚','龍井','霧峰','和平','東勢','石岡','新社','外埔','大安','苑裡'],
@@ -578,7 +579,8 @@ function showManual(){
   app.innerHTML=`<div class="card"><div class="card-head"><span>✏️</span><h2>手動指定條件</h2></div><div class="card-body">
     <div class="frow"><label>地區（推薦結果將嚴格限制在此地區）</label>
       <select id="sA" onchange="onAC(this.value)">
-        <option value="桃園/大台北">桃園 / 大台北</option>
+        <option value="桃園">桃園</option>
+        <option value="大台北">大台北（台北＋新北）</option>
         <option value="新竹">新竹</option>
         <option value="宜蘭">宜蘭</option>
         <option value="台中">台中</option>
@@ -601,7 +603,7 @@ function sT(el,v){document.querySelectorAll('#tT .tag').forEach(t=>t.classList.r
 
 // ── Region Picker ─────────────────────────────
 function showRegionPicker(){
-  const areas=['桃園/大台北','新竹','宜蘭','台中','台南'];
+  const areas=['桃園','大台北','新竹','宜蘭','台中','台南'];
   app.innerHTML=`<div class="card"><div class="card-head"><span>📍</span><h2>今天想去哪裡？</h2></div><div class="card-body">
     <div class="frow" style="margin-bottom:14px">
       <label>選擇地區</label>
