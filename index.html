@@ -228,10 +228,18 @@ async function callG(prompt,retry=0,model=planMdl){
 
 // ── Loading ───────────────────────────────────
 function showLd(title,sub){
+  // 若載入畫面已存在，只更新文字不重置動畫
+  const existTitle=document.getElementById('ld-title');
+  const existSub=document.getElementById('ld-sub');
+  if(existTitle&&existSub){
+    existTitle.textContent=title;
+    existSub.textContent=sub||'';
+    return;
+  }
   app.innerHTML=`<div class="ld-wrap">
-    <div class="ld-title">${title}</div>
+    <div class="ld-title" id="ld-title">${title}</div>
     <div class="ld-track"><span class="ld-baby">🍼</span><div class="ld-fill"></div></div>
-    <div class="ld-sub">${sub||''}</div>
+    <div class="ld-sub" id="ld-sub">${sub||''}</div>
   </div>`;
 }
 
