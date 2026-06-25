@@ -20,10 +20,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif;back
 .ld-wrap{padding:52px 24px;text-align:center}
 .ld-title{font-size:14px;color:#444;margin-bottom:16px;font-weight:500}
 .ld-track{background:#e8e7e0;border-radius:20px;height:10px;position:relative;overflow:visible;margin:0 8px 6px}
-.ld-fill{height:100%;background:linear-gradient(90deg,#4a8c6f,#7ab89a);border-radius:20px;animation:ldFill 18s ease-in-out forwards}
-@keyframes ldFill{0%{width:3%}20%{width:20%}50%{width:50%}80%{width:80%}100%{width:92%}}
-.ld-baby{position:absolute;top:-10px;font-size:22px;animation:ldRoll 18s ease-in-out forwards;left:0}
-@keyframes ldRoll{0%{left:0%}20%{left:17%}50%{left:46%}80%{left:76%}100%{left:88%}}
+.ld-fill{height:100%;background:linear-gradient(90deg,#4a8c6f,#7ab89a);border-radius:20px;animation:ldFill 14s ease-in-out forwards}
+@keyframes ldFill{0%{width:3%}20%{width:20%}50%{width:50%}80%{width:78%}100%{width:92%}}
+.ld-baby{position:absolute;top:-10px;font-size:22px;animation:ldRoll 14s ease-in-out forwards;left:0}
+@keyframes ldRoll{0%{left:0%}20%{left:17%}50%{left:45%}80%{left:72%}100%{left:86%}}
 .ld-sub{font-size:12px;color:#aaa;margin-top:8px}
 .wx-row{display:flex;align-items:center;gap:14px;padding:4px 0 10px}
 .wx-temp{font-size:36px;font-weight:300;line-height:1}
@@ -36,8 +36,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif;back
 .bday p{font-size:12px;color:#5a2d80;line-height:1.5}
 .sec{margin-bottom:12px}
 .sec-hdr{display:flex;align-items:center;gap:7px;padding:8px 2px;border-bottom:.5px solid #e8e7e0;margin-bottom:8px}
-.sec-title{font-size:13px;font-weight:500;flex:1}
-.sec-hint{font-size:11px;color:#aaa}
+.sec-hdr .sec-title{font-size:13px;font-weight:500;flex:1}
+.sec-hdr .sec-hint{font-size:11px;color:#aaa}
 .sec-empty{font-size:12px;color:#aaa;padding:12px 4px;text-align:center;background:#f9f9f7;border-radius:8px}
 .sg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .sc{border:1.5px solid #e8e7e0;border-radius:10px;padding:10px;background:#fff;display:flex;flex-direction:column;transition:all .2s}
@@ -96,69 +96,46 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif;back
 .pk-item span{font-size:12px;flex:1}
 .pk-item em{font-size:11px;color:#aaa;font-style:normal}
 .act-links{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
-.su-wrap{padding:16px 0;text-align:center}
-.su-wrap p{font-size:13px;color:#666;margin-bottom:14px;line-height:1.6}
-.su-hint{font-size:11px;color:#aaa;margin-top:6px;text-align:center}
-.frow{display:flex;flex-direction:column;gap:5px;margin-bottom:10px;text-align:left}
-.frow label{font-size:12px;color:#999}
-.frow input[type=password],.frow input[type=text],.frow select{font-size:13px;padding:8px 10px;border:.5px solid #d8d7d0;border-radius:8px;background:#fff;font-family:inherit;color:#1a1a1a;width:100%}
+.su-wrap{padding:16px 0;text-align:left}
+.su-wrap h3{font-size:14px;font-weight:500;margin-bottom:12px;text-align:center}
+.su-wrap .su-hint{font-size:11px;color:#aaa;margin-top:6px;text-align:center}
+.frow{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}
+.frow label{font-size:12px;color:#666;font-weight:500}
+.frow input,.frow select{font-size:13px;padding:9px 12px;border:.5px solid #d8d7d0;border-radius:8px;background:#fff;font-family:inherit;color:#1a1a1a;width:100%}
+.frow .hint{font-size:11px;color:#aaa}
 .tags{display:flex;flex-wrap:wrap;gap:6px}
 .tag{font-size:12px;padding:4px 10px;border-radius:20px;border:.5px solid #d0d0c8;background:#fff;cursor:pointer;color:#555}
 .tag.on{background:#2d5a3d;color:#fff;border-color:#2d5a3d}
 .err{font-size:12px;color:#c0392b;padding:10px;background:#fff8f8;border-radius:8px;border:.5px solid #f5c0c0;line-height:1.6}
 .warn{font-size:12px;color:#7a5c00;padding:8px 12px;background:#fffbe8;border-radius:8px;border:.5px solid #e8d888;margin-bottom:8px}
-.divider{height:.5px;background:#f0efe8;margin:12px 0}
+.divider{border:none;border-top:.5px solid #f0efe8;margin:12px 0}
 </style>
 </head>
 <body>
 <div class="hdr"><h1>🌿 親子行程</h1><div class="chip" id="dateChip"></div></div>
 <div class="main" id="app"></div>
 <script>
-// ── 家庭資料 ──────────────────────────────────
-const FAM={
-  kid:{name:'小寶',bday:new Date(2025,0,10)},
-  dad:{name:'爸爸',bday:new Date(1993,6,8)},
-  mom:{name:'媽媽',bday:new Date(1991,10,12)}
-};
+const FAM={kid:{name:'小寶',bday:new Date(2025,0,10)},dad:{name:'爸爸',bday:new Date(1993,6,8)},mom:{name:'媽媽',bday:new Date(1991,10,12)}};
 
-// ── API Keys & 設定 ────────────────────────────
-let gemKey  = localStorage.getItem('gk')  || '';
-let gcseKey = localStorage.getItem('gsk') || '';
-let gcseCx  = localStorage.getItem('gcx') || '';
-let planMdl = localStorage.getItem('gm')  || 'gemini-2.5-flash-lite';
-const SEARCH_MDL = 'gemini-2.5-flash';
-let prefs = {area:'桃園', type:'綜合'};
+// Keys & config
+let gKey=localStorage.getItem('gk')||'';    // Gemini API Key
+let gcKey=localStorage.getItem('gck')||'';  // Google Custom Search API Key
+let gcCx=localStorage.getItem('gcc')||'';   // Search Engine ID
+let planMdl=localStorage.getItem('gm')||'gemini-2.5-flash-lite';
+const SEARCH_MDL='gemini-2.5-flash';
 
-// ── 地區關鍵字對應 ─────────────────────────────
-const REGION_KW = {
-  '桃園':   ['桃園','中壢','平鎮','八德','楊梅','蘆竹','大園','龍潭','龜山','大溪','復興','新屋','觀音'],
-  '大台北': ['台北','臺北','新北','淡水','板橋','三重','中和','永和','新莊','土城','樹林','鶯歌','三峽','汐止','瑞芳','深坑','坪林','八里','林口','蘆洲','三芝','石門','金山','萬里'],
-  '新竹':   ['新竹','竹北','竹東','關西','新埔','湖口','新豐','芎林','橫山','北埔','峨眉','寶山','南寮'],
-  '宜蘭':   ['宜蘭','羅東','蘇澳','礁溪','頭城','冬山','五結','三星','大同','南澳'],
-  '台中':   ['台中','臺中','豐原','大里','太平','清水','沙鹿','梧棲','后里','神岡','潭子','大雅','烏日','霧峰'],
-  '台南':   ['台南','臺南','永康','仁德','歸仁','關廟','玉井','新化','善化','新市','麻豆','佳里','七股','將軍'],
-};
+let prefs={area:'桃園',type:'綜合'};
+const disc={wx:null,activities:[],spots:[],restaurants:[],selA:new Set(),selS:new Set(),selR:new Set()};
+const app=document.getElementById('app');
 
-function getRegionKws(){
-  const kws = REGION_KW[prefs.area];
-  return kws || (prefs.area ? [prefs.area] : []);
-}
-function matchRegion(area){
-  if(!area) return false;
-  return getRegionKws().some(k => area.includes(k));
-}
-function filterItems(items){
-  return (items||[]).filter(item => matchRegion(item.area));
-}
-
-// ── 工具函式 ──────────────────────────────────
+// ── Helpers ───────────────────────────────────
 function kidM(){const n=new Date(),b=FAM.kid.bday;return(n.getFullYear()-b.getFullYear())*12+(n.getMonth()-b.getMonth())}
 function todayS(){const d=new Date(),w=['日','一','二','三','四','五','六'];return`${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')} (週${w[d.getDay()]})`}
 function isWkd(){const d=new Date().getDay();return d===0||d===6}
 function dateRange(){
   const t=new Date(),f=new Date(t);f.setDate(f.getDate()+30);
   const fmt=d=>`${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')}`;
-  return{today:fmt(t),until:fmt(f),year:t.getFullYear(),month:t.getMonth()+1};
+  return{today:fmt(t),until:fmt(f),ym:`${t.getFullYear()}年${t.getMonth()+1}月`};
 }
 function bdays(){
   const t=new Date(),m=t.getMonth(),d=t.getDate(),r=[];
@@ -169,7 +146,23 @@ function bdays(){
   return r;
 }
 
-// ── 天氣 ──────────────────────────────────────
+const REGION_KW={
+  '桃園':['桃園','中壢','平鎮','八德','楊梅','蘆竹','大園','龍潭','龜山','大溪','復興','新屋','觀音'],
+  '大台北':['台北','臺北','新北','淡水','板橋','三重','中和','永和','新莊','土城','樹林','鶯歌','三峽','汐止','瑞芳','平溪','深坑','石碇','坪林','八里','林口','泰山','五股','蘆洲','三芝','石門','金山','萬里'],
+  '新竹':['新竹','竹北','竹東','關西','新埔','湖口','新豐','芎林','橫山','北埔','峨眉','寶山','五峰','尖石'],
+  '宜蘭':['宜蘭','羅東','蘇澳','礁溪','頭城','冬山','五結','三星','大同','南澳'],
+  '台中':['台中','臺中','豐原','大里','太平','清水','沙鹿','梧棲','后里','神岡','潭子','大雅','烏日','霧峰'],
+  '台南':['台南','臺南','永康','仁德','歸仁','關廟','玉井','楠西','善化','新市','麻豆','佳里','七股','將軍'],
+};
+function matchRegion(area){
+  if(!area)return false;
+  const kws=REGION_KW[prefs.area];
+  if(kws)return kws.some(k=>area.includes(k));
+  return area.includes(prefs.area);
+}
+function filterItems(items){return(items||[]).filter(i=>matchRegion(i.area))}
+
+// ── Weather ───────────────────────────────────
 async function getWx(){
   try{
     const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=24.993&longitude=121.301&current=temperature_2m,weather_code,relative_humidity_2m,precipitation_probability&daily=temperature_2m_max,temperature_2m_min&timezone=Asia/Taipei&forecast_days=1');
@@ -180,13 +173,17 @@ async function getWx(){
   }catch{return{icon:'🌡️',desc:'無法取得',temp:'--',hi:'--',lo:'--',hum:'--',rain:'--',good:true}}
 }
 
-// ── Google Custom Search ───────────────────────
-async function searchGoogle(query, num=8){
-  const url=`https://www.googleapis.com/customsearch/v1?key=${gcseKey}&cx=${gcseCx}&q=${encodeURIComponent(query)}&lr=lang_zh-TW&num=${num}&gl=tw`;
+// ── Google Custom Search ──────────────────────
+async function googleSearch(q,num=8){
+  const url=`https://www.googleapis.com/customsearch/v1?key=${gcKey}&cx=${gcCx}&q=${encodeURIComponent(q)}&num=${num}&lr=lang_zh-TW&gl=tw`;
   const r=await fetch(url);
   const d=await r.json();
-  if(d.error) throw new Error(`Google Search 錯誤：${d.error.message}`);
-  return (d.items||[]).map(i=>`【標題】${i.title}\n【摘要】${i.snippet}`).join('\n---\n');
+  if(d.error)throw new Error('Google搜尋失敗：'+d.error.message);
+  return(d.items||[]).map(it=>({title:it.title,link:it.link,snippet:(it.snippet||'').slice(0,200)}));
+}
+function fmtResults(items){
+  if(!items.length)return'（無搜尋結果）';
+  return items.map((it,i)=>`[${i+1}] ${it.title}\n    ${it.snippet}`).join('\n\n');
 }
 
 // ── Gemini API ────────────────────────────────
@@ -199,11 +196,11 @@ function parseJ(txt){
   throw new Error('AI 回應格式錯誤，請重試');
 }
 
-async function callG(prompt, retry=0, model=planMdl){
+async function callG(prompt,retry=0,model=planMdl){
   const FALLBACK='gemini-2.5-flash-lite';
-  const isRate=(c,s,m)=>c===429||c===503||s==='RESOURCE_EXHAUSTED'||s==='UNAVAILABLE'||(m&&(m.includes('demand')||m.includes('quota')||m.includes('exhausted')||m.includes('503')));
+  const isRate=(c,s,m)=>c===429||c===503||s==='RESOURCE_EXHAUSTED'||s==='UNAVAILABLE'||(m&&(m.includes('demand')||m.includes('quota')||m.includes('exhausted')));
   try{
-    const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${gemKey}`,{
+    const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${gKey}`,{
       method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({contents:[{parts:[{text:prompt}]}]})
     });
@@ -211,7 +208,7 @@ async function callG(prompt, retry=0, model=planMdl){
     if(d.error){
       if(isRate(d.error.code,d.error.status,d.error.message)){
         if(retry<2){await new Promise(r=>setTimeout(r,Math.pow(2,retry+1)*1000));return callG(prompt,retry+1,model)}
-        if(model!==FALLBACK) return callG(prompt,0,FALLBACK);
+        if(model!==FALLBACK)return callG(prompt,0,FALLBACK);
         if(retry<4){await new Promise(r=>setTimeout(r,8000));return callG(prompt,retry+1,FALLBACK)}
       }
       throw new Error(d.error.message);
@@ -222,75 +219,64 @@ async function callG(prompt, retry=0, model=planMdl){
     const msg=e.message||'';
     if(isRate(null,null,msg)){
       if(retry<2){await new Promise(r=>setTimeout(r,Math.pow(2,retry+1)*1000));return callG(prompt,retry+1,model)}
-      if(model!==FALLBACK) return callG(prompt,0,FALLBACK);
+      if(model!==FALLBACK)return callG(prompt,0,FALLBACK);
       if(retry<4){await new Promise(r=>setTimeout(r,8000));return callG(prompt,retry+1,FALLBACK)}
     }
     throw e;
   }
 }
 
-// ── Loading ──────────────────────────────────
-const disc={wx:null,activities:[],spots:[],restaurants:[],selA:new Set(),selS:new Set(),selR:new Set()};
-const app=document.getElementById('app');
-
+// ── Loading ───────────────────────────────────
 function showLd(title,sub){
   app.innerHTML=`<div class="ld-wrap">
     <div class="ld-title">${title}</div>
     <div class="ld-track"><span class="ld-baby">🍼</span><div class="ld-fill"></div></div>
-    <div class="ld-sub" id="ldSub">${sub||''}</div>
+    <div class="ld-sub">${sub||''}</div>
   </div>`;
-}
-function updLd(sub){
-  const el=document.getElementById('ldSub');
-  if(el) el.textContent=sub;
 }
 
 // ── Setup ─────────────────────────────────────
 function showSetup(){
-  app.innerHTML=`<div class="card"><div class="card-head"><span>⚙️</span><h2>初始設定</h2></div><div class="card-body">
-    <div class="su-wrap">
-      <p>首次使用需要設定三組金鑰<br>所有金鑰只存在本機，不會上傳</p>
+  app.innerHTML=`<div class="card"><div class="card-body"><div class="su-wrap">
+    <h3>🔑 設定 API Keys</h3>
+    <div class="frow">
+      <label>Gemini API Key（行程規劃用）</label>
+      <input type="password" id="ki" placeholder="AIza..." autocomplete="off" value="${gKey}">
+      <div class="hint">前往 <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a> 取得</div>
+    </div>
+    <hr class="divider">
+    <div class="frow">
+      <label>Google Custom Search API Key（活動搜尋用）</label>
+      <input type="password" id="gck" placeholder="AIzaSy..." autocomplete="off" value="${gcKey}">
+      <div class="hint">前往 <a href="https://console.cloud.google.com" target="_blank">Google Cloud Console</a> 取得</div>
     </div>
     <div class="frow">
-      <label>① Gemini API Key（行程規劃用）</label>
-      <input type="password" id="kiGem" placeholder="AIza..." autocomplete="off" value="${gemKey}">
-      <div class="su-hint">前往 <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a> 取得</div>
+      <label>Search Engine ID（cx）</label>
+      <input type="text" id="gcc" placeholder="a1b2c3..." autocomplete="off" value="${gcCx}">
+      <div class="hint">前往 <a href="https://programmablesearchengine.google.com" target="_blank">Programmable Search Engine</a> 取得</div>
     </div>
-    <div class="divider"></div>
-    <div class="frow">
-      <label>② Google Custom Search API Key（活動搜尋用）</label>
-      <input type="password" id="kiGcse" placeholder="AIzaSy..." autocomplete="off" value="${gcseKey}">
-      <div class="su-hint">前往 <a href="https://console.cloud.google.com" target="_blank">Google Cloud Console</a> 建立</div>
-    </div>
-    <div class="frow">
-      <label>③ Search Engine ID（cx）</label>
-      <input type="text" id="kiCx" placeholder="a1b2c3d4e..." autocomplete="off" value="${gcseCx}">
-      <div class="su-hint">前往 <a href="https://programmablesearchengine.google.com" target="_blank">Programmable Search Engine</a> 取得</div>
-    </div>
-    <div class="divider"></div>
+    <hr class="divider">
     <div class="frow">
       <label>行程規劃模型</label>
       <select id="ms">
-        <option value="gemini-2.5-flash-lite" ${planMdl==='gemini-2.5-flash-lite'?'selected':''}>gemini-2.5-flash-lite（推薦，每天1000次免費）</option>
-        <option value="gemini-2.5-flash" ${planMdl==='gemini-2.5-flash'?'selected':''}>gemini-2.5-flash（每天250次，品質較高）</option>
+        <option value="gemini-2.5-flash-lite" ${planMdl==='gemini-2.5-flash-lite'?'selected':''}>gemini-2.5-flash-lite（推薦）</option>
+        <option value="gemini-2.5-flash" ${planMdl==='gemini-2.5-flash'?'selected':''}>gemini-2.5-flash（品質較高）</option>
       </select>
     </div>
-    <button class="btn btn-p btn-full" onclick="saveKey()" style="margin-top:4px">✅ 儲存設定，開始使用</button>
-  </div></div>`;
+    <button class="btn btn-p btn-full" style="margin-top:4px" onclick="saveKeys()">確認儲存</button>
+  </div></div></div>`;
 }
 
-function saveKey(){
-  const g=document.getElementById('kiGem').value.trim();
-  const s=document.getElementById('kiGcse').value.trim();
-  const c=document.getElementById('kiCx').value.trim();
-  if(!g){alert('請輸入 Gemini API Key');return}
-  if(!s){alert('請輸入 Google Custom Search API Key');return}
-  if(!c){alert('請輸入 Search Engine ID');return}
-  gemKey=g; gcseKey=s; gcseCx=c;
+function saveKeys(){
+  const g=document.getElementById('ki').value.trim();
+  const gck=document.getElementById('gck').value.trim();
+  const gcc=document.getElementById('gcc').value.trim();
+  if(!g||!gck||!gcc){alert('請填入全部三組設定');return}
+  gKey=g;gcKey=gck;gcCx=gcc;
   planMdl=document.getElementById('ms').value;
   localStorage.setItem('gk',g);
-  localStorage.setItem('gsk',s);
-  localStorage.setItem('gcx',c);
+  localStorage.setItem('gck',gck);
+  localStorage.setItem('gcc',gcc);
   localStorage.setItem('gm',planMdl);
   showRegionPicker();
 }
@@ -310,18 +296,18 @@ function showRegionPicker(){
       </div>
     </div>
     <div class="frow" style="margin-bottom:16px">
-      <label>偏好類型（可選）</label>
+      <label>偏好類型</label>
       <div class="tags" id="rpTypeTags">${['綜合','展覽','互動體驗','戶外公園','百貨商場','文創市集'].map(t=>`<div class="tag${t===prefs.type?' on':''}" onclick="rpSelType(this,'${t}')">${t}</div>`).join('')}</div>
     </div>
     <button class="btn btn-p btn-full" style="padding:12px;font-size:14px" onclick="rpConfirm()">🔍 搜尋今日推薦</button>
     <div style="text-align:center;margin-top:10px">
-      <button class="btn" style="font-size:12px;color:#aaa;border:none;background:none;width:auto" onclick="showSetup()">⚙️ 修改 API Key 設定</button>
+      <button class="btn" style="font-size:12px;color:#aaa;border:none;background:none" onclick="showSetup()">⚙️ 修改 API 設定</button>
     </div>
   </div></div>`;
   document.getElementById('rpArea').addEventListener('change',function(){
     const isOther=this.value==='other';
     document.getElementById('rpCustomWrap').style.display=isOther?'block':'none';
-    if(!isOther) prefs.area=this.value;
+    if(!isOther)prefs.area=this.value;
   });
 }
 function rpSelType(el,v){document.querySelectorAll('#rpTypeTags .tag').forEach(t=>t.classList.remove('on'));el.classList.add('on');prefs.type=v}
@@ -331,9 +317,7 @@ function rpConfirm(){
     const c=document.getElementById('rpCustom').value.trim();
     if(!c){alert('請輸入地區');return}
     prefs.area=c;
-  }else{
-    prefs.area=sel;
-  }
+  }else{prefs.area=sel}
   doAuto();
 }
 
@@ -350,17 +334,16 @@ function wxH(w){
   </div></div>`;
 }
 function bdayH(bd){
-  return bd.map(b=>`<div class="bday"><div style="font-size:20px">🎂</div><p><strong>${b.name}</strong>${b.days===0?'今天生日！🎉':`生日還有 ${b.days} 天`}<br>留意生日優惠活動</p></div>`).join('');
+  return bd.map(b=>`<div class="bday"><div style="font-size:20px">🎂</div><p><strong>${b.name}</strong>${b.days===0?'今天生日！🎉':`生日還有 ${b.days} 天`}<br>留意生日優惠</p></div>`).join('');
 }
 
 // ── Cards ─────────────────────────────────────
 function mkCard(item,sec,i){
   const selSet=sec==='a'?disc.selA:sec==='s'?disc.selS:disc.selR;
   const sel=selSet.has(i);
-  const isRest=sec==='r';
   const mapUrl=`https://maps.google.com/?q=${encodeURIComponent(item.name+' '+item.area+' 台灣')}`;
   const srchUrl=`https://www.google.com/search?q=${encodeURIComponent(item.name+' '+item.area)}`;
-  return`<div class="sc ${sel?'yes':''} ${isRest?'rest-card':''}" id="sc-${sec}-${i}">
+  return`<div class="sc ${sel?'yes':''} ${sec==='r'?'rest-card':''}" id="sc-${sec}-${i}">
     <div class="sc-icon">${item.icon||'📍'}</div>
     <span class="sc-badge ${item.category}">${item.category}</span>
     ${item.period?`<div class="sc-period">📅 ${item.period}</div>`:''}
@@ -378,55 +361,50 @@ function mkCard(item,sec,i){
     </div>
   </div>`;
 }
-
 function tog(sec,i){
-  const selSet=sec==='a'?disc.selA:sec==='s'?disc.selS:disc.selR;
-  if(selSet.has(i)){selSet.delete(i)}
+  const ss=sec==='a'?disc.selA:sec==='s'?disc.selS:disc.selR;
+  if(ss.has(i)){ss.delete(i)}
   else{
-    if(sec==='r'){if(selSet.size>=2){alert('餐廳最多選2間');return}}
+    if(sec==='r'){if(ss.size>=2){alert('餐廳最多選2間');return}}
     else{if(disc.selA.size+disc.selS.size>=3){alert('景點+活動最多選3個');return}}
-    selSet.add(i);
+    ss.add(i);
   }
   rerender();
 }
-function togNo(sec,i){
-  const s=sec==='a'?disc.selA:sec==='s'?disc.selS:disc.selR;
-  s.delete(i);rerender();
-}
+function togNo(sec,i){const ss=sec==='a'?disc.selA:sec==='s'?disc.selS:disc.selR;ss.delete(i);rerender()}
 function rerender(){
   ['a','s','r'].forEach(sec=>{
-    const el=document.getElementById(`sg-${sec}`);
-    if(!el) return;
+    const el=document.getElementById('sg-'+sec);
     const arr=sec==='a'?disc.activities:sec==='s'?disc.spots:disc.restaurants;
-    el.innerHTML=arr.map((s,i)=>mkCard(s,sec,i)).join('');
+    if(el)el.innerHTML=arr.map((s,i)=>mkCard(s,sec,i)).join('');
   });
   updSummary();
 }
 function updSummary(){
   const el=document.getElementById('sel-summary');
-  if(!el) return;
+  if(!el)return;
   const ns=disc.selA.size+disc.selS.size,nr=disc.selR.size;
-  const rNote=nr===0?'未選餐廳（全程回家吃）':nr===1?'已選1間（午餐外食，晚餐6點到家）':'已選2間（午晚餐外食）';
+  const rNote=nr===0?'未選（全程回家吃）':nr===1?'已選1間（午餐外食，晚餐6點到家）':'已選2間（午晚餐外食）';
   el.innerHTML=`景點/活動：已選 <strong>${ns}</strong>/3 個 ｜ 餐廳：${rNote}`;
 }
 function secHTML(title,id,items,sec,hint){
   const cards=items.length?`<div class="sg" id="${id}">${items.map((s,i)=>mkCard(s,sec,i)).join('')}</div>`
-    :`<div class="sec-empty" id="${id}">「${prefs.area}」目前未找到符合的${title.replace(/[🗓️📍🍽️ ]/g,'')}項目，可換一批試試</div>`;
+    :`<div class="sec-empty" id="${id}">「${prefs.area}」目前未找到符合項目，可換一批或調整地區</div>`;
   return`<div class="sec"><div class="sec-hdr"><span class="sec-title">${title}</span><span class="sec-hint">${hint}</span></div>${cards}</div>`;
 }
 
 // ── Discovery Screen ──────────────────────────
 function showDisc(bd){
   const total=disc.activities.length+disc.spots.length+disc.restaurants.length;
-  const warnHTML=total===0?`<div class="warn">⚠️ 搜尋結果全部被地區過濾，請點「全部重新推薦」或調整地區。</div>`:'';
+  const warn=total===0?`<div class="warn">⚠️ 搜尋結果全部被地區過濾，建議重新推薦或調整地區。</div>`:'';
   app.innerHTML=bdayH(bd)+wxH(disc.wx)+`<div class="card">
     <div class="card-head"><span>✨</span><h2>今日推薦 — ${prefs.area}</h2></div>
     <div class="card-body">
-      ${warnHTML}
+      ${warn}
       ${secHTML('🗓️ 期間限定活動 / 展覽','sg-a',disc.activities,'a','本週/月限定')}
       ${secHTML('📍 親子景點','sg-s',disc.spots,'s','精選景點')}
       ${secHTML('🍽️ 餐廳推薦','sg-r',disc.restaurants,'r','午餐或晚餐')}
-      <div class="summary-box" id="sel-summary">景點/活動：已選 <strong>0</strong>/3 個 ｜ 餐廳：未選餐廳（全程回家吃）</div>
+      <div class="summary-box" id="sel-summary">景點/活動：已選 <strong>0</strong>/3 個 ｜ 餐廳：未選（全程回家吃）</div>
       <div class="brow">
         <button class="btn btn-a" onclick="doNearby()">🔄 換周邊</button>
         <button class="btn btn-p" onclick="doSubmit()">✅ 送出規劃</button>
@@ -436,92 +414,16 @@ function showDisc(bd){
     </div>
   </div>`;
 }
-
 function doSubmit(){
   if(disc.selA.size+disc.selS.size===0){alert('請至少選1個景點或活動');return}
-  const chosenSpots=[...[...disc.selA].map(i=>disc.activities[i]),...[...disc.selS].map(i=>disc.spots[i])];
-  const chosenRests=[...[...disc.selR].map(i=>disc.restaurants[i])];
-  genPlan(disc.wx,chosenSpots,chosenRests);
-}
-
-// ── Fetch: 兩步驟（Google Search → Gemini 整理）
-async function fetchAll(wx){
-  const dr=dateRange();
-  const area=prefs.area;
-
-  updLd(`🔍 Google 搜尋中（1/4）活動...`);
-  const actR=await searchGoogle(`${area} 親子活動 展覽 市集 ${dr.year}年${dr.month}月`,8);
-
-  updLd(`🔍 Google 搜尋中（2/4）景點...`);
-  const spotR=await searchGoogle(`${area} 親子景點 嬰幼兒 推薦`,8);
-
-  updLd(`🔍 Google 搜尋中（3/4）餐廳...`);
-  const restR=await searchGoogle(`${area} 親子餐廳 嬰幼兒 推薦`,8);
-
-  updLd(`🤖 AI 整理資料中（4/4）...`);
-
-  const prompt=`你是資料整理助手。以下是 Google 搜尋結果，請從中萃取資訊並整理成 JSON 格式。
-
-【絕對規則，違反則整個項目跳過】
-1. 只能使用下方搜尋結果中出現的資訊，禁止自行補充或創造任何內容
-2. 地區必須在「${area}」，其他縣市一律跳過不推薦
-3. 活動日期必須在搜尋結果中有明確提及，且在 ${dr.today} 至 ${dr.until} 之間，超出範圍跳過
-4. 無法從搜尋結果確認真實存在的項目，整個跳過
-5. 寧可少，絕不捏造
-
-今天：${todayS()}，天氣：${wx.desc}，${wx.temp}°C。家庭：爸爸+媽媽+${kidM()}個月嬰幼兒。
-
-【活動/展覽搜尋結果】
-${actR||'（無結果）'}
-
-【景點搜尋結果】
-${spotR||'（無結果）'}
-
-【餐廳搜尋結果】
-${restR||'（無結果）'}
-
-只回傳純JSON，第一個字元必須是{：
-{"activities":[{"name":"名稱","category":"活動","icon":"🎪","desc":"說明（20字內，只用搜尋結果中的資訊）","area":"${area}內的具體地點","period":"MM/DD~MM/DD（從搜尋結果取得，無法確認則省略此項目）"}],
-"spots":[{"name":"名稱","category":"景點","icon":"🌳","desc":"說明+嬰幼兒適合原因（20字內）","area":"具體地點"}],
-"restaurants":[{"name":"名稱","category":"餐廳","icon":"🍽️","desc":"特色（20字內）","area":"具體地點","priceRange":"$|$$|$$$"}]}
-
-category限定：活動、展覽、市集、特惠、景點、餐廳`;
-
-  return await callG(prompt,0,SEARCH_MDL);
-}
-
-async function fetchNearby(wx){
-  const dr=dateRange();
-  const area=prefs.area;
-  const selItems=[...[...disc.selA].map(i=>disc.activities[i]),...[...disc.selS].map(i=>disc.spots[i]),...[...disc.selR].map(i=>disc.restaurants[i])];
-  if(selItems.length===0) return fetchAll(wx);
-  const selNames=selItems.map(s=>s.name).join('、');
-
-  updLd(`🔍 搜尋周邊活動...`);
-  const actR=await searchGoogle(`${area} ${selNames}附近 親子活動 展覽 ${dr.year}年${dr.month}月`,6);
-  updLd(`🔍 搜尋周邊景點...`);
-  const spotR=await searchGoogle(`${area} ${selNames}附近 親子景點`,6);
-  updLd(`🔍 搜尋周邊餐廳...`);
-  const restR=await searchGoogle(`${area} ${selNames}附近 親子餐廳`,6);
-  updLd(`🤖 AI 整理資料中...`);
-
-  const prompt=`【絕對規則】只能使用下方搜尋結果的資訊，地區必須在「${area}」，活動日期必須在 ${dr.today}~${dr.until}，無法確認的跳過，寧可少不捏造。
-
-已選景點：${selNames}
-今天：${todayS()}
-
-【活動搜尋結果】${actR||'（無結果）'}
-【景點搜尋結果】${spotR||'（無結果）'}
-【餐廳搜尋結果】${restR||'（無結果）'}
-
-只回傳純JSON，第一個字元必須是{，格式同上（activities/spots/restaurants陣列）。`;
-
-  return await callG(prompt,0,SEARCH_MDL);
+  const spots=[...[...disc.selA].map(i=>disc.activities[i]),...[...disc.selS].map(i=>disc.spots[i])];
+  const rests=[...[...disc.selR].map(i=>disc.restaurants[i])];
+  genPlan(disc.wx,spots,rests);
 }
 
 // ── Itinerary ─────────────────────────────────
 function rtSVG(route){
-  if(!route||!route.length) return'';
+  if(!route||!route.length)return'';
   const tc={home:'#4a8c6f',spot:'#3a78b8',food:'#d4860a',go:'#aaa'};
   const ti={home:'🏠',spot:'📍',food:'🍽️',go:'🚗'};
   const n=route.length,W=340,pad=22,step=Math.floor((W-pad*2)/(n-1)),cy=52;
@@ -563,31 +465,108 @@ function actH(acts){
 }
 function showPlan(wx,plan){
   const bd=bdays();
-  app.innerHTML=bdayH(bd)+wxH(wx)
-    +`<div class="card"><div class="card-head"><span>✨</span><h2>${plan.summary||'今日親子行程'}</h2></div><div class="card-body">${rtSVG(plan.route)}</div></div>`
-    +`<div class="card"><div class="card-head"><span>🗓️</span><h2>行程時間表</h2></div><div class="card-body"><div class="tl">${tlH(plan.timeline)}</div></div></div>`
-    +`<div class="card"><div class="card-head"><span>📍</span><h2>景點詳細資訊</h2></div><div class="card-body">${actH(plan.activities)}</div></div>`
-    +`<div class="card"><div class="card-head"><span>⚙️</span><h2>操作</h2></div><div class="card-body">
-      <div class="brow"><button class="btn" onclick="showRegionPicker()">📍 換地區重搜</button><button class="btn" onclick="showSetup()">⚙️ 設定</button></div>
+  app.innerHTML=bdayH(bd)+wxH(wx)+
+    `<div class="card"><div class="card-head"><span>✨</span><h2>${plan.summary||'今日親子行程'}</h2></div><div class="card-body">${rtSVG(plan.route)}</div></div>`+
+    `<div class="card"><div class="card-head"><span>🗓️</span><h2>行程時間表</h2></div><div class="card-body"><div class="tl">${tlH(plan.timeline)}</div></div></div>`+
+    `<div class="card"><div class="card-head"><span>📍</span><h2>景點詳細資訊</h2></div><div class="card-body">${actH(plan.activities)}</div></div>`+
+    `<div class="card"><div class="card-head"><span>⚙️</span><h2>操作</h2></div><div class="card-body">
+      <div class="brow"><button class="btn" onclick="showRegionPicker()">📍 重新選地區</button><button class="btn" onclick="showDisc(bdays())">← 返回選擇</button></div>
     </div></div>`;
+}
+
+// ── Fetch All (Google Search + Gemini format) ─
+async function fetchAll(wx){
+  const dr=dateRange();
+  showLd('🔍 步驟 1/2：Google 搜尋真實資料...','查詢活動・景點・餐廳');
+
+  // 三組平行搜尋
+  const [actR,spotR,restR]=await Promise.all([
+    googleSearch(`${prefs.area} 活動 展覽 市集 ${dr.ym}`,8),
+    googleSearch(`${prefs.area} 親子景點 嬰幼兒 推薦`,6),
+    googleSearch(`${prefs.area} 親子餐廳 推薦`,6)
+  ]);
+
+  showLd('🤖 步驟 2/2：AI 整理格式中...','從真實搜尋結果萃取資訊');
+
+  const p=`以下是從Google搜尋到的台灣「${prefs.area}」地區真實資訊。今天：${todayS()}，天氣${wx.desc}，${wx.temp}°C，${wx.good?'適合戶外':'優先室內'}。
+
+【活動/展覽/市集 搜尋結果】
+${fmtResults(actR)}
+
+【親子景點 搜尋結果】
+${fmtResults(spotR)}
+
+【餐廳 搜尋結果】
+${fmtResults(restR)}
+
+請從以上真實搜尋結果中提取資訊，整理成JSON格式。
+
+嚴格規則：
+1. 只能使用上方搜尋結果中出現的資訊，禁止添加任何搜尋結果中沒有的地點或活動
+2. 活動日期必須在 ${dr.today} 至 ${dr.until} 之間，不在此範圍內不推薦
+3. 所有項目必須位於「${prefs.area}」地區
+4. 搜尋結果不足時減少數量，絕對禁止捏造
+5. 偏好類型：${prefs.type}
+
+只回傳純JSON，第一個字元必須是{：
+{"activities":[最多6個，{"name":"","category":"展覽|活動|市集|特惠","icon":"🎨","desc":"20字內說明","area":"確切區域","period":"MM/DD~MM/DD"}],
+"spots":[最多3個，{"name":"","category":"景點","icon":"🌳","desc":"20字內+嬰幼兒適合原因","area":"確切區域"}],
+"restaurants":[最多3個，{"name":"","category":"餐廳","icon":"🍽️","desc":"20字內特色","area":"確切區域","priceRange":"$|$$|$$$"}]}`;
+
+  return await callG(p,0,SEARCH_MDL);
+}
+
+async function fetchNearby(wx){
+  const dr=dateRange();
+  const selItems=[...[...disc.selA].map(i=>disc.activities[i]),...[...disc.selS].map(i=>disc.spots[i]),...[...disc.selR].map(i=>disc.restaurants[i])];
+  const nearbyArea=selItems.length?[...new Set(selItems.map(s=>s.area))].join(' '):prefs.area;
+
+  showLd('🔍 步驟 1/2：搜尋周邊資料...','依已選地點查找附近推薦');
+
+  const [actR,spotR,restR]=await Promise.all([
+    googleSearch(`${nearbyArea} 活動 展覽 ${dr.ym}`,8),
+    googleSearch(`${nearbyArea} 親子景點`,6),
+    googleSearch(`${nearbyArea} 親子餐廳`,6)
+  ]);
+
+  showLd('🤖 步驟 2/2：AI 整理格式中...','萃取周邊推薦資訊');
+
+  const needA=6-disc.selA.size, needS=3-disc.selS.size, needR=3-disc.selR.size;
+  const p=`以下是Google搜尋到的「${nearbyArea}」地區真實資訊，今天：${todayS()}。
+
+【活動/展覽 搜尋結果】
+${fmtResults(actR)}
+
+【親子景點 搜尋結果】
+${fmtResults(spotR)}
+
+【餐廳 搜尋結果】
+${fmtResults(restR)}
+
+請從以上搜尋結果提取資訊。只能使用搜尋結果中出現的資訊，禁止捏造。
+活動日期必須在 ${dr.today} 至 ${dr.until} 之間。所有項目必須在「${prefs.area}」地區。
+
+需要：活動最多${needA}個、景點最多${needS}個、餐廳最多${needR}間。
+
+只回傳純JSON，格式同前（activities/spots/restaurants陣列）。`;
+
+  return await callG(p,0,SEARCH_MDL);
 }
 
 async function fetchPlan(wx,spots,rests){
   const sNames=spots.map(s=>s.name).join('、');
   const sAreas=spots.map(s=>s.area).join('、');
-  const rCount=rests.length;
-  let dinnerNote;
-  if(rCount===0) dinnerNote='所有餐點回家吃，17:00前返程，18:00到家';
-  else if(rCount===1) dinnerNote=`午餐在${rests[0].name}（${rests[0].area}），晚餐回家，17:00前返程，18:00到家`;
-  else dinnerNote=`午餐在${rests[0].name}（${rests[0].area}），晚餐在${rests[1].name}（${rests[1].area}）`;
+  const rc=rests.length;
+  const dn=rc===0?'所有餐點回家吃，17:00前返程，18:00到家':rc===1?`午餐在${rests[0].name}，晚餐回家，17:00前返程，18:00到家`:`午餐在${rests[0].name}，晚餐在${rests[1].name}`;
+  const rInfo=rc>0?`已選餐廳：${rests.map(r=>r.name+'('+r.area+')').join('、')}`:'無選餐廳';
   const p=`今天${todayS()}，${isWkd()?'假日':'平日'}。天氣${wx.desc}，${wx.temp}°C。
 家庭：爸爸+媽媽+${kidM()}個月嬰幼兒，住桃園市桃園區，有汽車。
 已選景點/活動：${sNames}（區域：${sAreas}）
-${rests.length?`已選餐廳：${rests.map(r=>r.name+'('+r.area+')').join('、')}`:'無選擇餐廳'}
-餐飲安排：${dinnerNote}
+${rInfo}
+餐飲安排：${dn}
 作息：09:00起床，12:00午餐，13:30午休1小時，19:00家長洗澡，20:00小孩洗澡。
 
-規劃要求：依地理位置由近到遠排列，嚴禁來回折返，每個景點提供2個附近停車場。
+規劃要求：依地理由近到遠排列，嚴禁來回折返，每個景點提供2個附近停車場。
 
 只回傳純JSON，第一個字元必須是{：
 {"summary":"今日行程主題一句話",
@@ -596,22 +575,21 @@ ${rests.length?`已選餐廳：${rests.map(r=>r.name+'('+r.area+')').join('、')
 {"time":"09:00","label":"起床準備","type":"rest"},
 {"time":"10:00","label":"出發","sub":"車程約X分鐘","type":"go"},
 {"time":"10:30","label":"景點名","sub":"停留約X小時，特色","type":"spot"},
-{"time":"12:00","label":"午餐${rCount>0?' — '+rests[0].name:'（自備）'}","sub":"地址","type":"food"},
+{"time":"12:00","label":"午餐${rc>0?' — '+rests[0].name:'（自備）'}","sub":"地址","type":"food"},
 {"time":"13:00","label":"景點名","sub":"停留約X小時","type":"spot"},
 {"time":"13:30","label":"午休","sub":"車上或咖啡廳約1小時","type":"rest"},
 {"time":"14:30","label":"景點名（若有）","sub":"停留約X小時","type":"spot"},
-{"time":"${rCount>=2?'17:30':'17:00'}","label":"${rCount>=2?'晚餐 — '+rests[1].name:'返程出發'}","sub":"說明","type":"${rCount>=2?'food':'go'}"},
+{"time":"${rc>=2?'17:30':'17:00'}","label":"${rc>=2?'晚餐 — '+rests[1].name:'返程出發'}","sub":"${rc>=2?rests[1].area:'預計18:00到家'}","type":"${rc>=2?'food':'go'}"},
 {"time":"20:00","label":"小孩洗澡","type":"rest"}
 ],
-"activities":[{"name":"景點名","badge":"推薦","meta":"地址｜開放時間｜費用","desc":"說明+適合嬰幼兒原因","mapQ":"搜尋字串","parking":[{"name":"停車場名","dist":"步行X分鐘"},{"name":"停車場名2","dist":"步行X分鐘"}]}]}`;
+"activities":[{"name":"景點名","badge":"推薦","meta":"地址｜開放時間｜費用","desc":"詳細說明","mapQ":"搜尋字串","parking":[{"name":"停車場","dist":"步行X分鐘"},{"name":"停車場2","dist":"步行X分鐘"}]}]}`;
   return await callG(p,0,planMdl);
 }
 
-// ── 主流程 ─────────────────────────────────────
+// ── Flows ─────────────────────────────────────
 async function doAuto(){
-  showLd('🔍 搜尋今日推薦中...','查詢 Google 取得真實活動資訊');
-  disc.wx=await getWx();
   disc.selA=new Set();disc.selS=new Set();disc.selR=new Set();
+  disc.wx=await getWx();
   try{
     const d=await fetchAll(disc.wx);
     disc.activities=filterItems(d.activities||[]);
@@ -619,16 +597,17 @@ async function doAuto(){
     disc.restaurants=filterItems(d.restaurants||[]);
     showDisc(bdays());
   }catch(e){
-    app.innerHTML=wxH(disc.wx)+`<div class="card"><div class="card-body"><div class="err">❌ 搜尋失敗：${e.message}<br>
-    <button class="btn btn-full" onclick="doAuto()" style="margin-top:8px">重試</button>
-    <button class="btn btn-full" onclick="showSetup()" style="margin-top:8px">重新設定</button>
-    </div></div></div>`;
+    app.innerHTML=wxH(disc.wx||{icon:'🌡️',desc:'--',temp:'--',hi:'--',lo:'--',hum:'--',rain:'--',good:true})+
+      `<div class="card"><div class="card-body"><div class="err">❌ 搜尋失敗：${e.message}<br>
+      <button class="btn btn-full" onclick="doAuto()" style="margin-top:8px">重試</button>
+      <button class="btn btn-full" onclick="showSetup()" style="margin-top:8px">檢查 API 設定</button>
+      </div></div></div>`;
   }
 }
 
 async function doNearby(){
-  if(disc.selA.size+disc.selS.size+disc.selR.size===0){alert('請先選至少一個有興趣的項目');return}
-  showLd('🔄 搜尋周邊推薦中...','查詢已選地點附近的景點與活動');
+  const ns=disc.selA.size+disc.selS.size+disc.selR.size;
+  if(ns===0){alert('請先選至少一個有興趣的項目');return}
   try{
     const d=await fetchNearby(disc.wx);
     const newA=filterItems(d.activities||[]);
@@ -658,9 +637,8 @@ async function genPlan(wx,spots,rests){
 
 // ── Init ──────────────────────────────────────
 document.getElementById('dateChip').textContent=todayS();
-const allKeysReady = gemKey && gcseKey && gcseCx;
-if(!allKeysReady) showSetup();
-else showRegionPicker();
+const keysOk=gKey&&gcKey&&gcCx;
+if(!keysOk)showSetup();else showRegionPicker();
 </script>
 </body>
 </html>
